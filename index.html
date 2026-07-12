@@ -413,6 +413,21 @@
   .lifeline-card.show{ display:block; animation: panelFade 0.35s ease; }
 
   /* ---------- Teleprompter (reading practice) ---------- */
+  .level-badge{
+    display:flex; align-items:center; gap:12px; margin-bottom: 20px; flex-wrap:wrap;
+    background: #F1F3EE; border-radius: 999px; padding: 8px 16px; width:fit-content;
+  }
+  .level-badge-label{ font-size:0.85rem; font-weight:700; color: var(--indigo-deep); }
+  .level-dots{ display:flex; gap:5px; }
+  .level-dots span{ width:8px; height:8px; border-radius:50%; background:#D8E0D3; transition: background 0.3s ease; }
+  .level-dots span.done{ background: var(--gold); }
+  .level-badge-desc{ font-size:0.8rem; color: var(--ink-soft); }
+  .discovery-toggle{
+    display:flex; align-items:center; gap:10px; margin-bottom:20px; cursor:pointer;
+    font-size:0.88rem; color: var(--ink-soft); user-select:none;
+  }
+  .discovery-toggle input{ width:16px; height:16px; accent-color: var(--gold); cursor:pointer; }
+
   .teleprompter{
     background:#FBFCFA; border: 1.5px solid var(--line); border-radius: 16px;
     padding: 26px 28px; font-size: 1.15rem; line-height: 2; color: #C9CFC2;
@@ -423,7 +438,11 @@
   .tp-word.current{ color: var(--indigo-deep); background: var(--gold-soft); font-weight:600; }
   .tp-word.pending{ color: #C9CFC2; }
 
-  .reflex-zone{ margin-top: 26px; padding-top: 22px; border-top: 1.5px dashed var(--line); }
+  .reflex-zone{ margin-top: 26px; padding-top: 22px; border-top: 1.5px dashed var(--line); display:flex; flex-wrap:wrap; gap:12px; }
+  .reflex-zone .reflex-card{ flex-basis: 100%; }
+  #topicQuizBtn{ color: var(--indigo); }
+  #topicQuizBtn svg{ color: var(--indigo); }
+  #topicQuizBtn:hover{ border-color: var(--indigo); }
   #reflexBtn{ color: var(--coral); }
   #reflexBtn svg{ color: var(--coral); }
   #reflexBtn:hover{ border-color: var(--coral); }
@@ -490,23 +509,23 @@
   <nav class="tabs" role="tablist" aria-label="Modes d'entraînement">
     <button class="tab-btn active" data-panel="panel-parole" role="tab" aria-selected="true" aria-controls="panel-parole" id="tab-parole">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V6a3 3 0 0 0-3-3z"/><path d="M6 11a6 6 0 0 0 12 0"/><path d="M12 17v4M8 21h8"/></svg>
-      Prendre la parole
-    </button>
-    <button class="tab-btn" data-panel="panel-vocab" role="tab" aria-selected="false" aria-controls="panel-vocab" id="tab-vocab">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V5a2 2 0 0 1 2-2h11v16H6a2 2 0 0 0 0 4h13"/></svg>
-      Vocabulaire
-    </button>
-    <button class="tab-btn" data-panel="panel-anglais" role="tab" aria-selected="false" aria-controls="panel-anglais" id="tab-anglais">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.5 4 6 4 9s-1.5 6.5-4 9c-2.5-2.5-4-6-4-9s1.5-6.5 4-9z"/></svg>
-      Apprendre l'anglais
+      1. Prendre la parole
     </button>
     <button class="tab-btn" data-panel="panel-quiz" role="tab" aria-selected="false" aria-controls="panel-quiz" id="tab-quiz">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg>
-      Quiz éclair
+      2. Quiz éclair
+    </button>
+    <button class="tab-btn" data-panel="panel-vocab" role="tab" aria-selected="false" aria-controls="panel-vocab" id="tab-vocab">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V5a2 2 0 0 1 2-2h11v16H6a2 2 0 0 0 0 4h13"/></svg>
+      3. Vocabulaire
+    </button>
+    <button class="tab-btn" data-panel="panel-anglais" role="tab" aria-selected="false" aria-controls="panel-anglais" id="tab-anglais">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.5 4 6 4 9s-1.5 6.5-4 9c-2.5-2.5-4-6-4-9s1.5-6.5 4-9z"/></svg>
+      4. Apprendre l'anglais
     </button>
     <button class="tab-btn" data-panel="panel-lecture" role="tab" aria-selected="false" aria-controls="panel-lecture" id="tab-lecture">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5C4 4.7 4.7 4 5.5 4H12v16H5.5A1.5 1.5 0 0 1 4 18.5z"/><path d="M20 5.5C20 4.7 19.3 4 18.5 4H12v16h6.5a1.5 1.5 0 0 0 1.5-1.5z"/></svg>
-      Lecture
+      5. Lecture
     </button>
   </nav>
 
@@ -603,6 +622,10 @@
         <div id="errorZone" aria-live="assertive"></div>
 
         <div class="reflex-zone" id="reflexZone">
+          <button class="ghost" id="topicQuizBtn">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg>
+            <span id="topicQuizLabel">Quiz sur ce sujet (8 questions)</span>
+          </button>
           <button class="ghost" id="reflexBtn">
             <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 6 13h5l-1 9 8-13h-5z"/></svg>
             Relance surprise
@@ -674,6 +697,15 @@
 
       <div class="step" id="shadowStep2">
         <p class="tool-mini-label">2. Choisis un sujet</p>
+        <div class="level-badge" id="shLevelBadge">
+          <span class="level-badge-label">Niveau <span id="shLevelNum">1</span> / 5</span>
+          <div class="level-dots" id="shLevelDots"></div>
+          <span class="level-badge-desc" id="shLevelDesc">1 phrase à répéter</span>
+        </div>
+        <label class="discovery-toggle">
+          <input type="checkbox" id="shDiscoveryToggle">
+          <span>Je débute vraiment en anglais — mode découverte (sans coupure)</span>
+        </label>
         <div class="practice-top">
           <div class="topic-card" id="shadowTopicCard">
             <span class="topic-tag">Sujet</span>
@@ -716,34 +748,30 @@
       <div class="step" id="shadowStep4">
         <div class="transcripts" id="shadowTranscripts">
           <div class="transcript-block">
-            <h4>En anglais</h4>
-            <p id="transcriptEn"></p>
-          </div>
-          <div class="transcript-block">
-            <h4>En français</h4>
+            <h4>Traduction</h4>
             <p id="transcriptFr"></p>
           </div>
         </div>
 
         <div class="shadow-practice" id="shadowPractice">
-          <p class="tool-mini-label">4. À ton tour — répète en respectant la minute</p>
-          <div class="timer-zone">
-            <div class="timer-ring" id="shTimerRing">
-              <svg viewBox="0 0 96 96">
-                <circle class="timer-bg" cx="48" cy="48" r="42"></circle>
-                <circle class="timer-fg" id="shTimerCircle" cx="48" cy="48" r="42" stroke-dasharray="264" stroke-dashoffset="0"></circle>
-              </svg>
-              <div class="timer-label" id="shTimerLabel">60s</div>
-            </div>
-            <div class="timer-actions">
-              <button class="primary" id="shStartBtn">Je répète maintenant</button>
-              <span class="mic-hint">Essaie de garder le même rythme que l'avatar.</span>
-            </div>
+          <p class="tool-mini-label">4. À ton tour — répète la phrase jusqu'à bien la prononcer</p>
+          <div class="teleprompter" id="shTeleprompter" style="min-height:auto;"></div>
+          <div class="listen-actions" style="margin-top:16px;">
+            <button class="primary" id="shStartBtn">Je répète maintenant</button>
+            <button class="ghost" id="shManualDoneBtn" style="display:none;">J'ai fait de mon mieux, niveau suivant</button>
+            <span class="mic-hint" id="shHint">Répète la phrase, mot après mot.</span>
           </div>
-          <div class="celebrate" id="shCelebrate">🎉 Bien joué, tu as tenu la minute !</div>
+          <div class="celebrate" id="shCelebrate">🎉 Bien joué, bien prononcé !</div>
+          <div class="celebrate encourage" id="shRetryZone"></div>
         </div>
       </div>
     </section>
+
+    <div class="section-head">
+      <h2>L'essentiel pour communiquer en anglais</h2>
+      <p>Les mots et expressions les plus utiles pour tenir une conversation, quel que soit le sujet.</p>
+    </div>
+    <div class="theme-grid" id="englishThemeGrid"></div>
   </section>
 
   <section class="panel" id="panel-quiz" role="tabpanel" aria-labelledby="tab-quiz">
@@ -913,14 +941,19 @@ const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matc
 /* ---------------- Tab navigation ---------------- */
 const tabButtons = document.querySelectorAll('.tab-btn');
 const panels = document.querySelectorAll('.panel');
+
+function switchToTab(panelId){
+  tabButtons.forEach(b => { b.classList.remove('active'); b.setAttribute('aria-selected','false'); });
+  panels.forEach(p => p.classList.remove('active'));
+  const btn = document.querySelector(`.tab-btn[data-panel="${panelId}"]`);
+  if(btn){ btn.classList.add('active'); btn.setAttribute('aria-selected','true'); }
+  const panel = document.getElementById(panelId);
+  if(panel) panel.classList.add('active');
+  window.scrollTo({ top: 0, behavior: reducedMotion ? 'auto' : 'smooth' });
+}
+
 tabButtons.forEach(btn => {
-  btn.addEventListener('click', () => {
-    tabButtons.forEach(b => { b.classList.remove('active'); b.setAttribute('aria-selected','false'); });
-    panels.forEach(p => p.classList.remove('active'));
-    btn.classList.add('active');
-    btn.setAttribute('aria-selected','true');
-    document.getElementById(btn.dataset.panel).classList.add('active');
-  });
+  btn.addEventListener('click', () => switchToTab(btn.dataset.panel));
 });
 
 
@@ -1462,38 +1495,129 @@ function closeModal(){ overlay.classList.remove('show'); }
 overlay.addEventListener('click', (ev) => { if(ev.target === overlay) closeModal(); });
 document.addEventListener('keydown', (ev) => { if(ev.key === 'Escape') closeModal(); });
 
+/* ---------------- Essential English vocabulary ---------------- */
+const ENGLISH_THEMES = [
+  {
+    name: 'Se présenter', color: '#D89A3E',
+    icon: [{type:'path',d:'M4 11 12 4l8 7'},{type:'path',d:'M6 10v9h12v-9'}],
+    def: "Pour engager une conversation et parler un peu de toi.",
+    words: [
+      ['Nice to meet you', 'Enchanté·e'],
+      ['How are you doing?', 'Comment ça va ?'],
+      ['My name is...', 'Je m\'appelle...'],
+      ['Where are you from?', 'D\'où viens-tu ?'],
+      ['See you later', 'À plus tard'],
+      ['Take care', 'Prends soin de toi']
+    ]
+  },
+  {
+    name: 'Demander de l\'aide', color: '#6B5B95',
+    icon: [{type:'path',d:'M12 20 4.6 12.6a4.7 4.7 0 0 1 6.7-6.7L12 6.6l.7-.7a4.7 4.7 0 0 1 6.7 6.7z'}],
+    def: "Pour ne jamais rester bloqué·e dans une conversation en anglais.",
+    words: [
+      ['Could you repeat that?', 'Tu peux répéter ?'],
+      ['I don\'t understand', 'Je ne comprends pas'],
+      ['Could you speak slower?', 'Tu peux parler plus lentement ?'],
+      ['What does that mean?', 'Qu\'est-ce que ça veut dire ?'],
+      ['Sorry, what?', 'Pardon, quoi ?'],
+      ['Can you help me?', 'Tu peux m\'aider ?']
+    ]
+  },
+  {
+    name: 'Donner son avis', color: '#3D6E8C',
+    icon: [{type:'path',d:'M4 12h16'},{type:'circle',cx:8,cy:12,r:3},{type:'circle',cx:16,cy:12,r:3}],
+    def: "Pour exprimer ce que tu penses clairement.",
+    words: [
+      ['I think that...', 'Je pense que...'],
+      ['In my opinion', 'À mon avis'],
+      ['That makes sense', 'Ça a du sens'],
+      ['I\'m not sure about that', 'Je ne suis pas sûr·e de ça'],
+      ['I agree', 'Je suis d\'accord'],
+      ['I see your point', 'Je comprends ton point de vue']
+    ]
+  },
+  {
+    name: 'Le quotidien', color: '#3D8361',
+    icon: [{type:'path',d:'M4 11 12 4l8 7'},{type:'path',d:'M6 10v9h12v-9'}],
+    def: "Pour te débrouiller dans les situations de tous les jours.",
+    words: [
+      ['I\'m looking for...', 'Je cherche...'],
+      ['How much is this?', 'Combien ça coûte ?'],
+      ['Where is the nearest...?', 'Où est le plus proche...?'],
+      ['I\'d like to...', 'J\'aimerais...'],
+      ['Is it far from here?', 'C\'est loin d\'ici ?'],
+      ['What time is it?', 'Quelle heure est-il ?']
+    ]
+  },
+  {
+    name: 'Garder la conversation fluide', color: '#C1495D',
+    icon: [{type:'path',d:'M6 15l6-6 6 6'}],
+    def: "Les petits mots qui font enchaîner naturellement, sans blocage.",
+    words: [
+      ['Actually,', 'En fait,'],
+      ['By the way,', 'Au fait,'],
+      ['Anyway,', 'Bref,'],
+      ['You know what I mean?', 'Tu vois ce que je veux dire ?'],
+      ['So basically,', 'Donc en gros,'],
+      ['That reminds me,', 'Ça me rappelle,']
+    ]
+  },
+  {
+    name: 'Réagir naturellement', color: '#8C6E4E',
+    icon: [{type:'path',d:'M12 3v4M12 17v4M3 12h4M17 12h4M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1'},{type:'circle',cx:12,cy:12,r:4}],
+    def: "Pour réagir sur le moment, sans avoir à réfléchir.",
+    words: [
+      ['That\'s amazing!', 'C\'est génial !'],
+      ['No way!', 'Pas possible !'],
+      ['Sounds good', 'Ça marche'],
+      ['That\'s too bad', 'C\'est dommage'],
+      ['Really?', 'Vraiment ?'],
+      ['I bet', 'J\'imagine bien']
+    ]
+  },
+  {
+    name: 'Anglais informatique', color: '#45566B',
+    icon: [{type:'path',d:'M4 5h16v11H4z'},{type:'path',d:'M9 20h6M12 16v4'}],
+    def: "Le vocabulaire technique de base pour travailler ou échanger en anglais dans l'informatique.",
+    words: [
+      ['A bug', 'Un bug, une erreur dans le code'],
+      ['To fix / to debug', 'Corriger / déboguer'],
+      ['To deploy', 'Mettre en production, déployer'],
+      ['A commit', 'Un enregistrement de modification (Git)'],
+      ['To merge', 'Fusionner (des branches de code)'],
+      ['The server is down', 'Le serveur est en panne'],
+      ['A feature', 'Une fonctionnalité'],
+      ['To roll back', 'Revenir à une version précédente'],
+      ['A pull request', 'Une demande de fusion de code'],
+      ['It works as expected', 'Ça fonctionne comme prévu']
+    ]
+  }
+];
+
+const englishThemeGrid = document.getElementById('englishThemeGrid');
+ENGLISH_THEMES.forEach((t) => {
+  const card = document.createElement('div');
+  card.className = 'theme-card';
+  card.style.setProperty('--theme-color', t.color);
+  card.innerHTML = `<div class="theme-icon">${makeIcon(t.icon, t.color)}</div><div class="theme-name">${t.name}</div>`;
+  card.addEventListener('click', () => openThemeModal(t));
+  englishThemeGrid.appendChild(card);
+});
+
 /* ---------------- Shadowing: English learning ---------------- */
 const SHADOW_TOPICS = [
-  {
-    title: "Ton week-end",
-    en: "Last weekend was actually pretty relaxing. On Saturday morning, I slept in a little later than usual, then I went for a walk in the park near my place. In the afternoon, I met up with a friend and we grabbed coffee together, just catching up on things. Sunday was quieter — I stayed home, cooked something simple, and watched a couple of episodes of a show I've been following. I didn't get much done in terms of chores, but honestly, I needed that break. Sometimes doing nothing special is exactly what makes a weekend feel good.",
-    fr: "Le week-end dernier était plutôt reposant. Samedi matin, j'ai dormi un peu plus tard que d'habitude, puis je suis allé·e me promener dans le parc près de chez moi. L'après-midi, j'ai retrouvé un·e ami·e et on a pris un café ensemble, juste pour papoter. Dimanche était plus calme — je suis resté·e à la maison, j'ai cuisiné quelque chose de simple, et j'ai regardé quelques épisodes d'une série que je suis en ce moment. Je n'ai pas avancé sur les tâches ménagères, mais honnêtement, j'avais besoin de cette pause. Parfois, ne rien faire de particulier, c'est exactement ce qui rend un week-end agréable."
-  },
-  {
-    title: "Te présenter au travail",
-    en: "Hi, nice to meet you. I'm part of the team that handles customer support, and I've been with the company for about two years now. Before that, I worked in a completely different field, actually — more on the technical side. I decided to switch because I wanted something that involved more direct contact with people. What I enjoy most about my role is solving problems quickly and making sure people leave the conversation feeling like they were actually heard. Outside of work, I like to stay active, and I'm always up for learning something new, whether it's related to my job or not.",
-    fr: "Bonjour, ravi·e de vous rencontrer. Je fais partie de l'équipe qui s'occupe du support client, et je suis dans l'entreprise depuis environ deux ans. Avant ça, je travaillais en fait dans un domaine complètement différent — plutôt du côté technique. J'ai décidé de changer parce que je voulais quelque chose qui implique plus de contact direct avec les gens. Ce que j'aime le plus dans mon rôle, c'est résoudre des problèmes rapidement et m'assurer que les gens repartent en ayant l'impression d'avoir été vraiment écoutés. En dehors du travail, j'aime rester actif·ve, et je suis toujours partant·e pour apprendre quelque chose de nouveau, que ce soit lié à mon travail ou non."
-  },
-  {
-    title: "Décrire ta ville",
-    en: "The city I live in is a mix of old and new. In the center, you'll find narrow streets with buildings that are hundreds of years old, and just a few minutes away, there are modern shopping areas and office buildings. What I like most is that you can walk almost everywhere — there's a river that crosses through the middle, and a lot of people go running or cycling along it in the morning. It gets pretty busy during the week, especially around lunchtime, but on weekends things slow down a bit. If you ever visit, I'd definitely recommend exploring the older neighborhoods first.",
-    fr: "La ville où je vis est un mélange d'ancien et de moderne. Dans le centre, on trouve des rues étroites avec des bâtiments vieux de plusieurs centaines d'années, et à quelques minutes de là seulement, il y a des zones commerciales modernes et des immeubles de bureaux. Ce que j'aime le plus, c'est qu'on peut marcher presque partout — il y a une rivière qui traverse le centre, et beaucoup de gens vont courir ou faire du vélo le long de celle-ci le matin. Ça devient assez animé en semaine, surtout à l'heure du déjeuner, mais le week-end, tout ralentit un peu. Si jamais tu viens, je te conseillerais vraiment d'explorer d'abord les quartiers anciens."
-  },
-  {
-    title: "Parler de la nourriture que tu aimes",
-    en: "I'm honestly not that picky when it comes to food, but if I had to choose, I'd say I have a soft spot for anything with a lot of flavor — spicy dishes, strong sauces, that kind of thing. I grew up eating a lot of homemade meals, so I tend to compare restaurant food to what my family used to cook. Lately I've been trying to eat out less and cook more myself, partly to save money, partly because I actually enjoy it. There's something satisfying about trying a new recipe and having it turn out better than expected. Breakfast, though, is still my weakest meal — I usually just grab something quick.",
-    fr: "Honnêtement, je ne suis pas si difficile côté nourriture, mais si je devais choisir, je dirais que j'ai un faible pour tout ce qui a beaucoup de goût — les plats épicés, les sauces bien relevées, ce genre de choses. J'ai grandi en mangeant beaucoup de plats faits maison, donc j'ai tendance à comparer la nourriture des restaurants à ce que ma famille cuisinait. Ces derniers temps, j'essaie de moins manger dehors et de cuisiner plus moi-même, en partie pour économiser, en partie parce que j'aime vraiment ça. Il y a quelque chose de satisfaisant à essayer une nouvelle recette et à ce qu'elle soit meilleure que prévu. Le petit-déjeuner, par contre, reste mon repas le plus faible — en général, je prends juste quelque chose de rapide."
-  },
-  {
-    title: "Ton avis sur les réseaux sociaux",
-    en: "I have mixed feelings about social media, to be honest. On one hand, it's great for staying in touch with people who live far away, and I've discovered a lot of interesting things I wouldn't have come across otherwise. On the other hand, I notice that scrolling for too long makes me feel kind of drained, without really knowing why. I've started setting small limits for myself, like not checking my phone right after waking up. It's not always easy to stick to, but I do feel a difference on the days I manage it. I think it's really about finding a balance that works for you.",
-    fr: "J'ai des sentiments partagés sur les réseaux sociaux, pour être honnête. D'un côté, c'est super pratique pour rester en contact avec des gens qui vivent loin, et j'ai découvert pas mal de choses intéressantes que je n'aurais jamais croisées autrement. De l'autre, je remarque que défiler trop longtemps me laisse un peu vidé·e, sans vraiment savoir pourquoi. J'ai commencé à me fixer de petites limites, comme ne pas regarder mon téléphone juste après le réveil. Ce n'est pas toujours facile à tenir, mais je sens vraiment une différence les jours où j'y arrive. Je pense que c'est surtout une question d'équilibre à trouver pour soi-même."
-  },
-  {
-    title: "Tes objectifs pour cette année",
-    en: "This year, I'm trying to focus on fewer things but actually follow through on them, instead of starting a lot of projects and losing motivation halfway. One of my main goals is to get better at speaking English more naturally, which is actually part of why I'm practicing right now. I'm also trying to move more during the day, even if it's just short walks, since I spend a lot of time sitting. Financially, I'd like to save a bit more consistently instead of only saving when there's money left over. None of these goals are huge on their own, but together, I think they'll make a real difference by the end of the year.",
-    fr: "Cette année, j'essaie de me concentrer sur moins de choses, mais de vraiment les suivre jusqu'au bout, plutôt que de commencer plein de projets et de perdre ma motivation à mi-chemin. Un de mes objectifs principaux, c'est de mieux parler anglais de façon plus naturelle, ce qui explique en partie pourquoi je m'entraîne en ce moment. J'essaie aussi de bouger plus dans la journée, même si ce ne sont que de courtes marches, parce que je passe beaucoup de temps assis·e. Financièrement, j'aimerais épargner un peu plus régulièrement, au lieu de ne mettre de côté que ce qu'il reste à la fin. Aucun de ces objectifs n'est énorme en soi, mais ensemble, je pense qu'ils feront une vraie différence d'ici la fin de l'année."
-  }
+  { title: "Dire bonjour", en: "Hi, how are you doing today?", fr: "Salut, comment vas-tu aujourd'hui ?" },
+  { title: "Parler du temps", en: "It's really nice outside today.", fr: "Il fait vraiment beau dehors aujourd'hui." },
+  { title: "Donner ton avis", en: "I think that's a great idea.", fr: "Je pense que c'est une excellente idée." },
+  { title: "Parler de tes goûts", en: "I really enjoy reading before bed.", fr: "J'aime beaucoup lire avant de dormir." },
+  { title: "Demander de l'aide", en: "Could you help me with this, please?", fr: "Peux-tu m'aider avec ça, s'il te plaît ?" },
+  { title: "Parler du travail", en: "My job keeps me pretty busy this week.", fr: "Mon travail me tient assez occupé·e cette semaine." },
+  { title: "Faire un compliment", en: "You did a really great job on that.", fr: "Tu as fait un très bon travail sur ça." },
+  { title: "Parler de tes projets", en: "I'm planning to travel next summer.", fr: "Je prévois de voyager l'été prochain." },
+  { title: "Exprimer un doute", en: "I'm not really sure about that yet.", fr: "Je ne suis pas vraiment sûr·e de ça encore." },
+  { title: "Remercier quelqu'un", en: "Thank you so much for your help today.", fr: "Merci beaucoup pour ton aide aujourd'hui." },
+  { title: "Proposer quelque chose", en: "Do you want to grab lunch together?", fr: "Tu veux qu'on déjeune ensemble ?" },
+  { title: "Parler de ta journée", en: "Today was a pretty good day overall.", fr: "Aujourd'hui a été une plutôt bonne journée dans l'ensemble." }
 ];
 
 let selectedGender = null;
@@ -1549,8 +1673,36 @@ const shadowTopicTitle = document.getElementById('shadowTopicTitle');
 const shadowRollBtn = document.getElementById('shadowRollBtn');
 const shDiceIcon = document.getElementById('shDiceIcon');
 
+const MAX_SHADOW_LEVEL = 5;
+let shadowLevel = 1;
+
+const shLevelNum = document.getElementById('shLevelNum');
+const shLevelDots = document.getElementById('shLevelDots');
+const shLevelDesc = document.getElementById('shLevelDesc');
+
+function renderShLevelBadge(){
+  shLevelNum.textContent = shadowLevel;
+  shLevelDots.innerHTML = '';
+  for(let i=1; i<=MAX_SHADOW_LEVEL; i++){
+    const dot = document.createElement('span');
+    if(i <= shadowLevel) dot.classList.add('done');
+    shLevelDots.appendChild(dot);
+  }
+  shLevelDesc.textContent = shadowLevel === 1 ? '1 phrase à répéter' : shadowLevel + ' phrases à répéter à la suite';
+}
+renderShLevelBadge();
+
+function pickLevelTopics(level){
+  const picked = shuffle(SHADOW_TOPICS).slice(0, level);
+  return {
+    title: picked.map(p => p.title).join(' + '),
+    en: picked.map(p => p.en).join(' '),
+    fr: picked.map(p => p.fr).join(' ')
+  };
+}
+
 function rollShadowTopic(){
-  const finalItem = SHADOW_TOPICS[Math.floor(Math.random() * SHADOW_TOPICS.length)];
+  const finalItem = pickLevelTopics(shadowLevel);
   shadowRollBtn.disabled = true;
   listenBtn.disabled = true;
   document.getElementById('shadowStep4').classList.remove('show');
@@ -1575,7 +1727,7 @@ function rollShadowTopic(){
   const tick = () => {
     ticks++;
     const randomItem = SHADOW_TOPICS[Math.floor(Math.random() * SHADOW_TOPICS.length)];
-    shadowTopicTitle.textContent = (ticks >= totalTicks ? finalItem : randomItem).title;
+    shadowTopicTitle.textContent = ticks >= totalTicks ? finalItem.title : randomItem.title;
     if(ticks < totalTicks){
       setTimeout(tick, 40 + ticks * 12);
     } else {
@@ -1659,10 +1811,9 @@ function speakShadowText(){
     replayBtn.disabled = false;
     replayBtn.style.display = 'inline-flex';
     liveCaption.textContent = fullText;
-    document.getElementById('transcriptEn').textContent = selectedShadowTopic.en;
     document.getElementById('transcriptFr').textContent = selectedShadowTopic.fr;
     document.getElementById('shadowStep4').classList.add('show');
-    resetShadowTimer();
+    resetShadowRepeat();
   };
   utter.onerror = () => {
     clearInterval(fallbackInterval);
@@ -1676,50 +1827,137 @@ function speakShadowText(){
 listenBtn.addEventListener('click', speakShadowText);
 replayBtn.addEventListener('click', speakShadowText);
 
-/* ---------------- Shadow practice timer (repeat within a minute) ---------------- */
-const SH_DURATION = 60;
-let shTimeLeft = SH_DURATION;
-let shTimerInterval = null;
-const shTimerLabel = document.getElementById('shTimerLabel');
-const shTimerCircle = document.getElementById('shTimerCircle');
-const shTimerRing = document.getElementById('shTimerRing');
+/* ---------------- Shadow repeat: pronunciation check (word-by-word, like the teleprompter) ---------------- */
+const shTeleprompter = document.getElementById('shTeleprompter');
 const shStartBtn = document.getElementById('shStartBtn');
+const shDiscoveryToggle = document.getElementById('shDiscoveryToggle');
+const shManualDoneBtn = document.getElementById('shManualDoneBtn');
+shDiscoveryToggle.addEventListener('change', () => {
+  shManualDoneBtn.style.display = shDiscoveryToggle.checked ? 'inline-flex' : 'none';
+});
+shManualDoneBtn.addEventListener('click', () => {
+  shInterrupted = true;
+  stopShadowRepeat(true);
+});
+const shHint = document.getElementById('shHint');
 const shCelebrate = document.getElementById('shCelebrate');
+const shRetryZone = document.getElementById('shRetryZone');
 
-function resetShadowTimer(){
-  clearInterval(shTimerInterval);
-  shTimeLeft = SH_DURATION;
-  shTimerLabel.textContent = SH_DURATION + 's';
-  shTimerCircle.style.strokeDashoffset = 0;
-  shTimerCircle.style.stroke = 'var(--green)';
-  shTimerRing.classList.remove('urgent');
+const EN_FILLER_RE = /\b(u+m+|u+h+|e+r+m*)\b/i;
+
+let shExpectedWords = [];
+let shReadIndex = 0;
+let shRecognition = null;
+let shRecognizing = false;
+let shInterrupted = false;
+
+function renderShTeleprompter(){
+  const displayWords = selectedShadowTopic.en.split(/\s+/);
+  shTeleprompter.innerHTML = shExpectedWords.map((w, i) =>
+    `<span class="tp-word ${i < shReadIndex ? 'read' : (i === shReadIndex ? 'current' : 'pending')}">${displayWords[i]}</span>`
+  ).join(' ');
+}
+
+function resetShadowRepeat(){
+  if(shRecognition && shRecognizing){ try{ shRecognition.stop(); }catch(e){} }
+  shExpectedWords = selectedShadowTopic.en.split(/\s+/).map(normalizeWord).filter(Boolean);
+  shReadIndex = 0;
+  shInterrupted = false;
   shStartBtn.disabled = false;
   shStartBtn.textContent = 'Je répète maintenant';
   shCelebrate.classList.remove('show');
+  shRetryZone.classList.remove('show');
+  shRetryZone.textContent = '';
+  renderShTeleprompter();
+}
+
+function stopShadowRepeat(success, reason){
+  if(shRecognition && shRecognizing){ try{ shRecognition.stop(); }catch(e){} }
+  shStartBtn.disabled = false;
+  if(success){
+    shStartBtn.textContent = 'Répéter à nouveau';
+    if(shadowLevel < MAX_SHADOW_LEVEL){
+      shadowLevel++;
+      renderShLevelBadge();
+      shCelebrate.textContent = '🎉 Bien joué ! Niveau ' + shadowLevel + ' débloqué — lance un nouveau sujet pour continuer.';
+    } else {
+      shCelebrate.textContent = '🏆 Niveau maximum atteint, bravo ! Relance un sujet pour continuer à t\'entraîner.';
+    }
+    shCelebrate.classList.add('show');
+    burstCelebration(shTeleprompter);
+  } else {
+    shStartBtn.textContent = 'Reprendre depuis le début';
+    playAlertSound();
+    shRetryZone.textContent = reason;
+    shRetryZone.classList.add('show');
+    shReadIndex = 0;
+    renderShTeleprompter();
+  }
 }
 
 shStartBtn.addEventListener('click', () => {
-  resetShadowTimer();
+  if(!selectedShadowTopic) return;
+  resetShadowRepeat();
+  if(!SpeechRec){
+    shHint.textContent = "La reconnaissance vocale n'est pas disponible sur ce navigateur pour cet exercice.";
+    return;
+  }
   shStartBtn.disabled = true;
-  shStartBtn.textContent = 'En cours…';
-  shTimerInterval = setInterval(() => {
-    shTimeLeft -= 1;
-    shTimerLabel.textContent = Math.max(shTimeLeft,0) + 's';
-    shTimerCircle.style.strokeDashoffset = CIRCUM * (1 - shTimeLeft / SH_DURATION);
-    if(shTimeLeft <= 10){
-      shTimerCircle.style.stroke = 'var(--coral)';
-      shTimerRing.classList.add('urgent');
-    } else if(shTimeLeft <= 20){
-      shTimerCircle.style.stroke = 'var(--gold)';
-    }
-    if(shTimeLeft <= 0){
-      clearInterval(shTimerInterval);
-      shStartBtn.disabled = false;
-      shStartBtn.textContent = 'Recommencer';
-      shCelebrate.classList.add('show');
-      burstCelebration(shTimerRing);
-    }
-  }, 1000);
+  shStartBtn.textContent = 'Écoute en cours…';
+  shHint.textContent = 'Répète la phrase, mot après mot.';
+
+  try{
+    shRecognition = new SpeechRec();
+    shRecognition.lang = 'en-US';
+    shRecognition.continuous = true;
+    shRecognition.interimResults = true;
+
+    shRecognition.onresult = (event) => {
+      let fullText = '';
+      let latestChunk = '';
+      for(let i=0; i<event.results.length; i++){
+        fullText += event.results[i][0].transcript + ' ';
+        if(i === event.results.length - 1) latestChunk = event.results[i][0].transcript;
+      }
+
+      if(!shDiscoveryToggle.checked && !shInterrupted && EN_FILLER_RE.test(latestChunk)){
+        shInterrupted = true;
+        stopShadowRepeat(false, "Une hésitation a été entendue (« um »). On reprend depuis le début.");
+        return;
+      }
+
+      const recognizedWords = fullText.split(/\s+/).map(normalizeWord).filter(Boolean);
+      let matchCount = 0;
+      while(matchCount < recognizedWords.length && matchCount < shExpectedWords.length && recognizedWords[matchCount] === shExpectedWords[matchCount]){
+        matchCount++;
+      }
+      if(matchCount > shReadIndex){
+        shReadIndex = matchCount;
+        renderShTeleprompter();
+      }
+
+      if(shReadIndex >= shExpectedWords.length){
+        shInterrupted = true;
+        stopShadowRepeat(true);
+        return;
+      }
+
+      if(!shDiscoveryToggle.checked && !shInterrupted && recognizedWords.length > shReadIndex + 3){
+        shInterrupted = true;
+        stopShadowRepeat(false, "Ce qui a été dit ne correspond plus à la phrase. On reprend depuis le début.");
+      }
+    };
+    shRecognition.onerror = () => {
+      shHint.textContent = "Le micro n'a pas pu être utilisé ici.";
+    };
+    shRecognition.onend = () => { shRecognizing = false; };
+    shRecognition.start();
+    shRecognizing = true;
+  }catch(e){
+    shHint.textContent = "Le micro n'a pas pu être utilisé ici.";
+    shStartBtn.disabled = false;
+    shStartBtn.textContent = 'Je répète maintenant';
+  }
 });
 
 /* ---------------- Quiz éclair (active recall on vocab + connectors) ---------------- */
@@ -1754,7 +1992,13 @@ let quizIndex = 0;
 let quizScore = 0;
 let quizAnswered = false;
 
-function generateQuiz(){
+function generateQuiz(customQuestions){
+  if(customQuestions && customQuestions.length){
+    quizQuestions = customQuestions;
+    quizIndex = 0;
+    quizScore = 0;
+    return;
+  }
   const shuffledPool = shuffle(QUIZ_POOL);
   const picked = shuffledPool.slice(0, QUIZ_LENGTH);
   quizQuestions = picked.map(q => {
@@ -1841,6 +2085,58 @@ quizStartBtn.addEventListener('click', () => {
   generateQuiz();
   showQuizStep('quizStepQuestion');
   renderQuizQuestion();
+});
+
+/* ---------------- Contextual quiz: tied to the topic just practiced in "Prendre la parole" ---------------- */
+const topicQuizBtn = document.getElementById('topicQuizBtn');
+const topicQuizLabel = document.getElementById('topicQuizLabel');
+topicQuizBtn.addEventListener('click', async () => {
+  if(!currentTopic) return;
+  topicQuizBtn.disabled = true;
+  topicQuizLabel.textContent = 'Préparation du quiz…';
+
+  const subject = currentTopic.type === 'word' ? currentTopic.title : currentTopic.title;
+  const basis = lastSpokenText.trim();
+
+  try{
+    const prompt = `Une personne vient de s'entraîner à parler en français sur ce sujet : "${subject}".${basis ? ` Voici à peu près ce qu'elle a dit : "${basis}"` : ''}
+
+Crée un petit quiz de 8 questions à choix multiples en français, pour l'aider à consolider le vocabulaire et les expressions utiles sur CE sujet précis (pas un sujet générique). Chaque question porte sur un mot, une expression, ou une nuance utile pour parler de ce sujet. Reste bienveillant·e, sans piège inutile.
+
+Réponds UNIQUEMENT avec un JSON valide, sans texte autour, au format exact :
+{"questions":[{"prompt":"...","choices":["...","...","...","..."],"correct":"..."}]}
+Il doit y avoir exactement 8 questions, chacune avec exactement 4 "choices", et "correct" doit être un texte identique à l'un des 4 choices.`;
+
+    const response = await fetch("https://api.anthropic.com/v1/messages", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        model: "claude-sonnet-4-6",
+        max_tokens: 1200,
+        messages: [{ role: "user", content: prompt }]
+      })
+    });
+    const data = await response.json();
+    const textBlocks = (data.content || []).filter(b => b.type === 'text').map(b => b.text).join('');
+    const clean = textBlocks.replace(/```json|```/g, '').trim();
+    const parsed = JSON.parse(clean);
+    const questions = (parsed.questions || []).slice(0, QUIZ_LENGTH).map(q => ({
+      prompt: q.prompt,
+      correct: q.correct,
+      choices: shuffle(q.choices)
+    }));
+    if(questions.length < QUIZ_LENGTH) throw new Error('not enough questions');
+
+    generateQuiz(questions);
+    switchToTab('panel-quiz');
+    showQuizStep('quizStepQuestion');
+    renderQuizQuestion();
+  }catch(e){
+    errorZone.innerHTML = '<div class="error-msg">Impossible de préparer un quiz sur ce sujet pour le moment. Réessaie dans un instant, ou utilise le Quiz éclair général.</div>';
+  }finally{
+    topicQuizBtn.disabled = false;
+    topicQuizLabel.textContent = 'Quiz sur ce sujet (8 questions)';
+  }
 });
 quizNextBtn.addEventListener('click', nextQuizQuestion);
 quizRestartBtn.addEventListener('click', () => {
