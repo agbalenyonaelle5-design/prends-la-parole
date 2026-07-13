@@ -414,14 +414,25 @@
 
   /* ---------- Teleprompter (reading practice) ---------- */
   .level-badge{
-    display:flex; align-items:center; gap:12px; margin-bottom: 20px; flex-wrap:wrap;
-    background: #F1F3EE; border-radius: 999px; padding: 8px 16px; width:fit-content;
+    background: #F1F3EE; border-radius: 16px; padding: 14px 18px; margin-bottom: 20px;
   }
-  .level-badge-label{ font-size:0.85rem; font-weight:700; color: var(--indigo-deep); }
-  .level-dots{ display:flex; gap:5px; }
-  .level-dots span{ width:8px; height:8px; border-radius:50%; background:#D8E0D3; transition: background 0.3s ease; }
+  .level-badge-top{
+    display:flex; align-items:center; gap:10px; flex-wrap:nowrap; overflow-x:auto;
+  }
+  .level-badge-label{ font-size:0.85rem; font-weight:700; color: var(--indigo-deep); white-space:nowrap; flex:0 0 auto; }
+  .level-dots{ display:flex; gap:6px; flex:0 0 auto; }
+  .level-dots span{ width:8px; height:8px; border-radius:50%; background:#D8E0D3; transition: background 0.3s ease; flex:0 0 auto; }
+  .level-dot-btn{ width:16px !important; height:16px !important; cursor:pointer; border:2px solid transparent; box-sizing:border-box; }
+  .level-dot-btn:hover{ border-color: var(--indigo) !important; transform: scale(1.15); }
   .level-dots span.done{ background: var(--gold); }
-  .level-badge-desc{ font-size:0.8rem; color: var(--ink-soft); }
+  .level-badge-desc{ font-size:0.78rem; color: var(--ink-soft); margin-top:6px; }
+  .level-next-btn{
+    display:none; margin-top:12px; background: var(--indigo-deep); color:#fff; border:none;
+    padding: 9px 18px; border-radius:999px; font-size:0.85rem; font-weight:700;
+    font-family:'Work Sans', sans-serif; cursor:pointer; align-items:center; gap:8px;
+  }
+  .level-next-btn.show{ display:inline-flex; }
+  .level-next-btn:hover{ background:#24303D; }
   .discovery-toggle{
     display:flex; align-items:center; gap:10px; margin-bottom:20px; cursor:pointer;
     font-size:0.88rem; color: var(--ink-soft); user-select:none;
@@ -456,6 +467,17 @@
   .reflex-ring .timer-fg{ stroke: var(--coral); }
   #reflexCelebrate{ display:none; margin-top:16px; background:#EAF3EC; color:var(--green); }
   #reflexCelebrate.show{ display:flex; }
+
+  .word-help-card{
+    display:none; margin-top: 18px; background: linear-gradient(135deg, #FBEAE4, #FBF3E4);
+    border-radius: 16px; padding: 20px 24px; border: 1.5px solid #F1D9CC; text-align:center;
+  }
+  .word-help-card.show{ display:block; animation: panelFade 0.4s ease; }
+  .word-help-word{
+    font-family:'Fraunces', serif; font-weight:700; font-size: 1.6rem; color: var(--coral);
+    margin: 6px 0 18px;
+  }
+  .word-help-actions{ display:flex; gap:12px; justify-content:center; flex-wrap:wrap; }
 
   .transcripts{ margin-top: 24px; display:grid; gap:14px; }
   .transcript-block{
@@ -698,9 +720,12 @@
       <div class="step" id="shadowStep2">
         <p class="tool-mini-label">2. Choisis un sujet</p>
         <div class="level-badge" id="shLevelBadge">
-          <span class="level-badge-label">Niveau <span id="shLevelNum">1</span> / 5</span>
-          <div class="level-dots" id="shLevelDots"></div>
-          <span class="level-badge-desc" id="shLevelDesc">1 phrase à répéter</span>
+          <div class="level-badge-top">
+            <span class="level-badge-label">Niveau <span id="shLevelNum">1</span>/5</span>
+            <div class="level-dots" id="shLevelDots"></div>
+          </div>
+          <p class="level-badge-desc" id="shLevelDesc">1 phrase à répéter · clique un point pour changer de niveau</p>
+          <button class="level-next-btn" id="shLevelNextBtn">Niveau suivant débloqué →</button>
         </div>
         <label class="discovery-toggle">
           <input type="checkbox" id="shDiscoveryToggle">
@@ -767,6 +792,71 @@
       </div>
     </section>
 
+    <section class="practice-card" id="shAdvancedSection" style="display:none; margin-top:24px;">
+      <p class="tool-mini-label">🏆 Mode avancé débloqué — pour aller plus loin</p>
+      <p style="color:var(--ink-soft); font-size:0.92rem; margin:0 0 18px;">Tu as réussi les 5 niveaux ! Choisis une longueur de texte pour t'entraîner façon vraie conversation.</p>
+      <div class="duration-picker show" id="shDurationPicker">
+        <span>Longueur :</span>
+        <button class="dur-btn" data-dur="15">Courte (~15s)</button>
+        <button class="dur-btn" data-dur="30">Moyenne (~30s)</button>
+        <button class="dur-btn active" data-dur="60">Longue (~60s)</button>
+      </div>
+      <div class="practice-top">
+        <div class="topic-card" id="shAdvTopicCard">
+          <span class="topic-tag">Texte long</span>
+          <h2 class="topic-title" id="shAdvTopicTitle">Lance un texte pour commencer</h2>
+        </div>
+        <button class="ghost" id="shAdvRollBtn">
+          <svg class="dice-icon" id="shAdvDiceIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round">
+            <rect x="3" y="3" width="18" height="18" rx="4"/>
+            <circle cx="8" cy="8" r="1.3" fill="currentColor" stroke="none"/>
+            <circle cx="16" cy="8" r="1.3" fill="currentColor" stroke="none"/>
+            <circle cx="12" cy="12" r="1.3" fill="currentColor" stroke="none"/>
+            <circle cx="8" cy="16" r="1.3" fill="currentColor" stroke="none"/>
+            <circle cx="16" cy="16" r="1.3" fill="currentColor" stroke="none"/>
+          </svg>
+          <span>Lance un texte long</span>
+        </button>
+      </div>
+      <div class="listen-actions" style="margin-top:16px;">
+        <button class="primary" id="shAdvListenBtn" disabled>Écouter l'avatar</button>
+      </div>
+      <div class="live-caption-wrap" id="shAdvCaptionWrap">
+        <p class="live-caption" id="shAdvCaption"></p>
+      </div>
+      <div class="transcripts" id="shAdvTranscripts" style="display:none;">
+        <div class="transcript-block">
+          <h4>Traduction</h4>
+          <p id="shAdvTranscriptFr"></p>
+        </div>
+      </div>
+
+      <div class="shadow-practice" id="shAdvPracticeZone" style="display:none;">
+        <p class="tool-mini-label" style="margin-top:22px;">À ton tour — répète le texte, mot après mot</p>
+        <div class="quiz-progress">
+          <span id="shAdvProgressLabel">0 % lu</span>
+          <div class="quiz-progress-bar"><div class="quiz-progress-fill" id="shAdvProgressFill"></div></div>
+        </div>
+        <div class="teleprompter" id="shAdvTeleprompter"></div>
+        <div class="listen-actions" style="margin-top:16px;">
+          <button class="primary" id="shAdvStartBtn">Je répète maintenant</button>
+          <span class="mic-hint" id="shAdvHint">Répète le texte à ton rythme, mot après mot.</span>
+        </div>
+
+        <div class="word-help-card" id="shAdvWordHelp">
+          <p class="reflex-label">Tu as buté sur ce mot :</p>
+          <p class="word-help-word" id="shAdvHelpWord"></p>
+          <div class="word-help-actions">
+            <button class="ghost" id="shAdvHearWordBtn">🔊 Écouter ce mot</button>
+            <button class="primary" id="shAdvContinueBtn">Continuer à partir d'ici</button>
+          </div>
+          <button class="ghost" id="shAdvReplayAllBtn" style="margin-top:10px; font-size:0.85rem;">🔁 Toujours difficile ? Réécouter tout le texte</button>
+        </div>
+
+        <div class="celebrate" id="shAdvCelebrate">🎉 Bravo, texte lu en entier !</div>
+      </div>
+    </section>
+
     <div class="section-head">
       <h2>L'essentiel pour communiquer en anglais</h2>
       <p>Les mots et expressions les plus utiles pour tenir une conversation, quel que soit le sujet.</p>
@@ -822,6 +912,14 @@
 
     <section class="practice-card" id="readCard">
       <div class="step show" id="readStep1">
+        <div class="mode-toggle" id="readLangToggle" style="max-width:400px; margin-bottom:20px;">
+          <button class="mode-btn active" data-lang="fr">
+            <span class="mode-name">🇫🇷 Français</span>
+          </button>
+          <button class="mode-btn" data-lang="en">
+            <span class="mode-name">🇬🇧 English</span>
+          </button>
+        </div>
         <div class="practice-top">
           <div class="topic-card" id="readTopicCard">
             <span class="topic-tag" id="readTopicTag">Sujet</span>
@@ -1675,22 +1773,41 @@ const shDiceIcon = document.getElementById('shDiceIcon');
 
 const MAX_SHADOW_LEVEL = 5;
 let shadowLevel = 1;
+let shAdvancedUnlocked = false;
 
 const shLevelNum = document.getElementById('shLevelNum');
 const shLevelDots = document.getElementById('shLevelDots');
 const shLevelDesc = document.getElementById('shLevelDesc');
+const shAdvancedSection = document.getElementById('shAdvancedSection');
 
 function renderShLevelBadge(){
   shLevelNum.textContent = shadowLevel;
   shLevelDots.innerHTML = '';
   for(let i=1; i<=MAX_SHADOW_LEVEL; i++){
     const dot = document.createElement('span');
+    dot.className = 'level-dot-btn';
     if(i <= shadowLevel) dot.classList.add('done');
+    dot.title = 'Aller au niveau ' + i;
+    dot.addEventListener('click', () => {
+      shadowLevel = i;
+      shLevelNextBtn.classList.remove('show');
+      renderShLevelBadge();
+    });
     shLevelDots.appendChild(dot);
   }
-  shLevelDesc.textContent = shadowLevel === 1 ? '1 phrase à répéter' : shadowLevel + ' phrases à répéter à la suite';
+  shLevelDesc.textContent = (shadowLevel === 1 ? '1 phrase à répéter' : shadowLevel + ' phrases à répéter à la suite') + ' · clique un point pour changer de niveau';
 }
 renderShLevelBadge();
+
+const shLevelNextBtn = document.getElementById('shLevelNextBtn');
+shLevelNextBtn.addEventListener('click', () => {
+  shLevelNextBtn.classList.remove('show');
+  if(shadowLevel < MAX_SHADOW_LEVEL){
+    shadowLevel++;
+    renderShLevelBadge();
+  }
+  rollShadowTopic();
+});
 
 function pickLevelTopics(level){
   const picked = shuffle(SHADOW_TOPICS).slice(0, level);
@@ -1877,11 +1994,15 @@ function stopShadowRepeat(success, reason){
   if(success){
     shStartBtn.textContent = 'Répéter à nouveau';
     if(shadowLevel < MAX_SHADOW_LEVEL){
-      shadowLevel++;
-      renderShLevelBadge();
-      shCelebrate.textContent = '🎉 Bien joué ! Niveau ' + shadowLevel + ' débloqué — lance un nouveau sujet pour continuer.';
+      shCelebrate.textContent = '🎉 Bien joué, niveau ' + shadowLevel + ' réussi !';
+      shLevelNextBtn.textContent = 'Niveau ' + (shadowLevel + 1) + ' débloqué →';
+      shLevelNextBtn.classList.add('show');
     } else {
-      shCelebrate.textContent = '🏆 Niveau maximum atteint, bravo ! Relance un sujet pour continuer à t\'entraîner.';
+      shCelebrate.textContent = '🏆 Niveau maximum atteint, bravo ! Le mode avancé est débloqué juste en dessous.';
+      if(!shAdvancedUnlocked){
+        shAdvancedUnlocked = true;
+        shAdvancedSection.style.display = 'block';
+      }
     }
     shCelebrate.classList.add('show');
     burstCelebration(shTeleprompter);
@@ -2261,7 +2382,9 @@ lifelineBtn.addEventListener('click', async () => {
 });
 
 /* ---------------- Lecture façon journaliste (teleprompter) ---------------- */
-const READING_TEXTS = [
+const READING_TEXTS_FR = READING_TEXTS_DATA_FR();
+function READING_TEXTS_DATA_FR(){
+  return [
   { theme: "Météo", text: "Ce matin, le ciel reste dégagé sur la majeure partie du territoire, avec des températures comprises entre huit et quatorze degrés. Un vent léger souffle du nord-ouest en début de journée. Dans l'après-midi, quelques nuages pourraient apparaître sur les régions côtières, sans risque de précipitations. La soirée s'annonce calme et plutôt douce pour la saison." },
   { theme: "Circulation", text: "Sur le réseau routier, la circulation reste fluide ce matin, à l'exception d'un ralentissement signalé sur l'axe principal en direction du centre-ville. Des travaux sont en cours sur une voie secondaire jusqu'à la fin de la semaine. Les usagers des transports en commun ne signalent pour l'instant aucune perturbation notable sur les lignes habituelles." },
   { theme: "Économie", text: "Le secteur du commerce affiche une légère progression ce trimestre, portée notamment par la reprise des ventes en ligne. Plusieurs entreprises locales annoncent des recrutements dans les prochains mois. Les analystes restent toutefois prudents, évoquant une conjoncture encore incertaine à l'échelle internationale, susceptible d'influencer les résultats des mois à venir." },
@@ -2270,7 +2393,34 @@ const READING_TEXTS = [
   { theme: "Technologie", text: "Une nouvelle application destinée à faciliter les démarches administratives sera déployée progressivement dans les prochaines semaines. Elle permettra notamment de suivre l'avancement de certains dossiers directement depuis un téléphone. Les premiers retours des utilisateurs testeurs sont plutôt encourageants, même si quelques ajustements sont encore prévus avant le lancement officiel." },
   { theme: "Santé", text: "Les autorités sanitaires rappellent l'importance de bien s'hydrater pendant les périodes de fortes chaleurs, en particulier pour les personnes les plus fragiles. Il est également conseillé d'éviter les efforts physiques intenses aux heures les plus chaudes de la journée. Des points d'eau supplémentaires seront installés dans plusieurs lieux publics dès cette semaine." },
   { theme: "Société", text: "Une enquête récente révèle que de plus en plus de foyers privilégient les circuits courts pour leurs achats alimentaires. Cette tendance, en progression constante depuis plusieurs années, s'expliquerait notamment par une prise de conscience environnementale plus marquée. Les producteurs locaux se disent globalement satisfaits de cette évolution des habitudes de consommation." }
+  ];
+}
+
+const READING_TEXTS_EN = [
+  { theme: "Weather", text: "This morning, skies remain clear across most of the region, with temperatures ranging between eight and fourteen degrees. A light wind is blowing from the northwest early in the day. In the afternoon, a few clouds may appear along the coast, with no risk of rain. The evening should stay calm and fairly mild for the season." },
+  { theme: "Traffic", text: "Traffic remains smooth this morning on the main roads, apart from a slowdown reported on the route heading into downtown. Roadworks are underway on a secondary street until the end of the week. Public transport users are not reporting any notable disruption on the usual lines." },
+  { theme: "Economy", text: "The retail sector is showing slight growth this quarter, driven mainly by a rebound in online sales. Several local businesses have announced new hiring plans over the coming months. Analysts remain cautious, however, pointing to an uncertain global outlook that could still affect results in the months ahead." },
+  { theme: "Culture", text: "The annual festival opens its doors this weekend, with a particularly rich lineup this year. Around thirty artists will perform across the different stages set up downtown. Organizers remind visitors that access to certain areas requires advance booking, due to higher attendance expected compared to previous years." },
+  { theme: "Sport", text: "The local team secured a valuable win this weekend, in a closely fought match decided in the final minutes. This result allows them to move up the table before the break. The next fixture is set for two weeks from now, against a team that has been on a strong run this season." },
+  { theme: "Technology", text: "A new app designed to simplify administrative procedures will be rolled out gradually over the coming weeks. It will notably allow users to track the progress of certain requests directly from their phone. Early feedback from test users has been fairly positive, though a few adjustments are still planned before the official launch." },
+  { theme: "Health", text: "Health authorities are reminding the public to stay well hydrated during periods of extreme heat, especially those most vulnerable. It is also advised to avoid intense physical activity during the hottest hours of the day. Additional water points will be installed in several public locations starting this week." },
+  { theme: "Society", text: "A recent survey shows that more and more households are turning to local producers for their food shopping. This trend, which has been steadily growing for several years, appears to be driven by greater environmental awareness. Local producers say they are largely satisfied with this shift in consumer habits." }
 ];
+
+let readingLang = 'fr';
+let READING_TEXTS = READING_TEXTS_FR;
+
+document.querySelectorAll('#readLangToggle .mode-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('#readLangToggle .mode-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    readingLang = btn.dataset.lang;
+    READING_TEXTS = readingLang === 'en' ? READING_TEXTS_EN : READING_TEXTS_FR;
+    document.getElementById('readStep2').classList.remove('show');
+    readTopicTitle.textContent = 'Lance un texte pour commencer';
+    readTopicTag.textContent = 'Sujet';
+  });
+});
 
 function normalizeWord(w){
   return (w || '').toLowerCase()
@@ -2395,7 +2545,7 @@ readStartBtn.addEventListener('click', () => {
 
   try{
     readRecognition = new SpeechRec();
-    readRecognition.lang = 'fr-FR';
+    readRecognition.lang = readingLang === 'en' ? 'en-US' : 'fr-FR';
     readRecognition.continuous = true;
     readRecognition.interimResults = true;
     readLastSpeechTime = Date.now();
@@ -2409,14 +2559,15 @@ readStartBtn.addEventListener('click', () => {
         if(i === event.results.length - 1) latestChunk = event.results[i][0].transcript;
       }
 
-      if(!readInterrupted && FILLER_RE.test(latestChunk)){
+      const fillerHit = readingLang === 'en' ? EN_FILLER_RE.test(latestChunk) : FILLER_RE.test(latestChunk);
+      if(!readInterrupted && fillerHit){
         readInterrupted = true;
-        stopReading(false, "Une hésitation (« euh ») a été entendue. On reprend depuis le début du texte.");
+        stopReading(false, readingLang === 'en' ? "A hesitation was heard (« um »). Starting over from the beginning." : "Une hésitation (« euh ») a été entendue. On reprend depuis le début du texte.");
         return;
       }
       if(!readInterrupted && STUTTER_RE.test(latestChunk)){
         readInterrupted = true;
-        stopReading(false, "Une répétition de mot a été entendue. On reprend depuis le début du texte.");
+        stopReading(false, readingLang === 'en' ? "A repeated word was heard. Starting over from the beginning." : "Une répétition de mot a été entendue. On reprend depuis le début du texte.");
         return;
       }
 
@@ -2460,6 +2611,268 @@ readStartBtn.addEventListener('click', () => {
     readStartBtn.disabled = false;
     readStartBtn.textContent = 'Je commence à lire';
   }
+});
+
+/* ---------------- Mode avancé: longer texts, with word-verified repeat + pronunciation help ---------------- */
+const LONG_SHADOW_TEXTS = [
+  { title: "Ton week-end", en: "Last weekend was actually pretty relaxing. On Saturday morning, I slept in a little later than usual, then I went for a walk in the park near my place. In the afternoon, I met up with a friend and we grabbed coffee together, just catching up on things. Sunday was quieter, and I needed that break.", fr: "Le week-end dernier était plutôt reposant. Samedi matin, j'ai dormi un peu plus tard que d'habitude, puis je suis allé·e me promener dans le parc près de chez moi. L'après-midi, j'ai retrouvé un·e ami·e et on a pris un café ensemble, juste pour papoter. Dimanche était plus calme, et j'avais besoin de cette pause." },
+  { title: "Te présenter au travail", en: "Hi, nice to meet you. I'm part of the team that handles customer support, and I've been with the company for about two years now. Before that, I worked in a completely different field, more on the technical side. What I enjoy most is solving problems quickly.", fr: "Bonjour, ravi·e de vous rencontrer. Je fais partie de l'équipe qui s'occupe du support client, et je suis dans l'entreprise depuis environ deux ans. Avant ça, je travaillais dans un domaine complètement différent, plutôt technique. Ce que j'aime le plus, c'est résoudre des problèmes rapidement." },
+  { title: "Décrire ta ville", en: "The city I live in is a mix of old and new. In the center, you'll find narrow streets with buildings that are hundreds of years old, and just a few minutes away, there are modern shopping areas. What I like most is that you can walk almost everywhere.", fr: "La ville où je vis est un mélange d'ancien et de moderne. Dans le centre, on trouve des rues étroites avec des bâtiments centenaires, et à quelques minutes de là, des zones commerciales modernes. Ce que j'aime le plus, c'est qu'on peut marcher presque partout." },
+  { title: "Parler de la nourriture", en: "I'm honestly not that picky when it comes to food, but if I had to choose, I'd say I have a soft spot for anything with a lot of flavor, spicy dishes, strong sauces, that kind of thing. Lately I've been trying to cook more myself.", fr: "Honnêtement, je ne suis pas si difficile côté nourriture, mais si je devais choisir, je dirais que j'ai un faible pour tout ce qui a beaucoup de goût — les plats épicés, les sauces relevées. Ces derniers temps, j'essaie de cuisiner plus moi-même." },
+  { title: "Ton avis sur les réseaux sociaux", en: "I have mixed feelings about social media, to be honest. On one hand, it's great for staying in touch with people who live far away. On the other hand, scrolling for too long makes me feel kind of drained, without really knowing why.", fr: "J'ai des sentiments partagés sur les réseaux sociaux, pour être honnête. D'un côté, c'est pratique pour rester en contact avec des gens qui vivent loin. De l'autre, défiler trop longtemps me laisse un peu vidé·e, sans vraiment savoir pourquoi." },
+  { title: "Tes objectifs pour cette année", en: "This year, I'm trying to focus on fewer things but actually follow through on them, instead of starting a lot of projects and losing motivation halfway. One of my main goals is to get better at speaking English more naturally.", fr: "Cette année, j'essaie de me concentrer sur moins de choses, mais de vraiment les suivre jusqu'au bout, plutôt que de commencer plein de projets. Un de mes objectifs principaux, c'est de mieux parler anglais de façon plus naturelle." }
+];
+
+// Roughly maps a chosen "length" to how many sentences of the long text to use.
+const ADV_LENGTH_SENTENCES = { 15: 1, 30: 2, 60: 4 };
+
+let selectedAdvText = null;
+let shAdvDuration = 60;
+let shAdvExpectedWords = [];
+let shAdvReadIndex = 0;
+let shAdvRecognition = null;
+let shAdvRecognizing = false;
+let shAdvPaused = false;
+let shAdvWordsCorrected = 0;
+
+const shAdvTopicCard = document.getElementById('shAdvTopicCard');
+const shAdvTopicTitle = document.getElementById('shAdvTopicTitle');
+const shAdvRollBtn = document.getElementById('shAdvRollBtn');
+const shAdvDiceIcon = document.getElementById('shAdvDiceIcon');
+const shAdvListenBtn = document.getElementById('shAdvListenBtn');
+const shAdvCaptionWrap = document.getElementById('shAdvCaptionWrap');
+const shAdvCaption = document.getElementById('shAdvCaption');
+const shAdvTranscripts = document.getElementById('shAdvTranscripts');
+const shAdvTranscriptFr = document.getElementById('shAdvTranscriptFr');
+const shAdvPracticeZone = document.getElementById('shAdvPracticeZone');
+const shAdvTeleprompter = document.getElementById('shAdvTeleprompter');
+const shAdvProgressLabel = document.getElementById('shAdvProgressLabel');
+const shAdvProgressFill = document.getElementById('shAdvProgressFill');
+const shAdvStartBtn = document.getElementById('shAdvStartBtn');
+const shAdvHint = document.getElementById('shAdvHint');
+const shAdvWordHelp = document.getElementById('shAdvWordHelp');
+const shAdvHelpWord = document.getElementById('shAdvHelpWord');
+const shAdvHearWordBtn = document.getElementById('shAdvHearWordBtn');
+const shAdvContinueBtn = document.getElementById('shAdvContinueBtn');
+const shAdvCelebrate = document.getElementById('shAdvCelebrate');
+
+document.querySelectorAll('#shDurationPicker .dur-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('#shDurationPicker .dur-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    shAdvDuration = parseInt(btn.dataset.dur, 10);
+  });
+});
+
+function getAdvSentences(text){
+  return text.split(/(?<=[.!?])\s+/).filter(Boolean);
+}
+
+function rollAdvText(){
+  const finalItem = LONG_SHADOW_TEXTS[Math.floor(Math.random() * LONG_SHADOW_TEXTS.length)];
+  shAdvRollBtn.disabled = true;
+  shAdvListenBtn.disabled = true;
+  shAdvCaptionWrap.classList.remove('show');
+  shAdvTranscripts.style.display = 'none';
+  shAdvPracticeZone.style.display = 'none';
+  window.speechSynthesis && window.speechSynthesis.cancel();
+
+  const applyFinal = () => {
+    const sentCount = ADV_LENGTH_SENTENCES[shAdvDuration] || 4;
+    const enSentences = getAdvSentences(finalItem.en).slice(0, sentCount);
+    const frSentences = getAdvSentences(finalItem.fr).slice(0, sentCount);
+    selectedAdvText = {
+      title: finalItem.title,
+      en: enSentences.join(' '),
+      fr: frSentences.join(' ')
+    };
+    shAdvTopicTitle.textContent = finalItem.title;
+    shAdvRollBtn.disabled = false;
+    shAdvListenBtn.disabled = false;
+  };
+
+  if(reducedMotion){ applyFinal(); return; }
+
+  shAdvDiceIcon.classList.add('spin');
+  shAdvTopicCard.classList.add('rolling');
+  let ticks = 0;
+  const totalTicks = 12;
+  const tick = () => {
+    ticks++;
+    const randomItem = LONG_SHADOW_TEXTS[Math.floor(Math.random() * LONG_SHADOW_TEXTS.length)];
+    shAdvTopicTitle.textContent = ticks >= totalTicks ? finalItem.title : randomItem.title;
+    if(ticks < totalTicks){
+      setTimeout(tick, 40 + ticks * 12);
+    } else {
+      shAdvDiceIcon.classList.remove('spin');
+      shAdvTopicCard.classList.remove('rolling');
+      applyFinal();
+    }
+  };
+  tick();
+}
+shAdvRollBtn.addEventListener('click', rollAdvText);
+
+function renderShAdvTeleprompter(){
+  const displayWords = selectedAdvText.en.split(/\s+/);
+  shAdvTeleprompter.innerHTML = shAdvExpectedWords.map((w, i) =>
+    `<span class="tp-word ${i < shAdvReadIndex ? 'read' : (i === shAdvReadIndex ? 'current' : 'pending')}">${displayWords[i]}</span>`
+  ).join(' ');
+  const pct = shAdvExpectedWords.length ? Math.round((shAdvReadIndex / shAdvExpectedWords.length) * 100) : 0;
+  shAdvProgressLabel.textContent = pct + ' % lu';
+  shAdvProgressFill.style.width = pct + '%';
+}
+
+shAdvListenBtn.addEventListener('click', () => {
+  if(!window.speechSynthesis || !selectedAdvText) return;
+  window.speechSynthesis.cancel();
+  const utter = new SpeechSynthesisUtterance(selectedAdvText.en);
+  utter.lang = 'en-US';
+  utter.rate = 0.95;
+  if(selectedVoice) utter.voice = selectedVoice;
+  shAdvListenBtn.disabled = true;
+  utter.onend = () => {
+    shAdvCaption.textContent = selectedAdvText.en;
+    shAdvCaptionWrap.classList.add('show');
+    shAdvTranscriptFr.textContent = selectedAdvText.fr;
+    shAdvTranscripts.style.display = 'grid';
+
+    shAdvExpectedWords = selectedAdvText.en.split(/\s+/).map(normalizeWord).filter(Boolean);
+    shAdvReadIndex = 0;
+    shAdvWordsCorrected = 0;
+    renderShAdvTeleprompter();
+    shAdvPracticeZone.style.display = 'block';
+    shAdvStartBtn.disabled = false;
+    shAdvStartBtn.textContent = 'Je répète maintenant';
+    shAdvWordHelp.classList.remove('show');
+    shAdvCelebrate.classList.remove('show');
+    shAdvListenBtn.disabled = false;
+  };
+  utter.onerror = () => { shAdvListenBtn.disabled = false; };
+  window.speechSynthesis.speak(utter);
+});
+
+function pauseAdvOnWord(){
+  if(shAdvRecognition && shAdvRecognizing){ try{ shAdvRecognition.stop(); }catch(e){} }
+  shAdvPaused = true;
+  const displayWords = selectedAdvText.en.split(/\s+/);
+  const word = displayWords[shAdvReadIndex] || '';
+  shAdvHelpWord.textContent = word;
+  shAdvWordHelp.classList.add('show');
+  shAdvStartBtn.disabled = true;
+  shAdvHint.textContent = "Écoute le mot, puis continue quand tu es prêt·e.";
+}
+
+shAdvHearWordBtn.addEventListener('click', () => {
+  if(!window.speechSynthesis) return;
+  const displayWords = selectedAdvText.en.split(/\s+/);
+  const word = displayWords[shAdvReadIndex] || '';
+  window.speechSynthesis.cancel();
+  const utter = new SpeechSynthesisUtterance(word);
+  utter.lang = 'en-US';
+  utter.rate = 0.7;
+  if(selectedVoice) utter.voice = selectedVoice;
+  window.speechSynthesis.speak(utter);
+});
+
+shAdvContinueBtn.addEventListener('click', () => {
+  shAdvWordHelp.classList.remove('show');
+  shAdvPaused = false;
+  shAdvWordsCorrected++;
+  shAdvStartBtn.disabled = false;
+  shAdvHint.textContent = 'Répète le texte à ton rythme, mot après mot.';
+  startAdvRecognition();
+});
+
+const shAdvReplayAllBtn = document.getElementById('shAdvReplayAllBtn');
+shAdvReplayAllBtn.addEventListener('click', () => {
+  shAdvWordHelp.classList.remove('show');
+  shAdvPaused = false;
+  if(shAdvRecognition && shAdvRecognizing){ try{ shAdvRecognition.stop(); }catch(e){} }
+  shAdvListenBtn.click();
+});
+
+function startAdvRecognition(){
+  if(!SpeechRec){
+    shAdvHint.textContent = "La reconnaissance vocale n'est pas disponible sur ce navigateur.";
+    return;
+  }
+  shAdvStartBtn.disabled = true;
+  shAdvStartBtn.textContent = 'Écoute en cours…';
+  const sessionStart = shAdvReadIndex;
+
+  try{
+    shAdvRecognition = new SpeechRec();
+    shAdvRecognition.lang = 'en-US';
+    shAdvRecognition.continuous = true;
+    shAdvRecognition.interimResults = true;
+
+    shAdvRecognition.onresult = (event) => {
+      if(shAdvPaused) return;
+      let fullText = '';
+      let latestChunk = '';
+      for(let i=0; i<event.results.length; i++){
+        fullText += event.results[i][0].transcript + ' ';
+        if(i === event.results.length - 1) latestChunk = event.results[i][0].transcript;
+      }
+
+      if(EN_FILLER_RE.test(latestChunk)){
+        pauseAdvOnWord();
+        return;
+      }
+
+      // This recognition session only ever hears speech from the point we resumed at,
+      // so we match it against the expected words starting from that same offset —
+      // not from the very beginning of the text.
+      const recognizedWords = fullText.split(/\s+/).map(normalizeWord).filter(Boolean);
+      let localMatch = 0;
+      while(
+        localMatch < recognizedWords.length &&
+        (sessionStart + localMatch) < shAdvExpectedWords.length &&
+        recognizedWords[localMatch] === shAdvExpectedWords[sessionStart + localMatch]
+      ){
+        localMatch++;
+      }
+      const newReadIndex = sessionStart + localMatch;
+
+      if(newReadIndex > shAdvReadIndex){
+        shAdvReadIndex = newReadIndex;
+        renderShAdvTeleprompter();
+      }
+
+      if(shAdvReadIndex >= shAdvExpectedWords.length){
+        if(shAdvRecognition && shAdvRecognizing){ try{ shAdvRecognition.stop(); }catch(e){} }
+        shAdvStartBtn.disabled = false;
+        shAdvStartBtn.textContent = 'Répéter à nouveau';
+        shAdvCelebrate.textContent = shAdvWordsCorrected > 0
+          ? `🎉 Bravo, texte lu en entier ! (${shAdvWordsCorrected} mot${shAdvWordsCorrected > 1 ? 's' : ''} corrigé${shAdvWordsCorrected > 1 ? 's' : ''} en route)`
+          : '🎉 Bravo, texte lu en entier, sans accroc !';
+        shAdvCelebrate.classList.add('show');
+        burstCelebration(shAdvTeleprompter);
+        return;
+      }
+
+      // Said more words than expected from this point without matching further = drifted.
+      if(recognizedWords.length > localMatch + 2){
+        pauseAdvOnWord();
+      }
+    };
+    shAdvRecognition.onerror = () => {
+      shAdvHint.textContent = "Le micro n'a pas pu être utilisé ici.";
+    };
+    shAdvRecognition.onend = () => { shAdvRecognizing = false; };
+    shAdvRecognition.start();
+    shAdvRecognizing = true;
+  }catch(e){
+    shAdvHint.textContent = "Le micro n'a pas pu être utilisé ici.";
+    shAdvStartBtn.disabled = false;
+    shAdvStartBtn.textContent = 'Je répète maintenant';
+  }
+}
+
+shAdvStartBtn.addEventListener('click', () => {
+  shAdvPaused = false;
+  startAdvRecognition();
 });
 
 /* ---------------- Phrase du jour ---------------- */
