@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Prends la parole — Coach d'expression orale &amp; anglais</title>
-<meta name="description" content="Entraîne-toi à parler avec aisance en français et à apprendre l'anglais par le shadowing : sujets tirés au sort, minuteur, vocabulaire et connecteurs.">
+<title>Prends la parole — 90 jours pour parler avec confiance</title>
+<meta name="description" content="Un parcours gratuit de 90 jours pour devenir à l'aise à l'oral : une mission par jour, exercices guidés, progression visible, et l'anglais par le shadowing.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='6' fill='%232E3B4B'/%3E%3Ccircle cx='12' cy='10' r='4' fill='none' stroke='%23D89A3E' stroke-width='2'/%3E%3Cpath d='M6 19c0-3 2.7-4.5 6-4.5s6 1.5 6 4.5' fill='none' stroke='%23D89A3E' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E">
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#2E3B4B">
@@ -93,6 +93,45 @@
   }
   .connect-row .pill{ font-size:0.82rem; padding: 4px 11px; }
 
+  .dashboard{
+    max-width: 720px; margin: 0 auto 48px; background: var(--panel);
+    border: 1.5px solid var(--line); border-radius: var(--radius); padding: 28px 32px;
+    box-shadow: var(--shadow);
+  }
+  .dash-top{ display:flex; justify-content:center; gap:36px; margin-bottom:20px; flex-wrap:wrap; }
+  .dash-stat{ display:flex; flex-direction:column; align-items:center; }
+  .dash-stat-num{ font-family:'Fraunces', serif; font-weight:700; font-size:1.8rem; color: var(--indigo-deep); }
+  .dash-stat-label{ font-size:0.76rem; color: var(--ink-soft); text-transform:uppercase; letter-spacing:0.05em; }
+  .dash-phase{ margin-bottom: 24px; }
+  .dash-phase-label{ font-size:0.8rem; font-weight:700; color: var(--indigo); display:block; margin-bottom:8px; }
+  .mission-card{
+    background: linear-gradient(135deg, var(--indigo-deep), var(--indigo)); color:#F4F2EA;
+    border-radius: 18px; padding: 26px 28px; position:relative; overflow:hidden;
+  }
+  .mission-card::after{
+    content:""; position:absolute; bottom:-50px; right:-30px; width:180px; height:180px;
+    border-radius:50%; background: radial-gradient(circle, rgba(216,154,62,0.35), transparent 70%);
+  }
+  .mission-tag{
+    font-size:0.76rem; text-transform:uppercase; letter-spacing:0.08em; color: var(--gold-soft);
+    font-weight:700; display:block; margin-bottom:10px;
+  }
+  .mission-title{ font-family:'Fraunces', serif; font-weight:600; font-size:1.35rem; margin:0 0 10px; }
+  .mission-desc{ font-size:0.92rem; color:#CFD6E4; margin:0 0 20px; max-width:480px; }
+  .mission-actions{ display:flex; gap:12px; flex-wrap:wrap; position:relative; z-index:1; }
+  .mission-actions .ghost{ background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.3); color:#F4F2EA; }
+  .mission-actions .ghost:hover{ border-color:#fff; color:#fff; }
+  .mission-done-msg{ margin: 14px 0 0; font-size:0.86rem; color: var(--gold-soft); position:relative; z-index:1; }
+  .badges-row{ display:flex; gap:10px; margin-top:20px; flex-wrap:wrap; justify-content:center; }
+  .badge-pill{
+    background:#F1F3EE; border-radius:999px; padding:6px 14px; font-size:0.78rem;
+    font-weight:600; color: var(--indigo-deep); display:flex; align-items:center; gap:6px;
+  }
+  @media (max-width:560px){
+    .dashboard{ padding: 22px 20px; }
+    .dash-top{ gap:20px; }
+  }
+
   .tabs{
     display:flex; gap:10px; justify-content:center; flex-wrap:wrap;
     margin-bottom: 40px; position: sticky; top: 12px; z-index: 20;
@@ -107,6 +146,27 @@
   .tab-btn svg{ width:18px; height:18px; }
   .tab-btn:hover{ border-color: var(--indigo); color: var(--indigo); }
   .tab-btn.active{ background: var(--indigo-deep); border-color: var(--indigo-deep); color: #fff; }
+
+  .tabs-hidden{ display:none; }
+  .back-bar{ display:none; margin-bottom: 24px; }
+  .back-bar.show{ display:block; }
+  .back-btn{
+    background: var(--panel); border: 1.5px solid var(--line); color: var(--indigo-deep);
+    padding: 10px 18px; border-radius: 999px; font-family:'Work Sans', sans-serif;
+    font-size: 0.9rem; font-weight:600; cursor:pointer; transition: all 0.18s ease;
+  }
+  .back-btn:hover{ border-color: var(--indigo); background: #EDF1EA; }
+
+  .tool-grid-label{ text-align:center; color: var(--ink-soft); font-size:0.85rem; margin: 28px 0 14px; }
+  .tool-grid{ display:grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 12px; }
+  .tool-card{
+    display:flex; flex-direction:column; align-items:center; gap:8px;
+    background: #FBFCFA; border: 1.5px solid var(--line); border-radius: 14px;
+    padding: 18px 10px; cursor:pointer; font-family:'Work Sans', sans-serif;
+    font-size: 0.85rem; font-weight:600; color: var(--ink); transition: all 0.18s ease;
+  }
+  .tool-card svg{ width:22px; height:22px; color: var(--indigo); }
+  .tool-card:hover{ border-color: var(--indigo); transform: translateY(-2px); box-shadow: var(--shadow); }
 
   .panel{ display:none; }
   .panel.active{ display:block; animation: panelFade 0.35s ease; }
@@ -299,6 +359,16 @@
     font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.08em;
     color: var(--ink-soft); font-weight: 700; margin: 0 0 12px;
   }
+  .lang-choices{ display:flex; gap:10px; margin-bottom: 28px; flex-wrap:wrap; }
+  .lang-btn{
+    display:flex; align-items:center; gap:8px; background: var(--panel); border: 1.5px solid var(--line);
+    border-radius: 999px; padding: 10px 18px; cursor:pointer; font-family:'Work Sans', sans-serif;
+    font-size: 0.92rem; font-weight:600; color: var(--ink); transition: all 0.18s ease;
+  }
+  .lang-flag{ font-size:1.1rem; }
+  .lang-btn:hover{ border-color: var(--indigo); transform: translateY(-1px); }
+  .lang-btn.active{ border-color: var(--indigo-deep); background: #EDF1EA; box-shadow: var(--shadow); }
+
   .avatar-choices{ display:flex; gap:14px; margin-bottom: 28px; flex-wrap:wrap; }
   .avatar-btn{
     display:flex; flex-direction:column; align-items:center; gap:8px;
@@ -505,6 +575,8 @@
   .phrase-meaning{ color: #CFD6E4; font-size: 0.95rem; max-width: 480px; margin: 0 auto; }
 
   footer.foot{ text-align:center; margin-top: 56px; color: #93998C; font-size: 0.85rem; }
+  footer.foot a{ color: #93998C; text-decoration: underline; }
+  footer.foot a:hover{ color: var(--indigo); }
 
   @media (prefers-reduced-motion: reduce){
     *{ animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
@@ -522,36 +594,84 @@
 
 <div class="wrap">
 
-  <header class="hero">
-    <span class="eyebrow">Ton entraîneur à l'expression orale</span>
-    <h1 class="title">Parle avec <em>aisance</em></h1>
-    <p class="subtitle">Choisis un mode ci-dessous pour commencer.</p>
-  </header>
+  <div class="back-bar" id="backBar">
+    <button class="back-btn" id="backToMissionBtn">← Retour à ta mission</button>
+  </div>
 
-  <nav class="tabs" role="tablist" aria-label="Modes d'entraînement">
-    <button class="tab-btn active" data-panel="panel-parole" role="tab" aria-selected="true" aria-controls="panel-parole" id="tab-parole">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V6a3 3 0 0 0-3-3z"/><path d="M6 11a6 6 0 0 0 12 0"/><path d="M12 17v4M8 21h8"/></svg>
-      1. Prendre la parole
-    </button>
-    <button class="tab-btn" data-panel="panel-quiz" role="tab" aria-selected="false" aria-controls="panel-quiz" id="tab-quiz">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg>
-      2. Quiz éclair
-    </button>
-    <button class="tab-btn" data-panel="panel-vocab" role="tab" aria-selected="false" aria-controls="panel-vocab" id="tab-vocab">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V5a2 2 0 0 1 2-2h11v16H6a2 2 0 0 0 0 4h13"/></svg>
-      3. Vocabulaire
-    </button>
-    <button class="tab-btn" data-panel="panel-anglais" role="tab" aria-selected="false" aria-controls="panel-anglais" id="tab-anglais">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.5 4 6 4 9s-1.5 6.5-4 9c-2.5-2.5-4-6-4-9s1.5-6.5 4-9z"/></svg>
-      4. Apprendre l'anglais
-    </button>
-    <button class="tab-btn" data-panel="panel-lecture" role="tab" aria-selected="false" aria-controls="panel-lecture" id="tab-lecture">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5C4 4.7 4.7 4 5.5 4H12v16H5.5A1.5 1.5 0 0 1 4 18.5z"/><path d="M20 5.5C20 4.7 19.3 4 18.5 4H12v16h6.5a1.5 1.5 0 0 0 1.5-1.5z"/></svg>
-      5. Lecture
-    </button>
-  </nav>
+  <div class="tabs-hidden" style="display:none;">
+    <button class="tab-btn active" data-panel="panel-mission" id="tab-mission"></button>
+    <button class="tab-btn" data-panel="panel-parole" id="tab-parole"></button>
+    <button class="tab-btn" data-panel="panel-quiz" id="tab-quiz"></button>
+    <button class="tab-btn" data-panel="panel-vocab" id="tab-vocab"></button>
+    <button class="tab-btn" data-panel="panel-anglais" id="tab-anglais"></button>
+    <button class="tab-btn" data-panel="panel-lecture" id="tab-lecture"></button>
+  </div>
 
-  <section class="panel active" id="panel-parole" role="tabpanel" aria-labelledby="tab-parole">
+  <section class="panel active dashboard" id="panel-mission" role="tabpanel" aria-labelledby="tab-mission">
+    <details class="how-it-works">
+      <summary>Comment ça marche ?</summary>
+      <p>Un parcours de 90 jours, en 3 phases : les bases, construire un discours, devenir orateur. Chaque jour, une mission précise t'attend ici, avec un lien direct vers le bon exercice. Valide-la une fois faite pour avancer, garder ta série de jours, et débloquer la suite.</p>
+    </details>
+    <div class="dash-top">
+      <div class="dash-stat">
+        <span class="dash-stat-num" id="dashStreak">0</span>
+        <span class="dash-stat-label">🔥 jours de suite</span>
+      </div>
+      <div class="dash-stat">
+        <span class="dash-stat-num" id="dashDay">1</span>
+        <span class="dash-stat-label">/ 90 jours</span>
+      </div>
+      <div class="dash-stat">
+        <span class="dash-stat-num" id="dashXP">0</span>
+        <span class="dash-stat-label">XP</span>
+      </div>
+    </div>
+
+    <div class="dash-phase">
+      <span class="dash-phase-label" id="dashPhaseLabel">Phase 1 · Les bases</span>
+      <div class="quiz-progress-bar"><div class="quiz-progress-fill" id="dashPhaseFill"></div></div>
+    </div>
+
+    <div class="mission-card">
+      <span class="mission-tag">Mission du jour · <span id="missionDay">Jour 1</span></span>
+      <h2 class="mission-title" id="missionTitle">Chargement…</h2>
+      <p class="mission-desc" id="missionDesc"></p>
+      <div class="mission-actions">
+        <button class="primary" id="missionGoBtn">Commencer la mission</button>
+        <button class="ghost" id="missionDoneBtn">✓ J'ai terminé aujourd'hui</button>
+      </div>
+      <p class="mission-done-msg" id="missionDoneMsg"></p>
+    </div>
+
+    <div class="badges-row" id="badgesRow"></div>
+
+    <p class="tool-grid-label">Ou explore librement un exercice :</p>
+    <div class="tool-grid">
+      <button class="tool-card" data-panel="panel-parole">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V6a3 3 0 0 0-3-3z"/><path d="M6 11a6 6 0 0 0 12 0"/><path d="M12 17v4M8 21h8"/></svg>
+        <span>Prendre la parole</span>
+      </button>
+      <button class="tool-card" data-panel="panel-quiz">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg>
+        <span>Quiz éclair</span>
+      </button>
+      <button class="tool-card" data-panel="panel-vocab">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V5a2 2 0 0 1 2-2h11v16H6a2 2 0 0 0 0 4h13"/></svg>
+        <span>Vocabulaire</span>
+      </button>
+      <button class="tool-card" data-panel="panel-anglais">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.5 4 6 4 9s-1.5 6.5-4 9c-2.5-2.5-4-6-4-9s1.5-6.5 4-9z"/></svg>
+        <span>Langues</span>
+      </button>
+      <button class="tool-card" data-panel="panel-lecture">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5C4 4.7 4.7 4 5.5 4H12v16H5.5A1.5 1.5 0 0 1 4 18.5z"/><path d="M20 5.5C20 4.7 19.3 4 18.5 4H12v16h6.5a1.5 1.5 0 0 0 1.5-1.5z"/></svg>
+        <span>Lecture</span>
+      </button>
+    </div>
+  </section>
+
+
+  <section class="panel" id="panel-parole" role="tabpanel" aria-labelledby="tab-parole">
     <details class="how-it-works">
       <summary>Comment ça marche ?</summary>
       <p>Lance un sujet au hasard, puis parle une minute complète dessus, à voix haute. Si tu hésites (« euh »), répètes un mot ou perds le fil, le minuteur s'arrête — l'objectif est de tenir la minute sans accroc. À la fin, tu reçois des suggestions de vocabulaire adaptées.</p>
@@ -686,16 +806,26 @@
   <section class="panel" id="panel-anglais" role="tabpanel" aria-labelledby="tab-anglais">
     <details class="how-it-works">
       <summary>Comment ça marche ?</summary>
-      <p>Choisis un avatar, puis lance un sujet au hasard. L'avatar le raconte à voix haute en anglais pendant une minute environ. Tu peux ensuite lire la transcription en anglais et en français, puis t'entraîner à répéter le même texte en respectant toi aussi la minute.</p>
+      <p>Choisis une langue, un avatar, puis lance un sujet au hasard. L'avatar le raconte à voix haute pendant environ une minute. Tu peux ensuite lire la traduction, puis t'entraîner à répéter le même texte, mot après mot.</p>
     </details>
     <div class="section-head" style="margin-top:0;">
-      <h2>Apprends l'anglais avec le shadowing</h2>
-      <p>Écoute un avatar parler, puis reprends exactement ce qu'il a dit, dans le même temps.</p>
+      <h2>Apprends une langue avec le shadowing</h2>
+      <p>Écoute un avatar parler, puis reprends exactement ce qu'il a dit.</p>
     </div>
 
     <section class="practice-card" id="shadowCard">
+      <div class="step show" id="shadowStep0">
+        <p class="tool-mini-label">1. Choisis ta langue</p>
+        <div class="lang-choices" id="langChoices">
+          <button class="lang-btn active" data-lang="en"><span class="lang-flag">🇬🇧</span> English</button>
+          <button class="lang-btn" data-lang="es"><span class="lang-flag">🇪🇸</span> Español</button>
+          <button class="lang-btn" data-lang="de"><span class="lang-flag">🇩🇪</span> Deutsch</button>
+          <button class="lang-btn" data-lang="it"><span class="lang-flag">🇮🇹</span> Italiano</button>
+        </div>
+      </div>
+
       <div class="step show" id="shadowStep1">
-        <p class="tool-mini-label">1. Choisis ton avatar</p>
+        <p class="tool-mini-label">2. Choisis ton avatar</p>
         <div class="avatar-choices">
           <button class="avatar-btn" data-gender="male" id="avatarMale">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
@@ -718,7 +848,7 @@
       </div>
 
       <div class="step" id="shadowStep2">
-        <p class="tool-mini-label">2. Choisis un sujet</p>
+        <p class="tool-mini-label">3. Choisis un sujet</p>
         <div class="level-badge" id="shLevelBadge">
           <div class="level-badge-top">
             <span class="level-badge-label">Niveau <span id="shLevelNum">1</span>/5</span>
@@ -729,7 +859,7 @@
         </div>
         <label class="discovery-toggle">
           <input type="checkbox" id="shDiscoveryToggle">
-          <span>Je débute vraiment en anglais — mode découverte (sans coupure)</span>
+          <span>Je débute vraiment dans cette langue — mode découverte (sans coupure)</span>
         </label>
         <div class="practice-top">
           <div class="topic-card" id="shadowTopicCard">
@@ -751,7 +881,7 @@
       </div>
 
       <div class="step" id="shadowStep3">
-        <p class="tool-mini-label">3. Écoute l'avatar (une minute)</p>
+        <p class="tool-mini-label">4. Écoute l'avatar</p>
         <div class="avatar-stage">
           <div class="avatar-face" id="avatarFace">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="color:var(--indigo)">
@@ -858,7 +988,7 @@
     </section>
 
     <div class="section-head">
-      <h2>L'essentiel pour communiquer en anglais</h2>
+      <h2 id="essentialVocabTitle">L'essentiel pour communiquer en anglais</h2>
       <p>Les mots et expressions les plus utiles pour tenir une conversation, quel que soit le sujet.</p>
     </div>
     <div class="theme-grid" id="englishThemeGrid"></div>
@@ -961,7 +1091,10 @@
     <p class="phrase-meaning" id="phraseMeaning"></p>
   </div>
 
-  <footer class="foot">Fait avec soin pour celles et ceux qui veulent parler plus librement.</footer>
+  <footer class="foot">
+    <p style="margin:0 0 10px;">Fait avec soin pour celles et ceux qui veulent parler plus librement.</p>
+    <p style="margin:0;"><a href="about.html">À propos</a> · <a href="contact.html">Contact</a> · <a href="privacy.html">Confidentialité</a></p>
+  </footer>
 </div>
 
 
@@ -970,7 +1103,188 @@
 </div>
 
 <script>
-/* ---------------- Icon helper ---------------- */
+/* ---------------- 90-day journey: missions, streak, XP, badges ---------------- */
+const JOURNEY_KEY = 'ptp_journey_v1';
+
+function loadJourney(){
+  try{
+    const raw = localStorage.getItem(JOURNEY_KEY);
+    if(raw) return JSON.parse(raw);
+  }catch(e){}
+  return { day: 1, streak: 0, xp: 0, lastCompleted: null, badges: [] };
+}
+function saveJourney(state){
+  try{ localStorage.setItem(JOURNEY_KEY, JSON.stringify(state)); }catch(e){}
+}
+let journey = loadJourney();
+
+const MISSION_TEMPLATES = {
+  1: [ // Days 1-30 : Les bases — arrêter d'avoir peur
+    { tag:'parole', title:'Parle 15 secondes sur un sujet surprise', desc:"Lance un sujet au hasard dans « Prendre la parole », en mode Tout doux. L'objectif n'est pas la perfection, juste de commencer à parler sans te bloquer.", panel:'panel-parole' },
+    { tag:'connect', title:'Apprends 3 connecteurs utiles', desc:"Ouvre le tiroir « Besoin d'un mot de liaison ? » dans Prendre la parole, et repère 3 expressions que tu pourrais utiliser aujourd'hui.", panel:'panel-parole' },
+    { tag:'lecture', title:'Lis un bulletin à voix haute', desc:"Dans l'onglet Lecture, tire un texte et lis-le posément, comme un·e journaliste.", panel:'panel-lecture' },
+    { tag:'vocab', title:'Explore un thème de vocabulaire', desc:"Dans l'onglet Vocabulaire, ouvre un thème et note 2 expressions qui te manquaient.", panel:'panel-vocab' },
+    { tag:'quiz', title:'Teste-toi avec le Quiz éclair', desc:"8 questions rapides pour vérifier ce qui est déjà bien ancré.", panel:'panel-quiz' }
+  ],
+  2: [ // Days 31-60 : Construire un discours — raconter, convaincre
+    { tag:'parole', title:'Raconte une histoire en 30 secondes', desc:"Lance un sujet dans Prendre la parole (mode Entraînement) et structure ce que tu dis : un début, un milieu, une fin.", panel:'panel-parole' },
+    { tag:'reflex', title:"Réponds à une relance surprise", desc:"Après ta minute de parole, utilise « Relance surprise » pour t'entraîner à répondre sans préparation.", panel:'panel-parole' },
+    { tag:'quiz-ctx', title:'Fais le quiz sur ton sujet du jour', desc:"Une fois ton sujet terminé, clique sur « Quiz sur ce sujet » pour consolider le vocabulaire précis que tu viens d'utiliser.", panel:'panel-parole' },
+    { tag:'anglais', title:"Progresse d'un niveau en anglais", desc:"Dans Apprendre l'anglais, avance ou consolide un niveau de shadowing.", panel:'panel-anglais' },
+    { tag:'lecture', title:'Lis un texte plus long, sans erreur', desc:"Dans Lecture, essaie de lire un bulletin en entier sans hésitation ni répétition.", panel:'panel-lecture' }
+  ],
+  3: [ // Days 61-90 : Devenir orateur — pitch, débat, improvisation
+    { tag:'parole-strict', title:"Tiens une minute complète, sans accroc", desc:"Mode Entraînement complet, 60 secondes, sur un sujet tiré au sort. Vise la fluidité du début à la fin.", panel:'panel-parole' },
+    { tag:'anglais-adv', title:"Mode avancé anglais", desc:"Si tu l'as débloqué, entraîne-toi sur un texte long en anglais, avec correction de prononciation.", panel:'panel-anglais' },
+    { tag:'improv', title:'Improvise sur un mot, pas un sujet', desc:"Dans Prendre la parole, relance le dé jusqu'à tomber sur un simple mot (catégorie Improvisation) et parle dessus une minute.", panel:'panel-parole' },
+    { tag:'lecture-en', title:'Lecture façon journaliste, en anglais', desc:"Dans Lecture, bascule sur English et lis un bulletin à voix haute.", panel:'panel-lecture' },
+    { tag:'quiz', title:'Quiz de révision', desc:"Refais un Quiz éclair pour consolider trois mois de vocabulaire.", panel:'panel-quiz' }
+  ]
+};
+
+function getPhase(day){
+  if(day <= 30) return 1;
+  if(day <= 60) return 2;
+  return 3;
+}
+function getMissionForDay(day){
+  const phase = getPhase(day);
+  const list = MISSION_TEMPLATES[phase];
+  return list[(day - 1) % list.length];
+}
+
+const PHASE_LABELS = {
+  1: 'Phase 1 · Les bases — arrêter d\'avoir peur',
+  2: 'Phase 2 · Construire un discours — raconter, convaincre',
+  3: 'Phase 3 · Devenir orateur — pitch, débat, improvisation'
+};
+
+const BADGE_MILESTONES = [
+  { days: 7, icon: '🔥', label: '7 jours de suite' },
+  { days: 30, icon: '🥉', label: 'Phase 1 terminée' },
+  { days: 60, icon: '🥈', label: 'Phase 2 terminée' },
+  { days: 90, icon: '🏆', label: 'Certificat 90 jours' }
+];
+
+const dashStreak = document.getElementById('dashStreak');
+const dashDay = document.getElementById('dashDay');
+const dashXP = document.getElementById('dashXP');
+const dashPhaseLabel = document.getElementById('dashPhaseLabel');
+const dashPhaseFill = document.getElementById('dashPhaseFill');
+const missionDay = document.getElementById('missionDay');
+const missionTitle = document.getElementById('missionTitle');
+const missionDesc = document.getElementById('missionDesc');
+const missionGoBtn = document.getElementById('missionGoBtn');
+const missionDoneBtn = document.getElementById('missionDoneBtn');
+const missionDoneMsg = document.getElementById('missionDoneMsg');
+const badgesRow = document.getElementById('badgesRow');
+
+function isSameDay(a, b){
+  return a && b && new Date(a).toDateString() === new Date(b).toDateString();
+}
+function isYesterday(a, b){
+  if(!a) return false;
+  const d1 = new Date(a); const d2 = new Date(b);
+  const diff = Math.round((d2.setHours(0,0,0,0) - d1.setHours(0,0,0,0)) / 86400000);
+  return diff === 1;
+}
+
+function renderDashboard(){
+  const day = Math.min(journey.day, 90);
+  const phase = getPhase(day);
+  dashStreak.textContent = journey.streak;
+  dashDay.textContent = day;
+  dashXP.textContent = journey.xp;
+  dashPhaseLabel.textContent = PHASE_LABELS[phase];
+  const phaseStart = phase === 1 ? 1 : (phase === 2 ? 31 : 61);
+  const phaseLen = 30;
+  const phasePct = Math.round(((day - phaseStart + 1) / phaseLen) * 100);
+  dashPhaseFill.style.width = Math.max(0, Math.min(100, phasePct)) + '%';
+
+  const mission = getMissionForDay(day);
+  const isNewVisitor = day === 1 && journey.streak === 0 && !journey.lastCompleted;
+  missionDay.textContent = isNewVisitor ? 'Bienvenue' : 'Jour ' + day;
+  missionTitle.textContent = mission.title;
+  missionDesc.textContent = (isNewVisitor ? "Voici ta toute première mission. Pas besoin d'être prêt·e, juste de commencer. " : '') + mission.desc;
+  missionGoBtn.dataset.panel = mission.panel;
+
+  const doneToday = isSameDay(journey.lastCompleted, Date.now());
+  missionDoneBtn.disabled = doneToday;
+  missionDoneBtn.textContent = doneToday ? '✓ Mission déjà validée aujourd\'hui' : '✓ J\'ai terminé aujourd\'hui';
+  missionDoneMsg.textContent = doneToday ? 'Reviens demain pour la mission suivante.' : '';
+
+  badgesRow.innerHTML = '';
+  BADGE_MILESTONES.forEach(b => {
+    if(journey.badges.includes(b.days)){
+      const pill = document.createElement('span');
+      pill.className = 'badge-pill';
+      pill.innerHTML = `<span>${b.icon}</span> ${b.label}`;
+      badgesRow.appendChild(pill);
+    }
+  });
+
+  if(day >= 90 && journey.badges.includes(90)){
+    showCertificateIfNeeded();
+  }
+}
+
+missionGoBtn.addEventListener('click', () => {
+  switchToTab(missionGoBtn.dataset.panel);
+});
+
+missionDoneBtn.addEventListener('click', () => {
+  const now = Date.now();
+  if(isSameDay(journey.lastCompleted, now)) return;
+
+  if(isYesterday(journey.lastCompleted, now) || !journey.lastCompleted){
+    journey.streak += 1;
+  } else {
+    journey.streak = 1;
+  }
+  journey.xp += 10;
+  journey.lastCompleted = now;
+  if(journey.day < 90) journey.day += 1;
+
+  BADGE_MILESTONES.forEach(b => {
+    if(journey.day - 1 >= b.days && !journey.badges.includes(b.days)){
+      journey.badges.push(b.days);
+    }
+  });
+
+  saveJourney(journey);
+  renderDashboard();
+});
+
+// Initialize the mission dashboard right here, immediately after its own setup —
+// deliberately NOT at the end of the script. A script this size touches many
+// browser APIs (speech recognition, speech synthesis...) and if any one of them
+// throws somewhere further down, everything after it silently never runs.
+// Initializing here means the mission always works, no matter what happens elsewhere.
+try{
+  renderDashboard();
+}catch(e){
+  console.error('Mission dashboard failed to initialize:', e);
+}
+
+function showCertificateIfNeeded(){
+  if(document.getElementById('certOverlay')) return;
+  const overlay = document.createElement('div');
+  overlay.className = 'overlay show';
+  overlay.id = 'certOverlay';
+  overlay.innerHTML = `
+    <div class="modal" style="text-align:center;">
+      <button class="modal-close" id="certClose">&times;</button>
+      <p style="font-size:2.4rem; margin:0 0 10px;">🏆</p>
+      <h3>Félicitations !</h3>
+      <p class="def">Tu as terminé les 90 jours d'entraînement à la prise de parole. Ta constance a payé — continue à pratiquer, même un peu, pour garder ce que tu as gagné.</p>
+    </div>
+  `;
+  document.body.appendChild(overlay);
+  overlay.querySelector('#certClose').addEventListener('click', () => overlay.remove());
+  overlay.addEventListener('click', (ev) => { if(ev.target === overlay) overlay.remove(); });
+}
+
+
 function makeIcon(paths, color){
   const inner = paths.map(p => {
     if(p.type === 'path') return `<path d="${p.d}" fill="${p.fill? 'currentColor':'none'}"/>`;
@@ -1039,6 +1353,7 @@ const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matc
 /* ---------------- Tab navigation ---------------- */
 const tabButtons = document.querySelectorAll('.tab-btn');
 const panels = document.querySelectorAll('.panel');
+const backBar = document.getElementById('backBar');
 
 function switchToTab(panelId){
   tabButtons.forEach(b => { b.classList.remove('active'); b.setAttribute('aria-selected','false'); });
@@ -1047,12 +1362,18 @@ function switchToTab(panelId){
   if(btn){ btn.classList.add('active'); btn.setAttribute('aria-selected','true'); }
   const panel = document.getElementById(panelId);
   if(panel) panel.classList.add('active');
+  backBar.classList.toggle('show', panelId !== 'panel-mission');
   window.scrollTo({ top: 0, behavior: reducedMotion ? 'auto' : 'smooth' });
 }
 
 tabButtons.forEach(btn => {
   btn.addEventListener('click', () => switchToTab(btn.dataset.panel));
 });
+
+document.querySelectorAll('.tool-card').forEach(card => {
+  card.addEventListener('click', () => switchToTab(card.dataset.panel));
+});
+document.getElementById('backToMissionBtn').addEventListener('click', () => switchToTab('panel-mission'));
 
 
 function rollTopic(){
@@ -1594,155 +1915,210 @@ overlay.addEventListener('click', (ev) => { if(ev.target === overlay) closeModal
 document.addEventListener('keydown', (ev) => { if(ev.key === 'Escape') closeModal(); });
 
 /* ---------------- Essential English vocabulary ---------------- */
-const ENGLISH_THEMES = [
+const LANGUAGES = [
+  { code:'en', label:'English', locale:'en-US' },
+  { code:'es', label:'Español', locale:'es-ES' },
+  { code:'de', label:'Deutsch', locale:'de-DE' },
+  { code:'it', label:'Italiano', locale:'it-IT' }
+];
+let selectedLanguage = 'en';
+function getLocale(){
+  const lang = LANGUAGES.find(l => l.code === selectedLanguage);
+  return lang ? lang.locale : 'en-US';
+}
+
+const VOCAB_THEMES = [
   {
     name: 'Se présenter', color: '#D89A3E',
     icon: [{type:'path',d:'M4 11 12 4l8 7'},{type:'path',d:'M6 10v9h12v-9'}],
     def: "Pour engager une conversation et parler un peu de toi.",
-    words: [
-      ['Nice to meet you', 'Enchanté·e'],
-      ['How are you doing?', 'Comment ça va ?'],
-      ['My name is...', 'Je m\'appelle...'],
-      ['Where are you from?', 'D\'où viens-tu ?'],
-      ['See you later', 'À plus tard'],
-      ['Take care', 'Prends soin de toi']
+    items: [
+      { fr:'Enchanté·e', en:'Nice to meet you', es:'Encantado·a de conocerte', de:'Freut mich, dich kennenzulernen', it:'Piacere di conoscerti' },
+      { fr:'Comment ça va ?', en:'How are you doing?', es:'¿Cómo estás?', de:'Wie geht es dir?', it:'Come stai?' },
+      { fr:'Je m\'appelle...', en:'My name is...', es:'Me llamo...', de:'Ich heiße...', it:'Mi chiamo...' },
+      { fr:'D\'où viens-tu ?', en:'Where are you from?', es:'¿De dónde eres?', de:'Woher kommst du?', it:'Di dove sei?' },
+      { fr:'À plus tard', en:'See you later', es:'Hasta luego', de:'Bis später', it:'A dopo' },
+      { fr:'Prends soin de toi', en:'Take care', es:'Cuídate', de:'Pass auf dich auf', it:'Abbi cura di te' }
     ]
   },
   {
     name: 'Demander de l\'aide', color: '#6B5B95',
     icon: [{type:'path',d:'M12 20 4.6 12.6a4.7 4.7 0 0 1 6.7-6.7L12 6.6l.7-.7a4.7 4.7 0 0 1 6.7 6.7z'}],
-    def: "Pour ne jamais rester bloqué·e dans une conversation en anglais.",
-    words: [
-      ['Could you repeat that?', 'Tu peux répéter ?'],
-      ['I don\'t understand', 'Je ne comprends pas'],
-      ['Could you speak slower?', 'Tu peux parler plus lentement ?'],
-      ['What does that mean?', 'Qu\'est-ce que ça veut dire ?'],
-      ['Sorry, what?', 'Pardon, quoi ?'],
-      ['Can you help me?', 'Tu peux m\'aider ?']
+    def: "Pour ne jamais rester bloqué·e dans une conversation.",
+    items: [
+      { fr:'Tu peux répéter ?', en:'Could you repeat that?', es:'¿Puedes repetir eso?', de:'Kannst du das wiederholen?', it:'Puoi ripetere?' },
+      { fr:'Je ne comprends pas', en:'I don\'t understand', es:'No entiendo', de:'Ich verstehe nicht', it:'Non capisco' },
+      { fr:'Tu peux parler plus lentement ?', en:'Could you speak slower?', es:'¿Puedes hablar más despacio?', de:'Kannst du langsamer sprechen?', it:'Puoi parlare più lentamente?' },
+      { fr:'Qu\'est-ce que ça veut dire ?', en:'What does that mean?', es:'¿Qué significa eso?', de:'Was bedeutet das?', it:'Cosa significa?' },
+      { fr:'Pardon, quoi ?', en:'Sorry, what?', es:'Perdona, ¿qué?', de:'Entschuldigung, was?', it:'Scusa, cosa?' },
+      { fr:'Tu peux m\'aider ?', en:'Can you help me?', es:'¿Puedes ayudarme?', de:'Kannst du mir helfen?', it:'Puoi aiutarmi?' }
     ]
   },
   {
     name: 'Donner son avis', color: '#3D6E8C',
     icon: [{type:'path',d:'M4 12h16'},{type:'circle',cx:8,cy:12,r:3},{type:'circle',cx:16,cy:12,r:3}],
     def: "Pour exprimer ce que tu penses clairement.",
-    words: [
-      ['I think that...', 'Je pense que...'],
-      ['In my opinion', 'À mon avis'],
-      ['That makes sense', 'Ça a du sens'],
-      ['I\'m not sure about that', 'Je ne suis pas sûr·e de ça'],
-      ['I agree', 'Je suis d\'accord'],
-      ['I see your point', 'Je comprends ton point de vue']
+    items: [
+      { fr:'Je pense que...', en:'I think that...', es:'Creo que...', de:'Ich denke, dass...', it:'Penso che...' },
+      { fr:'À mon avis', en:'In my opinion', es:'En mi opinión', de:'Meiner Meinung nach', it:'Secondo me' },
+      { fr:'Ça a du sens', en:'That makes sense', es:'Eso tiene sentido', de:'Das ergibt Sinn', it:'Ha senso' },
+      { fr:'Je ne suis pas sûr·e de ça', en:'I\'m not sure about that', es:'No estoy seguro·a de eso', de:'Ich bin mir da nicht sicher', it:'Non ne sono sicuro·a' },
+      { fr:'Je suis d\'accord', en:'I agree', es:'Estoy de acuerdo', de:'Ich stimme zu', it:'Sono d\'accordo' },
+      { fr:'Je comprends ton point de vue', en:'I see your point', es:'Entiendo tu punto de vista', de:'Ich verstehe deinen Standpunkt', it:'Capisco il tuo punto di vista' }
     ]
   },
   {
     name: 'Le quotidien', color: '#3D8361',
     icon: [{type:'path',d:'M4 11 12 4l8 7'},{type:'path',d:'M6 10v9h12v-9'}],
     def: "Pour te débrouiller dans les situations de tous les jours.",
-    words: [
-      ['I\'m looking for...', 'Je cherche...'],
-      ['How much is this?', 'Combien ça coûte ?'],
-      ['Where is the nearest...?', 'Où est le plus proche...?'],
-      ['I\'d like to...', 'J\'aimerais...'],
-      ['Is it far from here?', 'C\'est loin d\'ici ?'],
-      ['What time is it?', 'Quelle heure est-il ?']
+    items: [
+      { fr:'Je cherche...', en:'I\'m looking for...', es:'Estoy buscando...', de:'Ich suche...', it:'Sto cercando...' },
+      { fr:'Combien ça coûte ?', en:'How much is this?', es:'¿Cuánto cuesta esto?', de:'Wie viel kostet das?', it:'Quanto costa?' },
+      { fr:'Où est le plus proche...?', en:'Where is the nearest...?', es:'¿Dónde está el más cercano...?', de:'Wo ist der nächste...?', it:'Dov\'è il più vicino...?' },
+      { fr:'J\'aimerais...', en:'I\'d like to...', es:'Me gustaría...', de:'Ich möchte gerne...', it:'Vorrei...' },
+      { fr:'C\'est loin d\'ici ?', en:'Is it far from here?', es:'¿Está lejos de aquí?', de:'Ist das weit von hier?', it:'È lontano da qui?' },
+      { fr:'Quelle heure est-il ?', en:'What time is it?', es:'¿Qué hora es?', de:'Wie spät ist es?', it:'Che ore sono?' }
     ]
   },
   {
     name: 'Garder la conversation fluide', color: '#C1495D',
     icon: [{type:'path',d:'M6 15l6-6 6 6'}],
     def: "Les petits mots qui font enchaîner naturellement, sans blocage.",
-    words: [
-      ['Actually,', 'En fait,'],
-      ['By the way,', 'Au fait,'],
-      ['Anyway,', 'Bref,'],
-      ['You know what I mean?', 'Tu vois ce que je veux dire ?'],
-      ['So basically,', 'Donc en gros,'],
-      ['That reminds me,', 'Ça me rappelle,']
+    items: [
+      { fr:'En fait,', en:'Actually,', es:'De hecho,', de:'Eigentlich,', it:'In realtà,' },
+      { fr:'Au fait,', en:'By the way,', es:'Por cierto,', de:'Übrigens,', it:'A proposito,' },
+      { fr:'Bref,', en:'Anyway,', es:'Bueno,', de:'Naja,', it:'Comunque,' },
+      { fr:'Tu vois ce que je veux dire ?', en:'You know what I mean?', es:'¿Sabes a qué me refiero?', de:'Weißt du, was ich meine?', it:'Capisci cosa intendo?' },
+      { fr:'Donc en gros,', en:'So basically,', es:'Entonces, básicamente,', de:'Also im Grunde,', it:'Quindi in pratica,' },
+      { fr:'Ça me rappelle,', en:'That reminds me,', es:'Eso me recuerda,', de:'Das erinnert mich,', it:'Questo mi ricorda,' }
     ]
   },
   {
     name: 'Réagir naturellement', color: '#8C6E4E',
     icon: [{type:'path',d:'M12 3v4M12 17v4M3 12h4M17 12h4M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1'},{type:'circle',cx:12,cy:12,r:4}],
     def: "Pour réagir sur le moment, sans avoir à réfléchir.",
-    words: [
-      ['That\'s amazing!', 'C\'est génial !'],
-      ['No way!', 'Pas possible !'],
-      ['Sounds good', 'Ça marche'],
-      ['That\'s too bad', 'C\'est dommage'],
-      ['Really?', 'Vraiment ?'],
-      ['I bet', 'J\'imagine bien']
+    items: [
+      { fr:'C\'est génial !', en:'That\'s amazing!', es:'¡Eso es genial!', de:'Das ist toll!', it:'È fantastico!' },
+      { fr:'Pas possible !', en:'No way!', es:'¡No puede ser!', de:'Auf keinen Fall!', it:'Non ci credo!' },
+      { fr:'Ça marche', en:'Sounds good', es:'Suena bien', de:'Klingt gut', it:'Va bene' },
+      { fr:'C\'est dommage', en:'That\'s too bad', es:'Qué pena', de:'Das ist schade', it:'Che peccato' },
+      { fr:'Vraiment ?', en:'Really?', es:'¿De verdad?', de:'Wirklich?', it:'Davvero?' },
+      { fr:'J\'imagine bien', en:'I bet', es:'Me lo imagino', de:'Das glaube ich gern', it:'Immagino di sì' }
     ]
   },
   {
-    name: 'Anglais informatique', color: '#45566B',
+    name: 'Vocabulaire informatique', color: '#45566B',
     icon: [{type:'path',d:'M4 5h16v11H4z'},{type:'path',d:'M9 20h6M12 16v4'}],
-    def: "Le vocabulaire technique de base pour travailler ou échanger en anglais dans l'informatique.",
-    words: [
-      ['A bug', 'Un bug, une erreur dans le code'],
-      ['To fix / to debug', 'Corriger / déboguer'],
-      ['To deploy', 'Mettre en production, déployer'],
-      ['A commit', 'Un enregistrement de modification (Git)'],
-      ['To merge', 'Fusionner (des branches de code)'],
-      ['The server is down', 'Le serveur est en panne'],
-      ['A feature', 'Une fonctionnalité'],
-      ['To roll back', 'Revenir à une version précédente'],
-      ['A pull request', 'Une demande de fusion de code'],
-      ['It works as expected', 'Ça fonctionne comme prévu']
+    def: "Le vocabulaire technique de base pour travailler ou échanger dans l'informatique.",
+    items: [
+      { fr:'Un bug, une erreur dans le code', en:'A bug', es:'Un bug, un error en el código', de:'Ein Bug, ein Fehler im Code', it:'Un bug, un errore nel codice' },
+      { fr:'Corriger / déboguer', en:'To fix / to debug', es:'Corregir / depurar', de:'Beheben / debuggen', it:'Correggere / debuggare' },
+      { fr:'Mettre en production, déployer', en:'To deploy', es:'Desplegar, poner en producción', de:'Bereitstellen, deployen', it:'Distribuire, mettere in produzione' },
+      { fr:'Le serveur est en panne', en:'The server is down', es:'El servidor está caído', de:'Der Server ist ausgefallen', it:'Il server è inattivo' },
+      { fr:'Une fonctionnalité', en:'A feature', es:'Una función', de:'Ein Feature', it:'Una funzionalità' },
+      { fr:'Ça fonctionne comme prévu', en:'It works as expected', es:'Funciona como se esperaba', de:'Es funktioniert wie erwartet', it:'Funziona come previsto' }
     ]
   }
 ];
 
+const essentialVocabTitle = document.getElementById('essentialVocabTitle');
+const LANG_LABELS_INLINE = { en:'anglais', es:'espagnol', de:'allemand', it:'italien' };
+
 const englishThemeGrid = document.getElementById('englishThemeGrid');
-ENGLISH_THEMES.forEach((t) => {
-  const card = document.createElement('div');
-  card.className = 'theme-card';
-  card.style.setProperty('--theme-color', t.color);
-  card.innerHTML = `<div class="theme-icon">${makeIcon(t.icon, t.color)}</div><div class="theme-name">${t.name}</div>`;
-  card.addEventListener('click', () => openThemeModal(t));
-  englishThemeGrid.appendChild(card);
+function renderVocabThemes(){
+  essentialVocabTitle.textContent = "L'essentiel pour communiquer en " + LANG_LABELS_INLINE[selectedLanguage];
+  englishThemeGrid.innerHTML = '';
+  VOCAB_THEMES.forEach((t) => {
+    const themeForModal = {
+      name: t.name, color: t.color, icon: t.icon, def: t.def,
+      words: t.items.map(it => [it[selectedLanguage], it.fr])
+    };
+    const card = document.createElement('div');
+    card.className = 'theme-card';
+    card.style.setProperty('--theme-color', t.color);
+    card.innerHTML = `<div class="theme-icon">${makeIcon(t.icon, t.color)}</div><div class="theme-name">${t.name}</div>`;
+    card.addEventListener('click', () => openThemeModal(themeForModal));
+    englishThemeGrid.appendChild(card);
+  });
+}
+renderVocabThemes();
+
+document.querySelectorAll('#langChoices .lang-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('#langChoices .lang-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    selectedLanguage = btn.dataset.lang;
+    renderVocabThemes();
+    // Changing language resets the avatar/topic/listen steps since voice and content depend on it.
+    selectedGender = null;
+    selectedVoice = null;
+    selectedShadowTopic = null;
+    avatarMaleBtn.classList.remove('selected');
+    avatarFemaleBtn.classList.remove('selected');
+    avatarFace.innerHTML = '';
+    shadowTopicTitle.textContent = 'Lance un sujet pour commencer';
+    document.getElementById('shadowStep2').classList.remove('show');
+    document.getElementById('shadowStep3').classList.remove('show');
+    document.getElementById('shadowStep4').classList.remove('show');
+    listenBtn.disabled = true;
+    replayBtn.style.display = 'none';
+    // Advanced mode content also depends on language; reset its unlock display state.
+    if(shAdvancedUnlocked){
+      selectedAdvText = null;
+      shAdvTopicTitle.textContent = 'Lance un texte pour commencer';
+      shAdvCaptionWrap.classList.remove('show');
+      shAdvTranscripts.style.display = 'none';
+      shAdvPracticeZone.style.display = 'none';
+    }
+  });
 });
 
-/* ---------------- Shadowing: English learning ---------------- */
-const SHADOW_TOPICS = [
-  { title: "Dire bonjour", en: "Hi, how are you doing today?", fr: "Salut, comment vas-tu aujourd'hui ?" },
-  { title: "Parler du temps", en: "It's really nice outside today.", fr: "Il fait vraiment beau dehors aujourd'hui." },
-  { title: "Donner ton avis", en: "I think that's a great idea.", fr: "Je pense que c'est une excellente idée." },
-  { title: "Parler de tes goûts", en: "I really enjoy reading before bed.", fr: "J'aime beaucoup lire avant de dormir." },
-  { title: "Demander de l'aide", en: "Could you help me with this, please?", fr: "Peux-tu m'aider avec ça, s'il te plaît ?" },
-  { title: "Parler du travail", en: "My job keeps me pretty busy this week.", fr: "Mon travail me tient assez occupé·e cette semaine." },
-  { title: "Faire un compliment", en: "You did a really great job on that.", fr: "Tu as fait un très bon travail sur ça." },
-  { title: "Parler de tes projets", en: "I'm planning to travel next summer.", fr: "Je prévois de voyager l'été prochain." },
-  { title: "Exprimer un doute", en: "I'm not really sure about that yet.", fr: "Je ne suis pas vraiment sûr·e de ça encore." },
-  { title: "Remercier quelqu'un", en: "Thank you so much for your help today.", fr: "Merci beaucoup pour ton aide aujourd'hui." },
-  { title: "Proposer quelque chose", en: "Do you want to grab lunch together?", fr: "Tu veux qu'on déjeune ensemble ?" },
-  { title: "Parler de ta journée", en: "Today was a pretty good day overall.", fr: "Aujourd'hui a été une plutôt bonne journée dans l'ensemble." }
+/* ---------------- Shadowing: multi-language learning ---------------- */
+const SHADOW_TOPICS_MEANINGS = [
+  { title: "Dire bonjour", fr:"Salut, comment vas-tu aujourd'hui ?", en:"Hi, how are you doing today?", es:"Hola, ¿cómo estás hoy?", de:"Hallo, wie geht es dir heute?", it:"Ciao, come stai oggi?" },
+  { title: "Parler du temps", fr:"Il fait vraiment beau dehors aujourd'hui.", en:"It's really nice outside today.", es:"Hace muy buen tiempo hoy.", de:"Das Wetter ist heute wirklich schön.", it:"Oggi fa davvero bel tempo." },
+  { title: "Donner ton avis", fr:"Je pense que c'est une excellente idée.", en:"I think that's a great idea.", es:"Creo que es una gran idea.", de:"Ich finde, das ist eine tolle Idee.", it:"Penso che sia un'ottima idea." },
+  { title: "Parler de tes goûts", fr:"J'aime beaucoup lire avant de dormir.", en:"I really enjoy reading before bed.", es:"Me encanta leer antes de dormir.", de:"Ich lese wirklich gerne vor dem Schlafen.", it:"Mi piace molto leggere prima di dormire." },
+  { title: "Demander de l'aide", fr:"Peux-tu m'aider avec ça, s'il te plaît ?", en:"Could you help me with this, please?", es:"¿Podrías ayudarme con esto, por favor?", de:"Könntest du mir bitte damit helfen?", it:"Potresti aiutarmi con questo, per favore?" },
+  { title: "Parler du travail", fr:"Mon travail me tient assez occupé·e cette semaine.", en:"My job keeps me pretty busy this week.", es:"Mi trabajo me tiene bastante ocupado·a esta semana.", de:"Meine Arbeit hält mich diese Woche ziemlich beschäftigt.", it:"Il mio lavoro mi tiene abbastanza occupato·a questa settimana." },
+  { title: "Faire un compliment", fr:"Tu as fait un très bon travail sur ça.", en:"You did a really great job on that.", es:"Hiciste un trabajo realmente genial con eso.", de:"Du hast das wirklich großartig gemacht.", it:"Hai fatto un ottimo lavoro con quello." },
+  { title: "Parler de tes projets", fr:"Je prévois de voyager l'été prochain.", en:"I'm planning to travel next summer.", es:"Estoy planeando viajar el próximo verano.", de:"Ich plane, nächsten Sommer zu verreisen.", it:"Sto pianificando di viaggiare la prossima estate." },
+  { title: "Exprimer un doute", fr:"Je ne suis pas vraiment sûr·e de ça encore.", en:"I'm not really sure about that yet.", es:"Todavía no estoy muy seguro·a de eso.", de:"Ich bin mir da noch nicht wirklich sicher.", it:"Non sono ancora molto sicuro·a di questo." },
+  { title: "Remercier quelqu'un", fr:"Merci beaucoup pour ton aide aujourd'hui.", en:"Thank you so much for your help today.", es:"Muchas gracias por tu ayuda hoy.", de:"Vielen Dank für deine Hilfe heute.", it:"Grazie mille per il tuo aiuto oggi." },
+  { title: "Proposer quelque chose", fr:"Tu veux qu'on déjeune ensemble ?", en:"Do you want to grab lunch together?", es:"¿Quieres que almorcemos juntos?", de:"Möchtest du zusammen Mittag essen?", it:"Vuoi pranzare insieme?" },
+  { title: "Parler de ta journée", fr:"Aujourd'hui a été une plutôt bonne journée dans l'ensemble.", en:"Today was a pretty good day overall.", es:"Hoy fue un día bastante bueno en general.", de:"Heute war insgesamt ein ziemlich guter Tag.", it:"Oggi è stata una giornata piuttosto buona nel complesso." }
 ];
+
+function getShadowTopics(){
+  return SHADOW_TOPICS_MEANINGS.map(m => ({ title: m.title, en: m[selectedLanguage], fr: m.fr }));
+}
 
 let selectedGender = null;
 let selectedVoice = null;
 let selectedShadowTopic = null;
-let englishVoices = [];
+let allVoices = [];
 
 function loadVoices(){
-  const all = window.speechSynthesis ? window.speechSynthesis.getVoices() : [];
-  englishVoices = all.filter(v => v.lang && v.lang.toLowerCase().startsWith('en'));
+  allVoices = window.speechSynthesis ? window.speechSynthesis.getVoices() : [];
 }
 if(window.speechSynthesis){
   loadVoices();
   window.speechSynthesis.onvoiceschanged = loadVoices;
 }
 
-const FEMALE_HINTS = ['female','zira','samantha','victoria','karen','moira','tessa','fiona','susan','allison','ava','serena','kate','emma'];
+const FEMALE_HINTS = ['female','zira','samantha','victoria','karen','moira','tessa','fiona','susan','allison','ava','serena','kate','emma','monica','helena','anna','elsa','paulina'];
 const MALE_HINTS = ['male','david','daniel','alex','fred','tom','oliver','arthur','gordon','james'];
 
 function pickVoice(gender){
+  const langVoices = allVoices.filter(v => v.lang && v.lang.toLowerCase().startsWith(selectedLanguage));
+  const pool = langVoices.length ? langVoices : allVoices;
   const hints = gender === 'female' ? FEMALE_HINTS : MALE_HINTS;
   const otherHints = gender === 'female' ? MALE_HINTS : FEMALE_HINTS;
-  let match = englishVoices.find(v => hints.some(h => v.name.toLowerCase().includes(h)));
+  let match = pool.find(v => hints.some(h => v.name.toLowerCase().includes(h)));
   if(!match){
-    match = englishVoices.find(v => !otherHints.some(h => v.name.toLowerCase().includes(h)));
+    match = pool.find(v => !otherHints.some(h => v.name.toLowerCase().includes(h)));
   }
-  return match || englishVoices[0] || null;
+  return match || pool[0] || null;
 }
 
 const avatarMaleBtn = document.getElementById('avatarMale');
@@ -1810,7 +2186,7 @@ shLevelNextBtn.addEventListener('click', () => {
 });
 
 function pickLevelTopics(level){
-  const picked = shuffle(SHADOW_TOPICS).slice(0, level);
+  const picked = shuffle(getShadowTopics()).slice(0, level);
   return {
     title: picked.map(p => p.title).join(' + '),
     en: picked.map(p => p.en).join(' '),
@@ -1841,9 +2217,10 @@ function rollShadowTopic(){
   shadowTopicCard.classList.add('rolling');
   let ticks = 0;
   const totalTicks = 12;
+  const shadowTopicsForRoll = getShadowTopics();
   const tick = () => {
     ticks++;
-    const randomItem = SHADOW_TOPICS[Math.floor(Math.random() * SHADOW_TOPICS.length)];
+    const randomItem = shadowTopicsForRoll[Math.floor(Math.random() * shadowTopicsForRoll.length)];
     shadowTopicTitle.textContent = ticks >= totalTicks ? finalItem.title : randomItem.title;
     if(ticks < totalTicks){
       setTimeout(tick, 40 + ticks * 12);
@@ -1873,7 +2250,7 @@ function speakShadowText(){
   const fullText = selectedShadowTopic.en;
   const words = fullText.split(' ');
   const utter = new SpeechSynthesisUtterance(fullText);
-  utter.lang = 'en-US';
+  utter.lang = getLocale();
   utter.rate = 0.95;
   if(selectedVoice) utter.voice = selectedVoice;
 
@@ -1960,7 +2337,13 @@ const shHint = document.getElementById('shHint');
 const shCelebrate = document.getElementById('shCelebrate');
 const shRetryZone = document.getElementById('shRetryZone');
 
-const EN_FILLER_RE = /\b(u+m+|u+h+|e+r+m*)\b/i;
+const FILLER_RE_BY_LANG = {
+  en: /\b(u+m+|u+h+|e+r+m*)\b/i,
+  es: /\b(e+h+|e+s+t+e+|o+\s*sea)\b/i,
+  de: /\b(ä+h+m*|ö+h+m*)\b/i,
+  it: /\b(e+h+m*|c+i+o+è+)\b/i
+};
+const EN_FILLER_RE = FILLER_RE_BY_LANG.en; // kept for the French "Lecture" English toggle
 
 let shExpectedWords = [];
 let shReadIndex = 0;
@@ -2029,7 +2412,7 @@ shStartBtn.addEventListener('click', () => {
 
   try{
     shRecognition = new SpeechRec();
-    shRecognition.lang = 'en-US';
+    shRecognition.lang = getLocale();
     shRecognition.continuous = true;
     shRecognition.interimResults = true;
 
@@ -2041,7 +2424,7 @@ shStartBtn.addEventListener('click', () => {
         if(i === event.results.length - 1) latestChunk = event.results[i][0].transcript;
       }
 
-      if(!shDiscoveryToggle.checked && !shInterrupted && EN_FILLER_RE.test(latestChunk)){
+      if(!shDiscoveryToggle.checked && !shInterrupted && (FILLER_RE_BY_LANG[selectedLanguage] || EN_FILLER_RE).test(latestChunk)){
         shInterrupted = true;
         stopShadowRepeat(false, "Une hésitation a été entendue (« um »). On reprend depuis le début.");
         return;
@@ -2614,14 +2997,42 @@ readStartBtn.addEventListener('click', () => {
 });
 
 /* ---------------- Mode avancé: longer texts, with word-verified repeat + pronunciation help ---------------- */
-const LONG_SHADOW_TEXTS = [
-  { title: "Ton week-end", en: "Last weekend was actually pretty relaxing. On Saturday morning, I slept in a little later than usual, then I went for a walk in the park near my place. In the afternoon, I met up with a friend and we grabbed coffee together, just catching up on things. Sunday was quieter, and I needed that break.", fr: "Le week-end dernier était plutôt reposant. Samedi matin, j'ai dormi un peu plus tard que d'habitude, puis je suis allé·e me promener dans le parc près de chez moi. L'après-midi, j'ai retrouvé un·e ami·e et on a pris un café ensemble, juste pour papoter. Dimanche était plus calme, et j'avais besoin de cette pause." },
-  { title: "Te présenter au travail", en: "Hi, nice to meet you. I'm part of the team that handles customer support, and I've been with the company for about two years now. Before that, I worked in a completely different field, more on the technical side. What I enjoy most is solving problems quickly.", fr: "Bonjour, ravi·e de vous rencontrer. Je fais partie de l'équipe qui s'occupe du support client, et je suis dans l'entreprise depuis environ deux ans. Avant ça, je travaillais dans un domaine complètement différent, plutôt technique. Ce que j'aime le plus, c'est résoudre des problèmes rapidement." },
-  { title: "Décrire ta ville", en: "The city I live in is a mix of old and new. In the center, you'll find narrow streets with buildings that are hundreds of years old, and just a few minutes away, there are modern shopping areas. What I like most is that you can walk almost everywhere.", fr: "La ville où je vis est un mélange d'ancien et de moderne. Dans le centre, on trouve des rues étroites avec des bâtiments centenaires, et à quelques minutes de là, des zones commerciales modernes. Ce que j'aime le plus, c'est qu'on peut marcher presque partout." },
-  { title: "Parler de la nourriture", en: "I'm honestly not that picky when it comes to food, but if I had to choose, I'd say I have a soft spot for anything with a lot of flavor, spicy dishes, strong sauces, that kind of thing. Lately I've been trying to cook more myself.", fr: "Honnêtement, je ne suis pas si difficile côté nourriture, mais si je devais choisir, je dirais que j'ai un faible pour tout ce qui a beaucoup de goût — les plats épicés, les sauces relevées. Ces derniers temps, j'essaie de cuisiner plus moi-même." },
-  { title: "Ton avis sur les réseaux sociaux", en: "I have mixed feelings about social media, to be honest. On one hand, it's great for staying in touch with people who live far away. On the other hand, scrolling for too long makes me feel kind of drained, without really knowing why.", fr: "J'ai des sentiments partagés sur les réseaux sociaux, pour être honnête. D'un côté, c'est pratique pour rester en contact avec des gens qui vivent loin. De l'autre, défiler trop longtemps me laisse un peu vidé·e, sans vraiment savoir pourquoi." },
-  { title: "Tes objectifs pour cette année", en: "This year, I'm trying to focus on fewer things but actually follow through on them, instead of starting a lot of projects and losing motivation halfway. One of my main goals is to get better at speaking English more naturally.", fr: "Cette année, j'essaie de me concentrer sur moins de choses, mais de vraiment les suivre jusqu'au bout, plutôt que de commencer plein de projets. Un de mes objectifs principaux, c'est de mieux parler anglais de façon plus naturelle." }
+const LONG_SHADOW_MEANINGS = [
+  { title: "Ton week-end", fr: "Le week-end dernier était plutôt reposant. Samedi matin, j'ai dormi un peu plus tard que d'habitude, puis je suis allé·e me promener dans le parc près de chez moi. L'après-midi, j'ai retrouvé un·e ami·e et on a pris un café ensemble, juste pour papoter. Dimanche était plus calme, et j'avais besoin de cette pause.",
+    en: "Last weekend was actually pretty relaxing. On Saturday morning, I slept in a little later than usual, then I went for a walk in the park near my place. In the afternoon, I met up with a friend and we grabbed coffee together, just catching up on things. Sunday was quieter, and I needed that break.",
+    es: "El fin de semana pasado fue bastante relajante. El sábado por la mañana dormí un poco más tarde de lo habitual, luego fui a caminar al parque cerca de mi casa. Por la tarde, quedé con un·a amigo·a y tomamos un café juntos, simplemente para ponernos al día. El domingo fue más tranquilo, y necesitaba ese descanso.",
+    de: "Das letzte Wochenende war eigentlich ziemlich entspannend. Am Samstagmorgen habe ich etwas länger als sonst geschlafen und bin dann im Park in meiner Nähe spazieren gegangen. Am Nachmittag habe ich mich mit einem Freund getroffen, und wir haben zusammen Kaffee getrunken. Der Sonntag war ruhiger, und ich brauchte diese Pause.",
+    it: "Il weekend scorso è stato davvero rilassante. Sabato mattina ho dormito un po' più del solito, poi sono andato·a a fare una passeggiata nel parco vicino a casa mia. Nel pomeriggio ho incontrato un·a amico·a e abbiamo preso un caffè insieme. La domenica è stata più tranquilla, e avevo bisogno di quella pausa." },
+  { title: "Te présenter au travail", fr: "Bonjour, ravi·e de vous rencontrer. Je fais partie de l'équipe qui s'occupe du support client, et je suis dans l'entreprise depuis environ deux ans. Avant ça, je travaillais dans un domaine complètement différent, plutôt technique. Ce que j'aime le plus, c'est résoudre des problèmes rapidement.",
+    en: "Hi, nice to meet you. I'm part of the team that handles customer support, and I've been with the company for about two years now. Before that, I worked in a completely different field, more on the technical side. What I enjoy most is solving problems quickly.",
+    es: "Hola, encantado·a de conocerte. Formo parte del equipo de atención al cliente, y llevo en la empresa unos dos años. Antes de eso, trabajaba en un campo completamente diferente, más del lado técnico. Lo que más me gusta es resolver problemas rápidamente.",
+    de: "Hallo, freut mich, dich kennenzulernen. Ich gehöre zum Team, das sich um den Kundensupport kümmert, und ich bin seit etwa zwei Jahren im Unternehmen. Davor habe ich in einem ganz anderen Bereich gearbeitet, eher auf der technischen Seite. Am meisten mag ich es, Probleme schnell zu lösen.",
+    it: "Ciao, piacere di conoscerti. Faccio parte del team che si occupa dell'assistenza clienti, e sono in azienda da circa due anni. Prima lavoravo in un campo completamente diverso, più dal lato tecnico. Quello che mi piace di più è risolvere i problemi velocemente." },
+  { title: "Décrire ta ville", fr: "La ville où je vis est un mélange d'ancien et de moderne. Dans le centre, on trouve des rues étroites avec des bâtiments centenaires, et à quelques minutes de là, des zones commerciales modernes. Ce que j'aime le plus, c'est qu'on peut marcher presque partout.",
+    en: "The city I live in is a mix of old and new. In the center, you'll find narrow streets with buildings that are hundreds of years old, and just a few minutes away, there are modern shopping areas. What I like most is that you can walk almost everywhere.",
+    es: "La ciudad donde vivo es una mezcla de lo antiguo y lo moderno. En el centro hay calles estrechas con edificios de cientos de años, y a pocos minutos, zonas comerciales modernas. Lo que más me gusta es que se puede caminar a casi todos lados.",
+    de: "Die Stadt, in der ich lebe, ist eine Mischung aus Alt und Neu. Im Zentrum gibt es enge Straßen mit jahrhundertealten Gebäuden, und nur wenige Minuten entfernt moderne Einkaufsviertel. Am meisten mag ich, dass man fast überall zu Fuß hinkommt.",
+    it: "La città in cui vivo è un mix di antico e moderno. Nel centro si trovano strade strette con edifici vecchi di secoli, e a pochi minuti di distanza, zone commerciali moderne. Quello che mi piace di più è che si può camminare quasi ovunque." },
+  { title: "Parler de la nourriture", fr: "Honnêtement, je ne suis pas si difficile côté nourriture, mais si je devais choisir, je dirais que j'ai un faible pour tout ce qui a beaucoup de goût — les plats épicés, les sauces relevées. Ces derniers temps, j'essaie de cuisiner plus moi-même.",
+    en: "I'm honestly not that picky when it comes to food, but if I had to choose, I'd say I have a soft spot for anything with a lot of flavor, spicy dishes, strong sauces, that kind of thing. Lately I've been trying to cook more myself.",
+    es: "Sinceramente no soy muy exigente con la comida, pero si tuviera que elegir, diría que tengo debilidad por todo lo que tiene mucho sabor, platos picantes, salsas fuertes. Últimamente estoy intentando cocinar más yo mismo·a.",
+    de: "Ehrlich gesagt bin ich beim Essen nicht besonders wählerisch, aber wenn ich wählen müsste, hätte ich eine Schwäche für alles mit viel Geschmack, scharfe Gerichte, kräftige Saucen. In letzter Zeit versuche ich, mehr selbst zu kochen.",
+    it: "Onestamente non sono così esigente con il cibo, ma se dovessi scegliere, direi che ho un debole per tutto ciò che ha molto sapore, piatti piccanti, salse forti. Ultimamente sto cercando di cucinare di più da solo·a." },
+  { title: "Ton avis sur les réseaux sociaux", fr: "J'ai des sentiments partagés sur les réseaux sociaux, pour être honnête. D'un côté, c'est pratique pour rester en contact avec des gens qui vivent loin. De l'autre, défiler trop longtemps me laisse un peu vidé·e, sans vraiment savoir pourquoi.",
+    en: "I have mixed feelings about social media, to be honest. On one hand, it's great for staying in touch with people who live far away. On the other hand, scrolling for too long makes me feel kind of drained, without really knowing why.",
+    es: "Sinceramente, tengo sentimientos encontrados sobre las redes sociales. Por un lado, son geniales para mantenerse en contacto con gente que vive lejos. Por otro lado, pasar demasiado tiempo desplazándome me deja agotado·a, sin saber muy bien por qué.",
+    de: "Ehrlich gesagt habe ich gemischte Gefühle bei sozialen Medien. Einerseits sind sie toll, um mit Leuten in Kontakt zu bleiben, die weit weg wohnen. Andererseits fühle ich mich nach zu langem Scrollen irgendwie erschöpft, ohne genau zu wissen warum.",
+    it: "Onestamente ho sentimenti contrastanti riguardo ai social media. Da un lato, sono ottimi per restare in contatto con persone che vivono lontano. Dall'altro, scorrere troppo a lungo mi fa sentire un po' svuotato·a, senza sapere bene perché." },
+  { title: "Tes objectifs pour cette année", fr: "Cette année, j'essaie de me concentrer sur moins de choses, mais de vraiment les suivre jusqu'au bout, plutôt que de commencer plein de projets. Un de mes objectifs principaux, c'est de mieux parler une nouvelle langue de façon plus naturelle.",
+    en: "This year, I'm trying to focus on fewer things but actually follow through on them, instead of starting a lot of projects and losing motivation halfway. One of my main goals is to get better at speaking a new language more naturally.",
+    es: "Este año estoy intentando centrarme en menos cosas pero llevarlas realmente a cabo, en lugar de empezar muchos proyectos y perder la motivación a mitad de camino. Uno de mis objetivos principales es hablar de forma más natural en otro idioma.",
+    de: "Dieses Jahr versuche ich, mich auf weniger Dinge zu konzentrieren, sie aber wirklich durchzuziehen, anstatt viele Projekte anzufangen. Eines meiner Hauptziele ist es, natürlicher in einer anderen Sprache zu sprechen.",
+    it: "Quest'anno sto cercando di concentrarmi su meno cose ma di portarle davvero a termine, invece di iniziare tanti progetti. Uno dei miei obiettivi principali è parlare in modo più naturale in un'altra lingua." }
 ];
+
+function getLongShadowTexts(){
+  return LONG_SHADOW_MEANINGS.map(m => ({ title: m.title, en: m[selectedLanguage], fr: m.fr }));
+}
 
 // Roughly maps a chosen "length" to how many sentences of the long text to use.
 const ADV_LENGTH_SENTENCES = { 15: 1, 30: 2, 60: 4 };
@@ -2669,7 +3080,8 @@ function getAdvSentences(text){
 }
 
 function rollAdvText(){
-  const finalItem = LONG_SHADOW_TEXTS[Math.floor(Math.random() * LONG_SHADOW_TEXTS.length)];
+  const longTexts = getLongShadowTexts();
+  const finalItem = longTexts[Math.floor(Math.random() * longTexts.length)];
   shAdvRollBtn.disabled = true;
   shAdvListenBtn.disabled = true;
   shAdvCaptionWrap.classList.remove('show');
@@ -2699,7 +3111,7 @@ function rollAdvText(){
   const totalTicks = 12;
   const tick = () => {
     ticks++;
-    const randomItem = LONG_SHADOW_TEXTS[Math.floor(Math.random() * LONG_SHADOW_TEXTS.length)];
+    const randomItem = longTexts[Math.floor(Math.random() * longTexts.length)];
     shAdvTopicTitle.textContent = ticks >= totalTicks ? finalItem.title : randomItem.title;
     if(ticks < totalTicks){
       setTimeout(tick, 40 + ticks * 12);
@@ -2727,7 +3139,7 @@ shAdvListenBtn.addEventListener('click', () => {
   if(!window.speechSynthesis || !selectedAdvText) return;
   window.speechSynthesis.cancel();
   const utter = new SpeechSynthesisUtterance(selectedAdvText.en);
-  utter.lang = 'en-US';
+  utter.lang = getLocale();
   utter.rate = 0.95;
   if(selectedVoice) utter.voice = selectedVoice;
   shAdvListenBtn.disabled = true;
@@ -2769,7 +3181,7 @@ shAdvHearWordBtn.addEventListener('click', () => {
   const word = displayWords[shAdvReadIndex] || '';
   window.speechSynthesis.cancel();
   const utter = new SpeechSynthesisUtterance(word);
-  utter.lang = 'en-US';
+  utter.lang = getLocale();
   utter.rate = 0.7;
   if(selectedVoice) utter.voice = selectedVoice;
   window.speechSynthesis.speak(utter);
@@ -2803,7 +3215,7 @@ function startAdvRecognition(){
 
   try{
     shAdvRecognition = new SpeechRec();
-    shAdvRecognition.lang = 'en-US';
+    shAdvRecognition.lang = getLocale();
     shAdvRecognition.continuous = true;
     shAdvRecognition.interimResults = true;
 
@@ -2816,7 +3228,7 @@ function startAdvRecognition(){
         if(i === event.results.length - 1) latestChunk = event.results[i][0].transcript;
       }
 
-      if(EN_FILLER_RE.test(latestChunk)){
+      if((FILLER_RE_BY_LANG[selectedLanguage] || EN_FILLER_RE).test(latestChunk)){
         pauseAdvOnWord();
         return;
       }
@@ -2901,4 +3313,3 @@ if('serviceWorker' in navigator){
 </script>
 </body>
 </html>
-
