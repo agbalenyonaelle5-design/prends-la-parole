@@ -1,4 +1,4 @@
-const CACHE_NAME = "prends-la-parole-v2";
+const CACHE_NAME = "prends-la-parole-v3";
 const ASSETS = [
   "./index.html",
   "./manifest.json",

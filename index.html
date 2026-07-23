@@ -28,8 +28,9 @@
     --gold-soft: #F2DDB3;
     --coral: #B65C46;
     --green: #3D8361;
-    --radius: 20px;
-    --shadow: 0 12px 30px -14px rgba(43,46,42,0.22);
+    --radius: 18px;
+    --shadow: 0 10px 28px -12px rgba(43,46,42,0.16), 0 2px 6px -2px rgba(43,46,42,0.06);
+    --shadow-lift: 0 20px 44px -16px rgba(43,46,42,0.22), 0 4px 10px -4px rgba(43,46,42,0.08);
     --ring-color: var(--green);
   }
   *{ box-sizing: border-box; }
@@ -45,6 +46,89 @@
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;
   }
+  /* ---------- Premium auth gate (landing before the app) ---------- */
+  .auth-gate{
+    position: fixed; inset:0; z-index: 100; overflow-y:auto;
+    background:
+      radial-gradient(1200px 700px at 20% -10%, #EAF0E4 0%, transparent 60%),
+      radial-gradient(900px 600px at 100% 10%, #EFE7D6 0%, transparent 55%),
+      var(--bg);
+    display:flex; align-items:center; justify-content:center; padding: 40px 20px;
+  }
+  .auth-gate.hidden{ display:none; }
+  .gate-inner{ max-width: 420px; width:100%; text-align:center; }
+  .gate-brand{
+    display:flex; align-items:center; justify-content:center; gap:10px; margin-bottom: 28px;
+    font-family:'Fraunces', serif; font-weight:600; font-size:1.2rem; color: var(--indigo-deep);
+  }
+  .gate-title{
+    font-family:'Fraunces', serif; font-weight:600; font-size: clamp(1.6rem, 5vw, 2.1rem);
+    color: var(--indigo-deep); margin: 0 0 12px; line-height:1.15;
+  }
+  .gate-title em{ font-style:italic; font-weight:500; color: var(--gold); }
+  .gate-subtitle{ color: var(--ink-soft); font-size:0.95rem; margin: 0 0 28px; }
+  .gate-card{
+    background: var(--panel); border: 1.5px solid var(--line); border-top: 3px solid var(--gold);
+    border-radius: var(--radius); padding: 26px 24px; box-shadow: var(--shadow-lift);
+    display:flex; flex-direction:column; gap:11px; text-align:left;
+  }
+  .gate-card .auth-tabs{ margin-bottom:2px; }
+  .gate-card input{ font-size:0.95rem; padding:12px 14px; }
+  .gate-card button.primary{ padding:12px; font-size:0.95rem; }
+  .gate-guest-link{
+    display:inline-block; margin-top:20px; background:none; border:none; color: var(--ink-soft);
+    font-size:0.85rem; font-weight:600; cursor:pointer; font-family:'Work Sans', sans-serif;
+    text-decoration: underline;
+  }
+  .gate-guest-link:hover{ color: var(--indigo); }
+  @media (max-width:480px){ .gate-card{ padding:20px 18px; } }
+
+  .site-masthead{
+    background: var(--panel); border-bottom: 1.5px solid var(--line);
+    position: sticky; top: 0; z-index: 30; box-shadow: 0 1px 0 rgba(43,46,42,0.03);
+  }
+  .masthead-inner{
+    max-width: 940px; margin: 0 auto; padding: 14px 24px;
+    display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap;
+  }
+  .masthead-brand{
+    display:flex; align-items:center; gap:10px; text-decoration:none;
+    font-family:'Fraunces', serif; font-weight:600; font-size:1.05rem; color: var(--indigo-deep);
+  }
+  .masthead-profile{ display:flex; align-items:center; gap:12px; position:relative; }
+  .masthead-greeting{ font-size:0.88rem; font-weight:600; color: var(--indigo-deep); }
+  .masthead-signup-btn, .masthead-logout-btn{
+    background: var(--indigo-deep); color:#fff; border:none; padding: 8px 16px;
+    border-radius: 999px; font-size:0.84rem; font-weight:700; font-family:'Work Sans', sans-serif;
+    cursor:pointer; transition: background 0.18s ease;
+  }
+  .masthead-logout-btn{ background:none; color: var(--ink-soft); border:1.5px solid var(--line); }
+  .masthead-signup-btn:hover{ background:#24303D; }
+  .masthead-logout-btn:hover{ border-color: var(--indigo); color: var(--indigo); }
+
+  .auth-tabs{ display:flex; gap:6px; margin-bottom:6px; background:#F1F3EE; border-radius:10px; padding:3px; }
+  .auth-tab{
+    flex:1; background:none; border:none; padding:7px 8px; border-radius:8px; font-size:0.78rem;
+    font-weight:700; color: var(--ink-soft); cursor:pointer; font-family:'Work Sans', sans-serif;
+  }
+  .auth-tab.active{ background:#fff; color: var(--indigo-deep); box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+  .gate-card input{
+    border:1.5px solid var(--line); border-radius:10px; padding:10px 12px; font-size:0.9rem;
+    font-family:'Work Sans', sans-serif; width:100%; box-sizing:border-box;
+  }
+  .gate-card input:focus{ outline:none; border-color: var(--indigo); }
+  .gate-card button.primary{ width:100%; justify-content:center; padding:10px; font-size:0.88rem; }
+  .auth-divider{ display:flex; align-items:center; gap:8px; color: var(--ink-soft); font-size:0.72rem; margin: 2px 0; }
+  .auth-divider::before, .auth-divider::after{ content:""; flex:1; height:1px; background: var(--line); }
+  .google-btn{
+    display:flex; align-items:center; justify-content:center; gap:10px; background:#fff;
+    border:1.5px solid var(--line); border-radius:999px; padding:9px; font-size:0.85rem; font-weight:600;
+    color: var(--ink); cursor:pointer; font-family:'Work Sans', sans-serif;
+  }
+  .google-btn:hover{ border-color: var(--indigo); }
+  .auth-error{ color: var(--coral); font-size:0.78rem; margin:0; min-height:1em; }
+  .auth-note{ color: var(--ink-soft); font-size:0.72rem; margin:2px 0 0; line-height:1.4; }
+
   .wrap{ max-width: 940px; margin: 0 auto; padding: 0 24px 100px; }
 
   header.hero{ padding: 68px 0 40px; text-align: center; }
@@ -158,6 +242,97 @@
   .back-btn:hover{ border-color: var(--indigo); background: #EDF1EA; }
 
   .tool-grid-label{ text-align:center; color: var(--ink-soft); font-size:0.85rem; margin: 28px 0 14px; }
+
+  /* ---------- 90-day English game ---------- */
+  .cefr-badge{
+    display:block; width:fit-content; margin: 18px auto 0; background: var(--indigo-deep); color:#fff;
+    padding: 7px 18px; border-radius: 999px; font-weight:700; font-size:0.85rem;
+  }
+  .discover-label{
+    text-align:center; margin-top: 32px; padding-top: 22px; border-top: 1.5px dashed var(--line);
+    font-size: 0.82rem; color: var(--ink-soft); font-weight:700; text-transform:uppercase; letter-spacing:0.04em;
+  }
+  .discover-row{ display:grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap:14px; margin-top:14px; }
+  .discover-card{
+    display:flex; align-items:center; gap:14px; background:#FBFCFA; border:1.5px solid var(--line);
+    border-radius: 16px; padding: 16px 18px; text-decoration:none; transition: all 0.18s ease;
+  }
+  .discover-card:hover{ border-color: var(--indigo); transform: translateY(-2px); box-shadow: var(--shadow); }
+  .discover-icon{
+    flex:0 0 auto; width:42px; height:42px; border-radius:12px; background: var(--gold-soft);
+    display:flex; align-items:center; justify-content:center; font-size:1.3rem;
+  }
+  .discover-text{ display:flex; flex-direction:column; gap:2px; flex:1; min-width:0; }
+  .discover-text strong{ font-family:'Fraunces', serif; font-weight:600; font-size:0.92rem; color: var(--indigo-deep); }
+  .discover-text em{ font-style:normal; font-size:0.76rem; color: var(--ink-soft); }
+  .discover-arrow{ flex:0 0 auto; color: var(--indigo); font-weight:700; font-size:1.1rem; transition: transform 0.18s ease; }
+  .discover-card:hover .discover-arrow{ transform: translateX(3px); }
+
+  .level-path{
+    display:flex; justify-content:center; gap: 14px; flex-wrap:wrap; margin: 8px 0 10px;
+  }
+  .level-node{
+    display:flex; flex-direction:column; align-items:center; gap:8px; width:84px;
+    background:none; border:none; cursor:pointer; font-family:'Work Sans', sans-serif;
+  }
+  .level-node-circle{
+    width:56px; height:56px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+    font-size:1.3rem; background:#F1F3EE; border:2.5px solid var(--line); transition: all 0.18s ease;
+  }
+  .level-node:not(.locked):hover .level-node-circle{ transform: translateY(-3px); box-shadow: var(--shadow); }
+  .level-node.current .level-node-circle{ border-color: var(--gold); background: var(--gold-soft); }
+  .level-node.done .level-node-circle{ border-color: var(--green); background:#EAF3EC; color: var(--green); }
+  .level-node.locked{ cursor: default; opacity: 0.5; }
+  .level-node-label{ font-size:0.74rem; color: var(--ink-soft); text-align:center; font-weight:600; }
+  .level-node-stars{ font-size:0.7rem; letter-spacing:1px; color: var(--gold); min-height:1em; }
+
+  .day-complete-card{
+    display:none; text-align:center; background: linear-gradient(135deg, var(--indigo-deep), var(--indigo));
+    color:#F4F2EA; border-radius: 18px; padding: 30px 24px; margin-top: 20px;
+  }
+  .day-complete-card.show{ display:block; animation: panelFade 0.4s ease; }
+  .day-complete-card .mission-desc{ color:#CFD6E4; }
+
+  .ex-prompt{ font-family:'Fraunces', serif; font-weight:600; font-size:1.2rem; color: var(--indigo-deep); margin: 0 0 20px; text-align:center; }
+  .ex-choices{ display:grid; gap:10px; max-width:420px; margin: 0 auto 18px; }
+  .ex-result-msg{ text-align:center; font-weight:600; margin: 10px 0 0; min-height:1.4em; }
+  .ex-result-msg.correct{ color: var(--green); }
+  .ex-result-msg.wrong{ color: var(--coral); }
+  .ex-next-row{ display:flex; justify-content:center; margin-top:18px; }
+  .ex-input-row{ display:flex; gap:10px; max-width:460px; margin: 0 auto; flex-wrap:wrap; justify-content:center; }
+  .ex-text-input{
+    flex:1; min-width:220px; border:1.5px solid var(--line); border-radius:12px; padding:12px 14px;
+    font-size:1rem; font-family:'Work Sans', sans-serif;
+  }
+  .ex-text-input:focus{ outline:none; border-color: var(--indigo); }
+  .ex-listen-btn{ display:block; margin: 0 auto 20px; }
+
+  /* ---------- Video shadowing: animated talking avatar ---------- */
+  .video-episode-bar{
+    display:flex; align-items:center; justify-content:center; gap:14px; margin-bottom:20px;
+  }
+  .video-episode-label{ font-size:0.85rem; font-weight:700; color: var(--indigo-deep); }
+  .video-dots{ display:flex; gap:5px; flex-wrap:wrap; max-width:260px; }
+  .video-dots span{ width:8px; height:8px; border-radius:50%; background:#D8E0D3; }
+  .video-dots span.done{ background: var(--gold); }
+  .video-dots span.current{ background: var(--indigo); }
+
+  .video-stage{ display:flex; flex-direction:column; align-items:center; gap:16px; }
+  .video-frame{
+    position:relative; width:220px; height:220px; border-radius:20px; overflow:hidden;
+    background:#1B232D; box-shadow: 0 20px 40px -16px rgba(0,0,0,0.4); border: 3px solid #1B232D;
+  }
+  .avatar-video-svg{ width:100%; height:100%; }
+  .video-badge{
+    position:absolute; top:10px; left:10px; background: rgba(182,92,70,0.9); color:#fff;
+    font-size:0.65rem; font-weight:700; padding: 3px 8px; border-radius:5px; letter-spacing:0.04em;
+    opacity:0; transition: opacity 0.2s ease;
+  }
+  .video-badge.on{ opacity:1; }
+  .video-caption-wrap{ max-width: 420px; width:100%; }
+  #avMouth{ transition: d 0.09s ease; }
+  #avEyeL, #avEyeR{ transition: transform 0.1s ease; transform-origin: center; }
+  .blinking #avEyeL, .blinking #avEyeR{ transform: scaleY(0.1); }
   .tool-grid{ display:grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 12px; }
   .tool-card{
     display:flex; flex-direction:column; align-items:center; gap:8px;
@@ -190,7 +365,8 @@
   /* ---------- Practice tool ---------- */
   .practice-card{
     background: var(--panel); border-radius: var(--radius); box-shadow: var(--shadow);
-    padding: 36px; border: 1px solid var(--line); position: relative; overflow: hidden;
+    padding: 36px; border: 1px solid var(--line); border-top: 3px solid var(--gold);
+    position: relative; overflow: hidden;
   }
   .practice-card::before{
     content:""; position:absolute; top:-40px; right:-40px; width:160px; height:160px;
@@ -255,11 +431,11 @@
   button.primary{
     background: var(--indigo-deep); color: #fff; border: none; padding: 13px 26px;
     border-radius: 999px; font-size: 0.98rem; font-weight: 600; font-family: 'Work Sans', sans-serif;
-    cursor: pointer; transition: transform 0.15s ease, background 0.2s ease;
+    cursor: pointer; transition: transform 0.15s ease, background 0.2s ease, box-shadow 0.2s ease;
     display:inline-flex; align-items:center; gap: 10px;
   }
-  button.primary:hover{ background: #24303D; transform: translateY(-1px); }
-  button.primary:disabled{ opacity:0.6; cursor:default; transform:none; }
+  button.primary:hover{ background: #24303D; transform: translateY(-1px); box-shadow: 0 10px 20px -8px rgba(46,59,75,0.45); }
+  button.primary:disabled{ opacity:0.6; cursor:default; transform:none; box-shadow:none; }
   .mic-hint{ font-size: 0.82rem; color: #93998C; max-width: 240px; }
 
   .burst{ position:absolute; width:8px; height:8px; border-radius:50%; pointer-events:none; }
@@ -592,7 +768,51 @@
 </head>
 <body>
 
-<div class="wrap">
+<div class="auth-gate" id="authGate">
+  <div class="gate-inner">
+    <div class="gate-brand">
+      <svg viewBox="0 0 24 24" width="34" height="34"><rect width="24" height="24" rx="6" fill="#2E3B4B"/><circle cx="12" cy="10" r="4" fill="none" stroke="#D89A3E" stroke-width="2"/><path d="M6 19c0-3 2.7-4.5 6-4.5s6 1.5 6 4.5" fill="none" stroke="#D89A3E" stroke-width="2" stroke-linecap="round"/></svg>
+      <span>Prends la parole</span>
+    </div>
+    <h1 class="gate-title">Deviens à l'aise à l'oral <em>en 90 jours</em></h1>
+    <p class="gate-subtitle">Un parcours guidé, une mission par jour. Ta progression te suit partout.</p>
+
+    <div class="gate-card">
+      <div class="auth-tabs">
+        <button class="auth-tab active" id="authTabLogin" type="button">Se connecter</button>
+        <button class="auth-tab" id="authTabSignup" type="button">Créer un compte</button>
+      </div>
+      <input type="email" id="authEmail" placeholder="Ton email" autocomplete="email">
+      <input type="password" id="authPassword" placeholder="Mot de passe (6 caractères min.)" autocomplete="current-password">
+      <button class="primary" id="authSubmitBtn">Se connecter</button>
+      <div class="auth-divider"><span>ou</span></div>
+      <button class="google-btn" id="authGoogleBtn">
+        <svg width="16" height="16" viewBox="0 0 18 18"><path fill="#4285F4" d="M17.64 9.2c0-.64-.06-1.25-.16-1.84H9v3.48h4.84c-.21 1.13-.84 2.09-1.8 2.73v2.27h2.91c1.7-1.57 2.69-3.87 2.69-6.64z"/><path fill="#34A853" d="M9 18c2.43 0 4.47-.8 5.96-2.18l-2.91-2.27c-.81.54-1.84.86-3.05.86-2.34 0-4.32-1.58-5.03-3.71H.96v2.34C2.44 15.98 5.48 18 9 18z"/><path fill="#FBBC05" d="M3.97 10.7c-.18-.54-.28-1.11-.28-1.7s.1-1.16.28-1.7V4.96H.96A8.99 8.99 0 0 0 0 9c0 1.45.35 2.83.96 4.04l3.01-2.34z"/><path fill="#EA4335" d="M9 3.58c1.32 0 2.51.45 3.44 1.35l2.58-2.58C13.46.89 11.43 0 9 0 5.48 0 2.44 2.02.96 4.96l3.01 2.34C4.68 5.16 6.66 3.58 9 3.58z"/></svg>
+        Continuer avec Google
+      </button>
+      <p class="auth-error" id="authError"></p>
+      <p class="auth-note">Ta progression est liée à ce compte et te suit sur tous tes appareils.</p>
+    </div>
+
+    <button class="gate-guest-link" id="gateGuestBtn">Continuer sans compte →</button>
+  </div>
+</div>
+
+<header class="site-masthead" id="siteMasthead" style="display:none;">
+  <div class="masthead-inner">
+    <a href="index.html" class="masthead-brand">
+      <svg viewBox="0 0 24 24" width="26" height="26"><rect width="24" height="24" rx="6" fill="#2E3B4B"/><circle cx="12" cy="10" r="4" fill="none" stroke="#D89A3E" stroke-width="2"/><path d="M6 19c0-3 2.7-4.5 6-4.5s6 1.5 6 4.5" fill="none" stroke="#D89A3E" stroke-width="2" stroke-linecap="round"/></svg>
+      <span>Prends la parole</span>
+    </a>
+    <div class="masthead-profile" id="mastheadProfile">
+      <span class="masthead-greeting" id="mastheadGreeting" style="display:none;"></span>
+      <button class="masthead-signup-btn" id="mastheadSignupBtn" style="display:none;">Se connecter / S'inscrire</button>
+      <button class="masthead-logout-btn" id="mastheadLogoutBtn" style="display:none;">Se déconnecter</button>
+    </div>
+  </div>
+</header>
+
+<div class="wrap" id="appWrap" style="display:none;">
 
   <div class="back-bar" id="backBar">
     <button class="back-btn" id="backToMissionBtn">← Retour à ta mission</button>
@@ -605,13 +825,15 @@
     <button class="tab-btn" data-panel="panel-vocab" id="tab-vocab"></button>
     <button class="tab-btn" data-panel="panel-anglais" id="tab-anglais"></button>
     <button class="tab-btn" data-panel="panel-lecture" id="tab-lecture"></button>
+    <button class="tab-btn" data-panel="panel-video" id="tab-video"></button>
   </div>
 
   <section class="panel active dashboard" id="panel-mission" role="tabpanel" aria-labelledby="tab-mission">
     <details class="how-it-works">
       <summary>Comment ça marche ?</summary>
-      <p>Un parcours de 90 jours, en 3 phases : les bases, construire un discours, devenir orateur. Chaque jour, une mission précise t'attend ici, avec un lien direct vers le bon exercice. Valide-la une fois faite pour avancer, garder ta série de jours, et débloquer la suite.</p>
+      <p>Un vrai parcours d'anglais de 90 jours, du niveau A1 au niveau C1. Chaque jour, 5 niveaux à réussir dans l'ordre : vocabulaire, grammaire, écoute, prononciation, dictée. Réussis les 5 pour débloquer le jour suivant — validé automatiquement, pas sur l'honneur.</p>
     </details>
+
     <div class="dash-top">
       <div class="dash-stat">
         <span class="dash-stat-num" id="dashStreak">0</span>
@@ -627,46 +849,50 @@
       </div>
     </div>
 
+    <div class="cefr-badge" id="cefrBadge">Niveau A1 · Débutant</div>
+
     <div class="dash-phase">
-      <span class="dash-phase-label" id="dashPhaseLabel">Phase 1 · Les bases</span>
+      <span class="dash-phase-label" id="dashPhaseLabel">Vers le niveau A1</span>
       <div class="quiz-progress-bar"><div class="quiz-progress-fill" id="dashPhaseFill"></div></div>
     </div>
 
-    <div class="mission-card">
-      <span class="mission-tag">Mission du jour · <span id="missionDay">Jour 1</span></span>
-      <h2 class="mission-title" id="missionTitle">Chargement…</h2>
-      <p class="mission-desc" id="missionDesc"></p>
-      <div class="mission-actions">
-        <button class="primary" id="missionGoBtn">Commencer la mission</button>
-        <button class="ghost" id="missionDoneBtn">✓ J'ai terminé aujourd'hui</button>
+    <!-- Level path: today's 5 levels as a game-like map -->
+    <div id="levelMapView">
+      <p class="tool-grid-label" style="margin-top:28px;">Jour <span id="lmDayNum">1</span> — choisis ton prochain niveau :</p>
+      <div class="level-path" id="levelPath"></div>
+      <div class="day-complete-card" id="dayCompleteCard">
+        <p style="font-size:2rem; margin:0 0 8px;">🎉</p>
+        <p class="mission-desc" style="margin:0 0 16px;">Jour <span id="dcDayNum"></span> terminé ! Niveau <span id="dcCefr"></span> en cours de consolidation.</p>
+        <button class="primary" id="nextDayBtn">Passer au jour suivant →</button>
       </div>
-      <p class="mission-done-msg" id="missionDoneMsg"></p>
+    </div>
+
+    <!-- Exercise view: one level played inline -->
+    <div id="exerciseView" style="display:none;">
+      <button class="back-btn" id="exerciseBackBtn" style="margin-bottom:18px;">← Retour aux niveaux du jour</button>
+      <div class="practice-card" id="exerciseCard"></div>
     </div>
 
     <div class="badges-row" id="badgesRow"></div>
 
-    <p class="tool-grid-label">Ou explore librement un exercice :</p>
-    <div class="tool-grid">
-      <button class="tool-card" data-panel="panel-parole">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V6a3 3 0 0 0-3-3z"/><path d="M6 11a6 6 0 0 0 12 0"/><path d="M12 17v4M8 21h8"/></svg>
-        <span>Prendre la parole</span>
-      </button>
-      <button class="tool-card" data-panel="panel-quiz">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg>
-        <span>Quiz éclair</span>
-      </button>
-      <button class="tool-card" data-panel="panel-vocab">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V5a2 2 0 0 1 2-2h11v16H6a2 2 0 0 0 0 4h13"/></svg>
-        <span>Vocabulaire</span>
-      </button>
-      <button class="tool-card" data-panel="panel-anglais">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.5 4 6 4 9s-1.5 6.5-4 9c-2.5-2.5-4-6-4-9s1.5-6.5 4-9z"/></svg>
-        <span>Langues</span>
-      </button>
-      <button class="tool-card" data-panel="panel-lecture">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5C4 4.7 4.7 4 5.5 4H12v16H5.5A1.5 1.5 0 0 1 4 18.5z"/><path d="M20 5.5C20 4.7 19.3 4 18.5 4H12v16h6.5a1.5 1.5 0 0 0 1.5-1.5z"/></svg>
-        <span>Lecture</span>
-      </button>
+    <p class="discover-label">Envie d'aller plus loin ?</p>
+    <div class="discover-row">
+      <a href="#" id="goToToolsLink" class="discover-card">
+        <span class="discover-icon">🗣️</span>
+        <span class="discover-text">
+          <strong>S'entraîner à l'oral en français</strong>
+          <em>Connecteurs, vocabulaire, lecture, quiz…</em>
+        </span>
+        <span class="discover-arrow">→</span>
+      </a>
+      <a href="#" id="goToVideoLink" class="discover-card">
+        <span class="discover-icon">🎬</span>
+        <span class="discover-text">
+          <strong>Shadowing vidéo avec avatar</strong>
+          <em>Une série d'épisodes à écouter et répéter</em>
+        </span>
+        <span class="discover-arrow">→</span>
+      </a>
     </div>
   </section>
 
@@ -1085,6 +1311,109 @@
     </section>
   </section>
 
+  <section class="panel" id="panel-video" role="tabpanel" aria-labelledby="tab-video">
+    <details class="how-it-works">
+      <summary>Comment ça marche ?</summary>
+      <p>Une série de petites vidéos avec un avatar qui parle vraiment (bouche animée, comme une vidéo). Choisis ta langue et ton avatar, regarde et écoute l'épisode, puis répète-le. Si c'est bien prononcé, l'épisode suivant se débloque ; sinon, tu reprends le même épisode.</p>
+    </details>
+    <div class="section-head" style="margin-top:0;">
+      <h2>Shadowing vidéo</h2>
+      <p>Une série d'épisodes à regarder, écouter, puis répéter — comme un vrai cours filmé.</p>
+    </div>
+
+    <section class="practice-card" id="videoCard">
+      <div class="step show" id="videoStep0">
+        <p class="tool-mini-label">1. Choisis ta langue</p>
+        <div class="lang-choices" id="videoLangChoices">
+          <button class="lang-btn active" data-lang="en"><span class="lang-flag">🇬🇧</span> English</button>
+          <button class="lang-btn" data-lang="es"><span class="lang-flag">🇪🇸</span> Español</button>
+          <button class="lang-btn" data-lang="de"><span class="lang-flag">🇩🇪</span> Deutsch</button>
+          <button class="lang-btn" data-lang="it"><span class="lang-flag">🇮🇹</span> Italiano</button>
+        </div>
+      </div>
+
+      <div class="step show" id="videoStep1">
+        <p class="tool-mini-label">2. Choisis ton avatar</p>
+        <div class="avatar-choices">
+          <button class="avatar-btn" data-gender="male" id="videoAvatarMale">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="9" r="5"/>
+              <path d="M7.3 7.2C8.5 6 10.1 5.3 12 5.3s3.5 0.7 4.7 1.9"/>
+              <path d="M4 20c0-3.3 3.6-5 8-5s8 1.7 8 5"/>
+            </svg>
+            Homme
+          </button>
+          <button class="avatar-btn" data-gender="female" id="videoAvatarFemale">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="9" r="5"/>
+              <path d="M6.5 9.5C6.2 6 8.7 3.3 12 3.3s5.8 2.7 5.5 6.2c-0.15 1.7-0.4 3.2-1 4.5"/>
+              <path d="M6.5 9.5c0 2.3 0.2 4 0.8 5.4"/>
+              <path d="M4 20c0-3.3 3.6-5 8-5s8 1.7 8 5"/>
+            </svg>
+            Femme
+          </button>
+        </div>
+      </div>
+
+      <div class="step" id="videoStep2">
+        <div class="video-episode-bar">
+          <span class="video-episode-label">Épisode <span id="veNum">1</span> / <span id="veTotal">12</span></span>
+          <div class="video-dots" id="veDots"></div>
+        </div>
+
+        <div class="video-stage">
+          <div class="video-frame">
+            <svg id="avatarSvg" viewBox="0 0 200 200" class="avatar-video-svg">
+              <circle cx="100" cy="100" r="96" fill="#EDF1EA"/>
+              <ellipse id="avHair" cx="100" cy="70" rx="52" ry="42" fill="#2E3B4B"/>
+              <circle id="avFace" cx="100" cy="105" r="48" fill="#F2DDB3"/>
+              <ellipse id="avEyeL" cx="82" cy="98" rx="5" ry="7" fill="#2E3B4B"/>
+              <ellipse id="avEyeR" cx="118" cy="98" rx="5" ry="7" fill="#2E3B4B"/>
+              <path id="avMouth" d="M82 130 Q100 130 118 130" stroke="#B65C46" stroke-width="5" stroke-linecap="round" fill="none"/>
+            </svg>
+            <div class="video-badge" id="videoBadge">● REC</div>
+          </div>
+          <div class="video-caption-wrap" id="videoCaptionWrap">
+            <p class="live-caption" id="videoCaption"></p>
+          </div>
+        </div>
+
+        <div class="listen-actions" style="justify-content:center; margin-top:16px;">
+          <button class="primary" id="videoPlayBtn">▶ Regarder l'épisode</button>
+          <button class="ghost" id="videoReplayBtn" style="display:none;">🔁 Revoir</button>
+        </div>
+
+        <div class="transcripts" id="videoTranscripts" style="display:none;">
+          <div class="transcript-block">
+            <h4>Traduction</h4>
+            <p id="videoTranscriptFr"></p>
+          </div>
+        </div>
+
+        <div class="shadow-practice" id="videoPracticeZone" style="display:none;">
+          <p class="tool-mini-label" style="margin-top:22px;">À ton tour — répète l'épisode</p>
+          <div class="teleprompter" id="videoTeleprompter"></div>
+          <div class="listen-actions" style="margin-top:16px;">
+            <button class="primary" id="videoRepeatBtn">Je répète maintenant</button>
+            <span class="mic-hint" id="videoHint">Répète la phrase, mot après mot.</span>
+          </div>
+
+          <div class="word-help-card" id="videoWordHelp">
+            <p class="reflex-label">Tu as buté sur ce mot :</p>
+            <p class="word-help-word" id="videoHelpWord"></p>
+            <div class="word-help-actions">
+              <button class="ghost" id="videoHearWordBtn">🔊 Écouter ce mot</button>
+              <button class="primary" id="videoContinueBtn">Continuer à partir d'ici</button>
+            </div>
+          </div>
+
+          <div class="celebrate" id="videoCelebrate">🎬 Épisode réussi ! Le suivant est débloqué.</div>
+          <div class="celebrate encourage" id="videoRetryZone"></div>
+        </div>
+      </div>
+    </section>
+  </section>
+
   <div class="phrase-card">
     <p class="phrase-eyebrow">Expression orale du jour</p>
     <p class="phrase-text" id="phraseText"></p>
@@ -1093,7 +1422,7 @@
 
   <footer class="foot">
     <p style="margin:0 0 10px;">Fait avec soin pour celles et ceux qui veulent parler plus librement.</p>
-    <p style="margin:0;"><a href="about.html">À propos</a> · <a href="contact.html">Contact</a> · <a href="privacy.html">Confidentialité</a></p>
+    <p style="margin:0;"><a href="about.html">À propos</a> · <a href="contact.html">Contact</a> · <a href="privacy.html">Confidentialité</a> · <a href="terms.html">Conditions d'utilisation</a></p>
   </footer>
 </div>
 
@@ -1102,82 +1431,353 @@
   <div class="modal" id="modalContent"></div>
 </div>
 
+<script type="module">
+  /* =====================================================================
+     ÉTAPE FIREBASE — remplace les valeurs ci-dessous par la config de TON
+     projet Firebase (Console Firebase > Paramètres du projet > Général >
+     "Vos applications" > icône Web </> > copier l'objet firebaseConfig).
+     ===================================================================== */
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+  import {
+    getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword,
+    GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut
+  } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+  import {
+    getFirestore, doc, getDoc, setDoc
+  } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyCg8uCm4EPgSUvdaFWz701rMn2a63pOMFw",
+    authDomain: "prends-la-parole.firebaseapp.com",
+    projectId: "prends-la-parole",
+    storageBucket: "prends-la-parole.firebasestorage.app",
+    messagingSenderId: "361843594489",
+    appId: "1:361843594489:web:83b54c11217d40e664fe28"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db = getFirestore(app);
+
+  // Bridge to the main (non-module) script below.
+  window.__ptpAuth = {
+    auth, db, doc, getDoc, setDoc,
+    createUserWithEmailAndPassword, signInWithEmailAndPassword,
+    GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut
+  };
+  window.dispatchEvent(new Event('ptp-firebase-ready'));
+</script>
+
 <script>
 /* ---------------- 90-day journey: missions, streak, XP, badges ---------------- */
-const JOURNEY_KEY = 'ptp_journey_v1';
+/* ---------------- Real account: Firebase Auth (email/password + Google) + Firestore progress sync ---------------- */
+let currentUser = null;
+let fb = null; // set once the Firebase module script has loaded
+let authMode = 'login'; // 'login' | 'signup'
+
+const mastheadGreeting = document.getElementById('mastheadGreeting');
+const mastheadSignupBtn = document.getElementById('mastheadSignupBtn');
+const mastheadLogoutBtn = document.getElementById('mastheadLogoutBtn');
+const authGate = document.getElementById('authGate');
+const siteMasthead = document.getElementById('siteMasthead');
+const appWrap = document.getElementById('appWrap');
+const gateGuestBtn = document.getElementById('gateGuestBtn');
+const authTabLogin = document.getElementById('authTabLogin');
+const authTabSignup = document.getElementById('authTabSignup');
+const authEmail = document.getElementById('authEmail');
+const authPassword = document.getElementById('authPassword');
+const authSubmitBtn = document.getElementById('authSubmitBtn');
+const authGoogleBtn = document.getElementById('authGoogleBtn');
+const authError = document.getElementById('authError');
+
+const GUEST_KEY = 'ptp_guest_v1';
+
+function enterApp(){
+  authGate.classList.add('hidden');
+  siteMasthead.style.display = 'block';
+  appWrap.style.display = 'block';
+}
+
+// Returning guests (who chose "Continuer sans compte" before) skip the gate immediately,
+// so they aren't asked again every visit. Logged-in users are let in once Firebase confirms it.
+if(localStorage.getItem(GUEST_KEY) === '1'){
+  enterApp();
+}
+
+gateGuestBtn.addEventListener('click', () => {
+  try{ localStorage.setItem(GUEST_KEY, '1'); }catch(e){}
+  enterApp();
+});
+
+function setAuthMode(mode){
+  authMode = mode;
+  authTabLogin.classList.toggle('active', mode === 'login');
+  authTabSignup.classList.toggle('active', mode === 'signup');
+  authSubmitBtn.textContent = mode === 'login' ? 'Se connecter' : 'Créer mon compte';
+  authError.textContent = '';
+}
+authTabLogin.addEventListener('click', () => setAuthMode('login'));
+authTabSignup.addEventListener('click', () => setAuthMode('signup'));
+
+function renderAuthUI(){
+  if(currentUser){
+    const label = currentUser.displayName || currentUser.email || 'Toi';
+    mastheadGreeting.textContent = 'Bonjour, ' + label + ' 👋';
+    mastheadGreeting.style.display = 'inline';
+    mastheadSignupBtn.style.display = 'none';
+    mastheadLogoutBtn.style.display = 'inline-block';
+    enterApp();
+  } else {
+    mastheadGreeting.style.display = 'none';
+    mastheadSignupBtn.style.display = 'none';
+    mastheadLogoutBtn.style.display = 'none';
+  }
+}
+renderAuthUI();
+
+authSubmitBtn.addEventListener('click', async () => {
+  if(!fb){ authError.textContent = "La connexion n'est pas encore prête, réessaie dans un instant."; return; }
+  const email = authEmail.value.trim();
+  const pass = authPassword.value;
+  if(!email || !pass){ authError.textContent = 'Renseigne un email et un mot de passe.'; return; }
+  authError.textContent = '';
+  authSubmitBtn.disabled = true;
+  try{
+    if(authMode === 'signup'){
+      await fb.createUserWithEmailAndPassword(fb.auth, email, pass);
+    } else {
+      await fb.signInWithEmailAndPassword(fb.auth, email, pass);
+    }
+  }catch(e){
+    authError.textContent = translateAuthError(e.code);
+  }finally{
+    authSubmitBtn.disabled = false;
+  }
+});
+authPassword.addEventListener('keydown', (ev) => { if(ev.key === 'Enter') authSubmitBtn.click(); });
+
+authGoogleBtn.addEventListener('click', async () => {
+  if(!fb){ authError.textContent = "La connexion n'est pas encore prête, réessaie dans un instant."; return; }
+  authError.textContent = '';
+  try{
+    const provider = new fb.GoogleAuthProvider();
+    await fb.signInWithPopup(fb.auth, provider);
+  }catch(e){
+    authError.textContent = translateAuthError(e.code);
+  }
+});
+
+mastheadLogoutBtn.addEventListener('click', async () => {
+  if(!fb) return;
+  await fb.signOut(fb.auth);
+  try{ localStorage.removeItem(GUEST_KEY); }catch(e){}
+  authGate.classList.remove('hidden');
+  siteMasthead.style.display = 'none';
+  appWrap.style.display = 'none';
+});
+
+function translateAuthError(code){
+  const map = {
+    'auth/email-already-in-use': 'Un compte existe déjà avec cet email — essaie de te connecter.',
+    'auth/invalid-email': "Cet email n'a pas l'air valide.",
+    'auth/weak-password': 'Le mot de passe doit faire au moins 6 caractères.',
+    'auth/wrong-password': 'Mot de passe incorrect.',
+    'auth/user-not-found': "Aucun compte avec cet email — essaie de t'inscrire.",
+    'auth/invalid-credential': 'Email ou mot de passe incorrect.',
+    'auth/popup-closed-by-user': 'Connexion Google annulée.'
+  };
+  return map[code] || "Une erreur est survenue, réessaie.";
+}
+
+/* ---- Cloud sync: merge/save journey + video progress against the signed-in account ---- */
+let cloudSyncTimer = null;
+function syncToCloudSoon(){
+  if(!currentUser || !fb) return;
+  clearTimeout(cloudSyncTimer);
+  cloudSyncTimer = setTimeout(async () => {
+    try{
+      await fb.setDoc(fb.doc(fb.db, 'users', currentUser.uid), {
+        journey, videoProgress, updatedAt: Date.now()
+      }, { merge: true });
+    }catch(e){ console.error('Cloud sync failed:', e); }
+  }, 600);
+}
+
+async function loadFromCloud(uid){
+  try{
+    const snap = await fb.getDoc(fb.doc(fb.db, 'users', uid));
+    if(snap.exists()){
+      const data = snap.data();
+      if(data.journey) journey = data.journey;
+      if(data.videoProgress) videoProgress = data.videoProgress;
+      saveJourney(journey);
+      saveVideoProgress(videoProgress);
+    } else {
+      // First time signing in: send this device's current (guest) progress to the cloud.
+      await fb.setDoc(fb.doc(fb.db, 'users', uid), { journey, videoProgress, updatedAt: Date.now() });
+    }
+  }catch(e){ console.error('Cloud load failed:', e); }
+  renderDashboard();
+  renderAuthUI();
+}
+
+window.addEventListener('ptp-firebase-ready', () => {
+  fb = window.__ptpAuth;
+  fb.onAuthStateChanged(fb.auth, (user) => {
+    currentUser = user;
+    renderAuthUI();
+    if(user) loadFromCloud(user.uid);
+  });
+});
+// In case the module script already fired the event before this listener was attached.
+if(window.__ptpAuth){
+  fb = window.__ptpAuth;
+  fb.onAuthStateChanged(fb.auth, (user) => {
+    currentUser = user;
+    renderAuthUI();
+    if(user) loadFromCloud(user.uid);
+  });
+}
+
+const JOURNEY_KEY = 'ptp_journey_v2';
 
 function loadJourney(){
   try{
     const raw = localStorage.getItem(JOURNEY_KEY);
     if(raw) return JSON.parse(raw);
   }catch(e){}
-  return { day: 1, streak: 0, xp: 0, lastCompleted: null, badges: [] };
+  return { day: 1, streak: 0, xp: 0, lastCompleted: null, badges: [], todayLevels: [false,false,false,false,false], todayStars: [0,0,0,0,0] };
 }
 function saveJourney(state){
   try{ localStorage.setItem(JOURNEY_KEY, JSON.stringify(state)); }catch(e){}
+  syncToCloudSoon();
 }
 let journey = loadJourney();
 
-const MISSION_TEMPLATES = {
-  1: [ // Days 1-30 : Les bases — arrêter d'avoir peur
-    { tag:'parole', title:'Parle 15 secondes sur un sujet surprise', desc:"Lance un sujet au hasard dans « Prendre la parole », en mode Tout doux. L'objectif n'est pas la perfection, juste de commencer à parler sans te bloquer.", panel:'panel-parole' },
-    { tag:'connect', title:'Apprends 3 connecteurs utiles', desc:"Ouvre le tiroir « Besoin d'un mot de liaison ? » dans Prendre la parole, et repère 3 expressions que tu pourrais utiliser aujourd'hui.", panel:'panel-parole' },
-    { tag:'lecture', title:'Lis un bulletin à voix haute', desc:"Dans l'onglet Lecture, tire un texte et lis-le posément, comme un·e journaliste.", panel:'panel-lecture' },
-    { tag:'vocab', title:'Explore un thème de vocabulaire', desc:"Dans l'onglet Vocabulaire, ouvre un thème et note 2 expressions qui te manquaient.", panel:'panel-vocab' },
-    { tag:'quiz', title:'Teste-toi avec le Quiz éclair', desc:"8 questions rapides pour vérifier ce qui est déjà bien ancré.", panel:'panel-quiz' }
+/* ---------------- CEFR content pools (A1 → C1) ---------------- */
+const CEFR_VOCAB = {
+  A1: [
+    ['hello','bonjour'], ['goodbye','au revoir'], ['please','s\'il te plaît'], ['thank you','merci'],
+    ['water','de l\'eau'], ['food','de la nourriture'], ['house','une maison'], ['friend','un ami'],
+    ['today','aujourd\'hui'], ['tomorrow','demain'], ['morning','le matin'], ['night','la nuit'],
+    ['happy','content·e'], ['name','un nom'], ['family','la famille']
   ],
-  2: [ // Days 31-60 : Construire un discours — raconter, convaincre
-    { tag:'parole', title:'Raconte une histoire en 30 secondes', desc:"Lance un sujet dans Prendre la parole (mode Entraînement) et structure ce que tu dis : un début, un milieu, une fin.", panel:'panel-parole' },
-    { tag:'reflex', title:"Réponds à une relance surprise", desc:"Après ta minute de parole, utilise « Relance surprise » pour t'entraîner à répondre sans préparation.", panel:'panel-parole' },
-    { tag:'quiz-ctx', title:'Fais le quiz sur ton sujet du jour', desc:"Une fois ton sujet terminé, clique sur « Quiz sur ce sujet » pour consolider le vocabulaire précis que tu viens d'utiliser.", panel:'panel-parole' },
-    { tag:'anglais', title:"Progresse d'un niveau en anglais", desc:"Dans Apprendre l'anglais, avance ou consolide un niveau de shadowing.", panel:'panel-anglais' },
-    { tag:'lecture', title:'Lis un texte plus long, sans erreur', desc:"Dans Lecture, essaie de lire un bulletin en entier sans hésitation ni répétition.", panel:'panel-lecture' }
+  A2: [
+    ['yesterday','hier'], ['expensive','cher'], ['cheap','pas cher'], ['near','proche'], ['far','loin'],
+    ['always','toujours'], ['sometimes','parfois'], ['never','jamais'], ['because','parce que'],
+    ['before','avant'], ['after','après'], ['again','encore'], ['already','déjà'], ['still','toujours (encore)'], ['store','un magasin']
   ],
-  3: [ // Days 61-90 : Devenir orateur — pitch, débat, improvisation
-    { tag:'parole-strict', title:"Tiens une minute complète, sans accroc", desc:"Mode Entraînement complet, 60 secondes, sur un sujet tiré au sort. Vise la fluidité du début à la fin.", panel:'panel-parole' },
-    { tag:'anglais-adv', title:"Mode avancé anglais", desc:"Si tu l'as débloqué, entraîne-toi sur un texte long en anglais, avec correction de prononciation.", panel:'panel-anglais' },
-    { tag:'improv', title:'Improvise sur un mot, pas un sujet', desc:"Dans Prendre la parole, relance le dé jusqu'à tomber sur un simple mot (catégorie Improvisation) et parle dessus une minute.", panel:'panel-parole' },
-    { tag:'lecture-en', title:'Lecture façon journaliste, en anglais', desc:"Dans Lecture, bascule sur English et lis un bulletin à voix haute.", panel:'panel-lecture' },
-    { tag:'quiz', title:'Quiz de révision', desc:"Refais un Quiz éclair pour consolider trois mois de vocabulaire.", panel:'panel-quiz' }
+  B1: [
+    ['opinion','une opinion'], ['decision','une décision'], ['experience','une expérience'], ['situation','une situation'],
+    ['achievement','une réussite'], ['challenge','un défi'], ['opportunity','une opportunité'], ['improve','améliorer'],
+    ['suggest','suggérer'], ['recommend','recommander'], ['avoid','éviter'], ['realize','se rendre compte'],
+    ['consider','considérer'], ['worthwhile','qui en vaut la peine'], ['relationship','une relation']
+  ],
+  B2: [
+    ['nevertheless','néanmoins'], ['furthermore','de plus'], ['consequently','par conséquent'], ['arguably','sans doute'],
+    ['significant','significatif'], ['substantial','considérable'], ['controversial','controversé'], ['perspective','un point de vue'],
+    ['assumption','une supposition'], ['implication','une implication'], ['contradict','contredire'], ['justify','justifier'],
+    ['acknowledge','reconnaître'], ['undermine','affaiblir'], ['undoubtedly','sans aucun doute']
+  ],
+  C1: [
+    ['nuanced','nuancé'], ['ambiguous','ambigu'], ['discrepancy','un écart'], ['unprecedented','sans précédent'],
+    ['pragmatic','pragmatique'], ['meticulous','méticuleux'], ['comprehensive','complet, exhaustif'], ['articulate','s\'exprimer clairement'],
+    ['coherent','cohérent'], ['viable','viable'], ['entail','impliquer'], ['reconcile','concilier'],
+    ['substantiate','étayer'], ['mitigate','atténuer'], ['encompass','englober']
   ]
 };
 
-function getPhase(day){
-  if(day <= 30) return 1;
-  if(day <= 60) return 2;
-  return 3;
-}
-function getMissionForDay(day){
-  const phase = getPhase(day);
-  const list = MISSION_TEMPLATES[phase];
-  return list[(day - 1) % list.length];
-}
-
-const PHASE_LABELS = {
-  1: 'Phase 1 · Les bases — arrêter d\'avoir peur',
-  2: 'Phase 2 · Construire un discours — raconter, convaincre',
-  3: 'Phase 3 · Devenir orateur — pitch, débat, improvisation'
+const CEFR_SENTENCES = {
+  A1: [
+    ["My name is Anna.","Je m'appelle Anna."], ["I am from France.","Je viens de France."],
+    ["This is my house.","Voici ma maison."], ["I have two brothers.","J'ai deux frères."],
+    ["The weather is nice today.","Il fait beau aujourd'hui."], ["I like coffee.","J'aime le café."],
+    ["She is my friend.","Elle est mon amie."], ["We are happy.","Nous sommes content·e·s."],
+    ["It is Monday today.","Aujourd'hui, c'est lundi."], ["I am hungry.","J'ai faim."]
+  ],
+  A2: [
+    ["I went to the store yesterday.","Je suis allé·e au magasin hier."], ["She is taller than her brother.","Elle est plus grande que son frère."],
+    ["Can you tell me the way to the station?","Peux-tu m'indiquer le chemin vers la gare ?"], ["I usually wake up at seven.","D'habitude, je me réveille à sept heures."],
+    ["We watched a movie last night.","On a regardé un film hier soir."], ["He doesn't like vegetables.","Il n'aime pas les légumes."],
+    ["I need to buy some bread.","J'ai besoin d'acheter du pain."], ["They arrived late.","Ils sont arrivés en retard."],
+    ["It was raining all day.","Il a plu toute la journée."], ["I have never been to Italy.","Je ne suis jamais allé·e en Italie."]
+  ],
+  B1: [
+    ["I think this decision was a mistake.","Je pense que cette décision était une erreur."], ["If it rains tomorrow, we will stay home.","S'il pleut demain, on restera à la maison."],
+    ["I have lived here for five years.","J'habite ici depuis cinq ans."], ["She suggested we try a new restaurant.","Elle a suggéré qu'on essaie un nouveau restaurant."],
+    ["This experience taught me a lot.","Cette expérience m'a beaucoup appris."], ["We should consider all the options.","On devrait considérer toutes les options."],
+    ["He apologized for being late.","Il s'est excusé pour son retard."], ["I'm looking forward to the trip.","J'ai hâte de faire ce voyage."],
+    ["It depends on the situation.","Ça dépend de la situation."], ["They managed to solve the problem.","Ils ont réussi à résoudre le problème."]
+  ],
+  B2: [
+    ["If I were you, I would reconsider that decision.","À ta place, je reconsidérerais cette décision."], ["The report was reviewed by three experts.","Le rapport a été relu par trois experts."],
+    ["Despite the challenges, the project succeeded.","Malgré les difficultés, le projet a réussi."], ["This raises an important question about ethics.","Cela soulève une question importante d'éthique."],
+    ["The findings contradict previous research.","Les résultats contredisent les recherches précédentes."], ["It's arguably the most significant change this year.","C'est sans doute le changement le plus important de l'année."],
+    ["We must acknowledge the risks involved.","Il faut reconnaître les risques impliqués."], ["The policy has far-reaching implications.","Cette politique a des implications considérables."],
+    ["Nevertheless, the team remained optimistic.","Néanmoins, l'équipe est restée optimiste."], ["Her argument was difficult to justify.","Son argument était difficile à justifier."]
+  ],
+  C1: [
+    ["Had we anticipated the outcome, we would have acted differently.","Si nous avions anticipé le résultat, nous aurions agi différemment."],
+    ["The proposal, though ambitious, is not entirely without merit.","La proposition, bien qu'ambitieuse, n'est pas dénuée de mérite."],
+    ["It is imperative that the committee reach a consensus.","Il est impératif que le comité parvienne à un consensus."],
+    ["The discrepancy between the two reports raised concerns.","L'écart entre les deux rapports a suscité des inquiétudes."],
+    ["Her argument, while compelling, fails to address the core issue.","Son argument, bien que convaincant, ne traite pas le fond du problème."],
+    ["The strategy must be both pragmatic and sustainable.","La stratégie doit être à la fois pragmatique et durable."],
+    ["This unprecedented decision reshaped the entire industry.","Cette décision sans précédent a transformé toute l'industrie."],
+    ["We need to reconcile these conflicting priorities.","Il faut concilier ces priorités contradictoires."],
+    ["The findings substantiate the initial hypothesis.","Les résultats étayent l'hypothèse initiale."],
+    ["A more nuanced approach is required here.","Une approche plus nuancée est nécessaire ici."]
+  ]
 };
 
+const CEFR_LABELS = {
+  A1: 'Niveau A1 · Débutant', A2: 'Niveau A2 · Élémentaire', B1: 'Niveau B1 · Intermédiaire',
+  B2: 'Niveau B2 · Intermédiaire avancé', C1: 'Niveau C1 · Autonome'
+};
+const CEFR_BAND_START = { A1:1, A2:19, B1:37, B2:55, C1:73 };
+const CEFR_ORDER = ['A1','A2','B1','B2','C1'];
+
+function getBand(day){
+  if(day <= 18) return 'A1';
+  if(day <= 36) return 'A2';
+  if(day <= 54) return 'B1';
+  if(day <= 72) return 'B2';
+  return 'C1';
+}
+
+const LEVEL_TYPES = [
+  { key:'vocab', icon:'📚', label:'Vocabulaire' },
+  { key:'grammar', icon:'✍️', label:'Grammaire' },
+  { key:'listening', icon:'🎧', label:'Écoute' },
+  { key:'pronunciation', icon:'🗣️', label:'Prononciation' },
+  { key:'dictation', icon:'⌨️', label:'Dictée' }
+];
+
 const BADGE_MILESTONES = [
-  { days: 7, icon: '🔥', label: '7 jours de suite' },
-  { days: 30, icon: '🥉', label: 'Phase 1 terminée' },
-  { days: 60, icon: '🥈', label: 'Phase 2 terminée' },
-  { days: 90, icon: '🏆', label: 'Certificat 90 jours' }
+  { days: 18, icon: '🥉', label: 'Niveau A1 acquis' },
+  { days: 36, icon: '🥈', label: 'Niveau A2 acquis' },
+  { days: 54, icon: '🎖️', label: 'Niveau B1 acquis' },
+  { days: 72, icon: '🏅', label: 'Niveau B2 acquis' },
+  { days: 90, icon: '🏆', label: 'Niveau C1 — certificat' }
 ];
 
 const dashStreak = document.getElementById('dashStreak');
 const dashDay = document.getElementById('dashDay');
 const dashXP = document.getElementById('dashXP');
+const cefrBadge = document.getElementById('cefrBadge');
 const dashPhaseLabel = document.getElementById('dashPhaseLabel');
 const dashPhaseFill = document.getElementById('dashPhaseFill');
-const missionDay = document.getElementById('missionDay');
-const missionTitle = document.getElementById('missionTitle');
-const missionDesc = document.getElementById('missionDesc');
-const missionGoBtn = document.getElementById('missionGoBtn');
-const missionDoneBtn = document.getElementById('missionDoneBtn');
-const missionDoneMsg = document.getElementById('missionDoneMsg');
 const badgesRow = document.getElementById('badgesRow');
+const levelMapView = document.getElementById('levelMapView');
+const lmDayNum = document.getElementById('lmDayNum');
+const levelPath = document.getElementById('levelPath');
+const dayCompleteCard = document.getElementById('dayCompleteCard');
+const dcDayNum = document.getElementById('dcDayNum');
+const dcCefr = document.getElementById('dcCefr');
+const nextDayBtn = document.getElementById('nextDayBtn');
+const exerciseView = document.getElementById('exerciseView');
+const exerciseBackBtn = document.getElementById('exerciseBackBtn');
+const exerciseCard = document.getElementById('exerciseCard');
 
 function isSameDay(a, b){
   return a && b && new Date(a).toDateString() === new Date(b).toDateString();
@@ -1188,30 +1788,29 @@ function isYesterday(a, b){
   const diff = Math.round((d2.setHours(0,0,0,0) - d1.setHours(0,0,0,0)) / 86400000);
   return diff === 1;
 }
+function pick(arr){ return arr[Math.floor(Math.random() * arr.length)]; }
+function pickN(arr, n, excludeItem){
+  const pool = excludeItem ? arr.filter(x => x !== excludeItem) : arr.slice();
+  const out = [];
+  const copy = pool.slice();
+  while(out.length < n && copy.length){
+    out.push(copy.splice(Math.floor(Math.random() * copy.length), 1)[0]);
+  }
+  return out;
+}
 
 function renderDashboard(){
   const day = Math.min(journey.day, 90);
-  const phase = getPhase(day);
+  const band = getBand(day);
   dashStreak.textContent = journey.streak;
   dashDay.textContent = day;
   dashXP.textContent = journey.xp;
-  dashPhaseLabel.textContent = PHASE_LABELS[phase];
-  const phaseStart = phase === 1 ? 1 : (phase === 2 ? 31 : 61);
-  const phaseLen = 30;
-  const phasePct = Math.round(((day - phaseStart + 1) / phaseLen) * 100);
-  dashPhaseFill.style.width = Math.max(0, Math.min(100, phasePct)) + '%';
-
-  const mission = getMissionForDay(day);
-  const isNewVisitor = day === 1 && journey.streak === 0 && !journey.lastCompleted;
-  missionDay.textContent = isNewVisitor ? 'Bienvenue' : 'Jour ' + day;
-  missionTitle.textContent = mission.title;
-  missionDesc.textContent = (isNewVisitor ? "Voici ta toute première mission. Pas besoin d'être prêt·e, juste de commencer. " : '') + mission.desc;
-  missionGoBtn.dataset.panel = mission.panel;
-
-  const doneToday = isSameDay(journey.lastCompleted, Date.now());
-  missionDoneBtn.disabled = doneToday;
-  missionDoneBtn.textContent = doneToday ? '✓ Mission déjà validée aujourd\'hui' : '✓ J\'ai terminé aujourd\'hui';
-  missionDoneMsg.textContent = doneToday ? 'Reviens demain pour la mission suivante.' : '';
+  cefrBadge.textContent = CEFR_LABELS[band];
+  const bandStart = CEFR_BAND_START[band];
+  const pct = Math.round(((day - bandStart + 1) / 18) * 100);
+  dashPhaseLabel.textContent = 'Vers le niveau ' + band;
+  dashPhaseFill.style.width = Math.max(0, Math.min(100, pct)) + '%';
+  lmDayNum.textContent = day;
 
   badgesRow.innerHTML = '';
   BADGE_MILESTONES.forEach(b => {
@@ -1223,27 +1822,79 @@ function renderDashboard(){
     }
   });
 
+  const allDone = journey.todayLevels.every(Boolean);
+  if(allDone){
+    levelMapView.querySelector('.tool-grid-label').style.display = 'none';
+    levelPath.style.display = 'none';
+    dayCompleteCard.classList.add('show');
+    dcDayNum.textContent = day;
+    dcCefr.textContent = band;
+  } else {
+    levelMapView.querySelector('.tool-grid-label').style.display = 'block';
+    levelPath.style.display = 'flex';
+    dayCompleteCard.classList.remove('show');
+    renderLevelPath();
+  }
+
   if(day >= 90 && journey.badges.includes(90)){
     showCertificateIfNeeded();
   }
 }
 
-missionGoBtn.addEventListener('click', () => {
-  switchToTab(missionGoBtn.dataset.panel);
+function renderLevelPath(){
+  levelPath.innerHTML = '';
+  const firstNotDone = journey.todayLevels.findIndex(d => !d);
+  LEVEL_TYPES.forEach((lt, i) => {
+    const done = journey.todayLevels[i];
+    const isCurrent = i === firstNotDone;
+    const locked = !done && !isCurrent;
+    const node = document.createElement('button');
+    node.className = 'level-node' + (done ? ' done' : isCurrent ? ' current' : ' locked');
+    const stars = journey.todayStars[i] || 0;
+    node.innerHTML = `
+      <div class="level-node-circle">${done ? '✓' : lt.icon}</div>
+      <span class="level-node-label">${lt.label}</span>
+      <span class="level-node-stars">${done ? '⭐'.repeat(stars) : ''}</span>
+    `;
+    if(!locked){
+      node.addEventListener('click', () => openExercise(i));
+    }
+    levelPath.appendChild(node);
+  });
+}
+
+function openExercise(levelIndex){
+  levelMapView.style.display = 'none';
+  exerciseView.style.display = 'block';
+  const band = getBand(Math.min(journey.day, 90));
+  const type = LEVEL_TYPES[levelIndex].key;
+  buildExercise(type, band, levelIndex);
+}
+
+exerciseBackBtn.addEventListener('click', () => {
+  exerciseView.style.display = 'none';
+  levelMapView.style.display = 'block';
+  renderDashboard();
 });
 
-missionDoneBtn.addEventListener('click', () => {
-  const now = Date.now();
-  if(isSameDay(journey.lastCompleted, now)) return;
+function completeLevel(levelIndex, stars){
+  journey.todayLevels[levelIndex] = true;
+  journey.todayStars[levelIndex] = stars || 1;
+  journey.xp += 15;
+  saveJourney(journey);
+}
 
+function advanceDay(){
+  const now = Date.now();
   if(isYesterday(journey.lastCompleted, now) || !journey.lastCompleted){
     journey.streak += 1;
-  } else {
+  } else if(!isSameDay(journey.lastCompleted, now)){
     journey.streak = 1;
   }
-  journey.xp += 10;
   journey.lastCompleted = now;
   if(journey.day < 90) journey.day += 1;
+  journey.todayLevels = [false,false,false,false,false];
+  journey.todayStars = [0,0,0,0,0];
 
   BADGE_MILESTONES.forEach(b => {
     if(journey.day - 1 >= b.days && !journey.badges.includes(b.days)){
@@ -1253,7 +1904,322 @@ missionDoneBtn.addEventListener('click', () => {
 
   saveJourney(journey);
   renderDashboard();
-});
+}
+nextDayBtn.addEventListener('click', advanceDay);
+
+/* ---------------- Exercise builders ---------------- */
+function exFooter(levelIndex, resultId, nextLabel){
+  return `<div class="ex-result-msg" id="${resultId}"></div>
+    <div class="ex-next-row"><button class="primary" id="exNextBtn" style="display:none;">${nextLabel || 'Niveau suivant'}</button></div>`;
+}
+
+function goBackToPathAfterSuccess(){
+  setTimeout(() => {
+    exerciseView.style.display = 'none';
+    levelMapView.style.display = 'block';
+    renderDashboard();
+  }, 900);
+}
+
+function buildExercise(type, band, levelIndex){
+  if(type === 'vocab') return buildVocabExercise(band, levelIndex);
+  if(type === 'grammar') return buildGrammarExercise(band, levelIndex);
+  if(type === 'listening') return buildListeningExercise(band, levelIndex);
+  if(type === 'pronunciation') return buildPronunciationExercise(band, levelIndex);
+  if(type === 'dictation') return buildDictationExercise(band, levelIndex);
+}
+
+function buildVocabExercise(band, levelIndex){
+  const pool = CEFR_VOCAB[band];
+  const correct = pick(pool);
+  const distractors = pickN(pool, 3, correct);
+  const choices = pickN([correct, ...distractors], 4);
+  exerciseCard.innerHTML = `
+    <p class="ex-prompt">Que veut dire « ${correct[0]} » ?</p>
+    <div class="ex-choices" id="exChoices"></div>
+    ${exFooter(levelIndex, 'exResult')}
+  `;
+  const choicesEl = exerciseCard.querySelector('#exChoices');
+  choices.forEach(c => {
+    const btn = document.createElement('button');
+    btn.className = 'quiz-choice';
+    btn.textContent = c[1];
+    btn.addEventListener('click', () => {
+      const allBtns = choicesEl.querySelectorAll('.quiz-choice');
+      allBtns.forEach(b => { b.disabled = true; if(b.textContent === correct[1]) b.classList.add('correct'); });
+      const result = exerciseCard.querySelector('#exResult');
+      if(c[1] === correct[1]){
+        result.textContent = '✓ Exact !';
+        result.className = 'ex-result-msg correct';
+        completeLevel(levelIndex, 3);
+        goBackToPathAfterSuccess();
+      } else {
+        btn.classList.add('incorrect');
+        result.textContent = 'Pas tout à fait — regarde la bonne réponse en vert.';
+        result.className = 'ex-result-msg wrong';
+        completeLevel(levelIndex, 2);
+        goBackToPathAfterSuccess();
+      }
+    });
+    choicesEl.appendChild(btn);
+  });
+}
+
+function buildGrammarExercise(band, levelIndex){
+  const pool = CEFR_SENTENCES[band];
+  const item = pick(pool);
+  const words = item[0].replace(/\.$/, '').split(' ');
+  const blankIdx = words.length - 1;
+  const correctWord = words[blankIdx];
+  const vocabPool = CEFR_VOCAB[band].map(v => v[0]);
+  const distractors = pickN(vocabPool, 3, correctWord);
+  const choices = pickN([correctWord, ...distractors], 4);
+  const displaySentence = words.map((w,i) => i === blankIdx ? '____' : w).join(' ') + '.';
+
+  exerciseCard.innerHTML = `
+    <p class="ex-prompt">${displaySentence}<br><span style="font-size:0.85rem; color:var(--ink-soft); font-weight:400;">${item[1]}</span></p>
+    <div class="ex-choices" id="exChoices"></div>
+    ${exFooter(levelIndex, 'exResult')}
+  `;
+  const choicesEl = exerciseCard.querySelector('#exChoices');
+  choices.forEach(c => {
+    const btn = document.createElement('button');
+    btn.className = 'quiz-choice';
+    btn.textContent = c;
+    btn.addEventListener('click', () => {
+      const allBtns = choicesEl.querySelectorAll('.quiz-choice');
+      allBtns.forEach(b => { b.disabled = true; if(b.textContent === correctWord) b.classList.add('correct'); });
+      const result = exerciseCard.querySelector('#exResult');
+      if(c === correctWord){
+        result.textContent = '✓ Exact !';
+        result.className = 'ex-result-msg correct';
+        completeLevel(levelIndex, 3);
+      } else {
+        btn.classList.add('incorrect');
+        result.textContent = 'La bonne réponse est en vert.';
+        result.className = 'ex-result-msg wrong';
+        completeLevel(levelIndex, 2);
+      }
+      goBackToPathAfterSuccess();
+    });
+    choicesEl.appendChild(btn);
+  });
+}
+
+function buildListeningExercise(band, levelIndex){
+  const pool = CEFR_SENTENCES[band];
+  const correct = pick(pool);
+  const distractors = pickN(pool, 3, correct);
+  const choices = pickN([correct, ...distractors], 4);
+
+  exerciseCard.innerHTML = `
+    <p class="ex-prompt">Écoute, puis choisis la phrase entendue.</p>
+    <button class="primary ex-listen-btn" id="exPlayBtn">🔊 Écouter</button>
+    <div class="ex-choices" id="exChoices"></div>
+    ${exFooter(levelIndex, 'exResult')}
+  `;
+  exerciseCard.querySelector('#exPlayBtn').addEventListener('click', () => {
+    if(!window.speechSynthesis) return;
+    window.speechSynthesis.cancel();
+    const utter = new SpeechSynthesisUtterance(correct[0]);
+    utter.lang = 'en-US';
+    utter.rate = 0.9;
+    window.speechSynthesis.speak(utter);
+  });
+  const choicesEl = exerciseCard.querySelector('#exChoices');
+  choices.forEach(c => {
+    const btn = document.createElement('button');
+    btn.className = 'quiz-choice';
+    btn.textContent = c[0];
+    btn.addEventListener('click', () => {
+      const allBtns = choicesEl.querySelectorAll('.quiz-choice');
+      allBtns.forEach(b => { b.disabled = true; if(b.textContent === correct[0]) b.classList.add('correct'); });
+      const result = exerciseCard.querySelector('#exResult');
+      if(c[0] === correct[0]){
+        result.textContent = '✓ Exact !';
+        result.className = 'ex-result-msg correct';
+        completeLevel(levelIndex, 3);
+      } else {
+        btn.classList.add('incorrect');
+        result.textContent = 'Réécoute et compare avec la bonne réponse en vert.';
+        result.className = 'ex-result-msg wrong';
+        completeLevel(levelIndex, 2);
+      }
+      goBackToPathAfterSuccess();
+    });
+    choicesEl.appendChild(btn);
+  });
+}
+
+function buildPronunciationExercise(band, levelIndex){
+  const pool = CEFR_SENTENCES[band];
+  const item = pick(pool);
+  const expectedWords = item[0].split(/\s+/).map(normalizeWord).filter(Boolean);
+  let readIndex = 0;
+  let corrections = 0;
+  let recognition = null;
+  let paused = false;
+
+  exerciseCard.innerHTML = `
+    <p class="ex-prompt">Écoute, puis répète la phrase mot après mot.</p>
+    <button class="primary ex-listen-btn" id="exPlayBtn">🔊 Écouter</button>
+    <div class="teleprompter" id="exTeleprompter" style="min-height:auto;"></div>
+    <div class="listen-actions" style="margin-top:16px; justify-content:center;">
+      <button class="primary" id="exRepeatBtn" disabled>Je répète maintenant</button>
+    </div>
+    <div class="word-help-card" id="exWordHelp">
+      <p class="reflex-label">Tu as buté sur ce mot :</p>
+      <p class="word-help-word" id="exHelpWord"></p>
+      <div class="word-help-actions">
+        <button class="ghost" id="exHearWordBtn">🔊 Écouter ce mot</button>
+        <button class="primary" id="exContinueBtn">Continuer à partir d'ici</button>
+      </div>
+    </div>
+    ${exFooter(levelIndex, 'exResult')}
+  `;
+  const displayWords = item[0].split(/\s+/);
+  const teleprompter = exerciseCard.querySelector('#exTeleprompter');
+  const repeatBtn = exerciseCard.querySelector('#exRepeatBtn');
+  const wordHelp = exerciseCard.querySelector('#exWordHelp');
+  const helpWord = exerciseCard.querySelector('#exHelpWord');
+
+  function render(){
+    teleprompter.innerHTML = expectedWords.map((w,i) =>
+      `<span class="tp-word ${i < readIndex ? 'read' : (i === readIndex ? 'current' : 'pending')}">${displayWords[i]}</span>`
+    ).join(' ');
+  }
+  render();
+
+  exerciseCard.querySelector('#exPlayBtn').addEventListener('click', () => {
+    if(!window.speechSynthesis) return;
+    window.speechSynthesis.cancel();
+    const utter = new SpeechSynthesisUtterance(item[0]);
+    utter.lang = 'en-US';
+    utter.rate = 0.9;
+    utter.onend = () => { repeatBtn.disabled = false; };
+    window.speechSynthesis.speak(utter);
+  });
+
+  function pauseOnWord(){
+    if(recognition){ try{ recognition.stop(); }catch(e){} }
+    paused = true;
+    corrections++;
+    helpWord.textContent = displayWords[readIndex] || '';
+    wordHelp.classList.add('show');
+    repeatBtn.disabled = true;
+  }
+
+  exerciseCard.querySelector('#exHearWordBtn').addEventListener('click', () => {
+    if(!window.speechSynthesis) return;
+    window.speechSynthesis.cancel();
+    const utter = new SpeechSynthesisUtterance(displayWords[readIndex] || '');
+    utter.lang = 'en-US'; utter.rate = 0.7;
+    window.speechSynthesis.speak(utter);
+  });
+  exerciseCard.querySelector('#exContinueBtn').addEventListener('click', () => {
+    wordHelp.classList.remove('show');
+    paused = false;
+    repeatBtn.disabled = false;
+    startRecognition();
+  });
+
+  function finishSuccess(){
+    const stars = corrections === 0 ? 3 : corrections <= 2 ? 2 : 1;
+    const result = exerciseCard.querySelector('#exResult');
+    result.textContent = '✓ Phrase terminée !';
+    result.className = 'ex-result-msg correct';
+    completeLevel(levelIndex, stars);
+    goBackToPathAfterSuccess();
+  }
+
+  function startRecognition(){
+    if(!SpeechRec) return;
+    const sessionStart = readIndex;
+    repeatBtn.disabled = true;
+    repeatBtn.textContent = 'Écoute en cours…';
+    try{
+      recognition = new SpeechRec();
+      recognition.lang = 'en-US';
+      recognition.continuous = true;
+      recognition.interimResults = true;
+      recognition.onresult = (event) => {
+        if(paused) return;
+        let fullText = '';
+        let latestChunk = '';
+        for(let i=0;i<event.results.length;i++){
+          fullText += event.results[i][0].transcript + ' ';
+          if(i === event.results.length-1) latestChunk = event.results[i][0].transcript;
+        }
+        if(EN_FILLER_RE.test(latestChunk)){ pauseOnWord(); return; }
+        const recognizedWords = fullText.split(/\s+/).map(normalizeWord).filter(Boolean);
+        let localMatch = 0;
+        while(localMatch < recognizedWords.length && (sessionStart+localMatch) < expectedWords.length && recognizedWords[localMatch] === expectedWords[sessionStart+localMatch]){
+          localMatch++;
+        }
+        const newIdx = sessionStart + localMatch;
+        if(newIdx > readIndex){ readIndex = newIdx; render(); }
+        if(readIndex >= expectedWords.length){
+          if(recognition){ try{ recognition.stop(); }catch(e){} }
+          finishSuccess();
+          return;
+        }
+        if(recognizedWords.length > localMatch + 2){ pauseOnWord(); }
+      };
+      recognition.onend = () => {};
+      recognition.start();
+    }catch(e){}
+  }
+  repeatBtn.addEventListener('click', startRecognition);
+}
+
+function buildDictationExercise(band, levelIndex){
+  const pool = CEFR_SENTENCES[band];
+  const item = pick(pool);
+  let attempts = 0;
+
+  exerciseCard.innerHTML = `
+    <p class="ex-prompt">Écoute et écris exactement ce que tu entends.</p>
+    <button class="primary ex-listen-btn" id="exPlayBtn">🔊 Écouter</button>
+    <div class="ex-input-row">
+      <input type="text" class="ex-text-input" id="exInput" placeholder="Écris ici ce que tu as entendu...">
+      <button class="primary" id="exCheckBtn">Valider</button>
+    </div>
+    ${exFooter(levelIndex, 'exResult')}
+  `;
+  function play(){
+    if(!window.speechSynthesis) return;
+    window.speechSynthesis.cancel();
+    const utter = new SpeechSynthesisUtterance(item[0]);
+    utter.lang = 'en-US'; utter.rate = 0.85;
+    window.speechSynthesis.speak(utter);
+  }
+  exerciseCard.querySelector('#exPlayBtn').addEventListener('click', play);
+  play();
+
+  exerciseCard.querySelector('#exCheckBtn').addEventListener('click', () => {
+    attempts++;
+    const input = exerciseCard.querySelector('#exInput');
+    const typed = input.value.split(/\s+/).map(normalizeWord).filter(Boolean);
+    const expected = item[0].split(/\s+/).map(normalizeWord).filter(Boolean);
+    const correct = typed.length === expected.length && typed.every((w,i) => w === expected[i]);
+    const result = exerciseCard.querySelector('#exResult');
+    if(correct){
+      const stars = attempts === 1 ? 3 : attempts === 2 ? 2 : 1;
+      result.textContent = '✓ Exact !';
+      result.className = 'ex-result-msg correct';
+      completeLevel(levelIndex, stars);
+      goBackToPathAfterSuccess();
+    } else if(attempts >= 3){
+      result.innerHTML = `Voici la phrase : « ${item[0]} » — recopie-la pour valider ce niveau.`;
+      result.className = 'ex-result-msg wrong';
+      input.value = '';
+      input.dataset.reveal = item[0];
+    } else {
+      result.textContent = `Pas encore ça (essai ${attempts}/3). Réécoute et réessaie.`;
+      result.className = 'ex-result-msg wrong';
+    }
+  });
+}
 
 // Initialize the mission dashboard right here, immediately after its own setup —
 // deliberately NOT at the end of the script. A script this size touches many
@@ -1374,6 +2340,10 @@ document.querySelectorAll('.tool-card').forEach(card => {
   card.addEventListener('click', () => switchToTab(card.dataset.panel));
 });
 document.getElementById('backToMissionBtn').addEventListener('click', () => switchToTab('panel-mission'));
+document.getElementById('goToToolsLink').addEventListener('click', (ev) => {
+  ev.preventDefault();
+  switchToTab('panel-parole');
+});
 
 
 function rollTopic(){
@@ -3288,6 +4258,326 @@ shAdvStartBtn.addEventListener('click', () => {
 });
 
 /* ---------------- Phrase du jour ---------------- */
+/* ---------------- Shadowing vidéo: animated talking avatar, episode series ---------------- */
+const VIDEO_KEY = 'ptp_video_v1';
+function loadVideoProgress(){
+  try{
+    const raw = localStorage.getItem(VIDEO_KEY);
+    if(raw) return JSON.parse(raw);
+  }catch(e){}
+  return { en:0, es:0, de:0, it:0 };
+}
+function saveVideoProgress(p){ try{ localStorage.setItem(VIDEO_KEY, JSON.stringify(p)); }catch(e){} syncToCloudSoon(); }
+let videoProgress = loadVideoProgress();
+
+let videoLanguage = 'en';
+let videoGender = null;
+let videoVoice = null;
+let videoEpisodeIndex = 0;
+const VIDEO_EPISODES_TOTAL = SHADOW_TOPICS_MEANINGS.length;
+
+const videoAvatarMale = document.getElementById('videoAvatarMale');
+const videoAvatarFemale = document.getElementById('videoAvatarFemale');
+const avatarSvg = document.getElementById('avatarSvg');
+const avMouth = document.getElementById('avMouth');
+const videoBadge = document.getElementById('videoBadge');
+const veNum = document.getElementById('veNum');
+const veTotal = document.getElementById('veTotal');
+const veDots = document.getElementById('veDots');
+const videoPlayBtn = document.getElementById('videoPlayBtn');
+const videoReplayBtn = document.getElementById('videoReplayBtn');
+const videoCaptionWrap = document.getElementById('videoCaptionWrap');
+const videoCaption = document.getElementById('videoCaption');
+const videoTranscripts = document.getElementById('videoTranscripts');
+const videoTranscriptFr = document.getElementById('videoTranscriptFr');
+const videoPracticeZone = document.getElementById('videoPracticeZone');
+const videoTeleprompter = document.getElementById('videoTeleprompter');
+const videoRepeatBtn = document.getElementById('videoRepeatBtn');
+const videoHint = document.getElementById('videoHint');
+const videoWordHelp = document.getElementById('videoWordHelp');
+const videoHelpWord = document.getElementById('videoHelpWord');
+const videoCelebrate = document.getElementById('videoCelebrate');
+const videoRetryZone = document.getElementById('videoRetryZone');
+
+veTotal.textContent = VIDEO_EPISODES_TOTAL;
+
+document.querySelectorAll('#videoLangChoices .lang-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('#videoLangChoices .lang-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    videoLanguage = btn.dataset.lang;
+    videoEpisodeIndex = videoProgress[videoLanguage] || 0;
+    if(videoGender) renderEpisode();
+  });
+});
+
+function pickVideoVoice(gender){
+  const langVoices = allVoices.filter(v => v.lang && v.lang.toLowerCase().startsWith(videoLanguage));
+  const pool = langVoices.length ? langVoices : allVoices;
+  const hints = gender === 'female' ? FEMALE_HINTS : MALE_HINTS;
+  const otherHints = gender === 'female' ? MALE_HINTS : FEMALE_HINTS;
+  let match = pool.find(v => hints.some(h => v.name.toLowerCase().includes(h)));
+  if(!match) match = pool.find(v => !otherHints.some(h => v.name.toLowerCase().includes(h)));
+  return match || pool[0] || null;
+}
+
+function selectVideoAvatar(gender){
+  videoGender = gender;
+  videoVoice = pickVideoVoice(gender);
+  videoAvatarMale.classList.toggle('selected', gender === 'male');
+  videoAvatarFemale.classList.toggle('selected', gender === 'female');
+  videoEpisodeIndex = videoProgress[videoLanguage] || 0;
+  document.getElementById('videoStep2').classList.add('show');
+  startBlinking();
+  renderEpisode();
+}
+videoAvatarMale.addEventListener('click', () => selectVideoAvatar('male'));
+videoAvatarFemale.addEventListener('click', () => selectVideoAvatar('female'));
+
+let blinkInterval = null;
+function startBlinking(){
+  if(blinkInterval) return;
+  blinkInterval = setInterval(() => {
+    avatarSvg.classList.add('blinking');
+    setTimeout(() => avatarSvg.classList.remove('blinking'), 140);
+  }, 3200 + Math.random()*1500);
+}
+
+function renderEpisodeDots(){
+  veDots.innerHTML = '';
+  const unlocked = videoProgress[videoLanguage] || 0;
+  for(let i=0; i<VIDEO_EPISODES_TOTAL; i++){
+    const dot = document.createElement('span');
+    if(i < unlocked) dot.classList.add('done');
+    else if(i === videoEpisodeIndex) dot.classList.add('current');
+    veDots.appendChild(dot);
+  }
+}
+
+let currentVideoEpisode = null;
+function renderEpisode(){
+  currentVideoEpisode = SHADOW_TOPICS_MEANINGS[videoEpisodeIndex];
+  veNum.textContent = videoEpisodeIndex + 1;
+  renderEpisodeDots();
+  videoCaptionWrap.classList.remove('show');
+  videoCaption.textContent = '';
+  videoTranscripts.style.display = 'none';
+  videoPracticeZone.style.display = 'none';
+  videoReplayBtn.style.display = 'none';
+  videoPlayBtn.style.display = 'inline-flex';
+  videoWordHelp.classList.remove('show');
+  videoCelebrate.classList.remove('show');
+  videoRetryZone.classList.remove('show');
+  avMouth.setAttribute('d', 'M82 130 Q100 130 118 130');
+}
+
+function getVideoLocale(){
+  const lang = LANGUAGES.find(l => l.code === videoLanguage);
+  return lang ? lang.locale : 'en-US';
+}
+
+let mouthInterval = null;
+function playEpisode(){
+  if(!window.speechSynthesis || !currentVideoEpisode) return;
+  window.speechSynthesis.cancel();
+  const text = currentVideoEpisode[videoLanguage];
+  const words = text.split(/\s+/);
+  const utter = new SpeechSynthesisUtterance(text);
+  utter.lang = getVideoLocale();
+  utter.rate = 0.92;
+  if(videoVoice) utter.voice = videoVoice;
+
+  let wordIndex = 0;
+  let mouthOpen = false;
+  const wordDelayMs = 270 / utter.rate;
+  let fallbackCaptionInterval = null;
+  let boundaryFired = false;
+
+  function renderCaption(upToIndex){
+    const said = words.slice(0, upToIndex).join(' ');
+    const rest = words.slice(upToIndex).join(' ');
+    videoCaption.innerHTML = said + (rest ? ' <span class="pending">' + rest + '</span>' : '');
+  }
+
+  utter.onstart = () => {
+    videoBadge.classList.add('on');
+    videoCaptionWrap.classList.add('show');
+    videoPlayBtn.disabled = true;
+    wordIndex = 0;
+    renderCaption(0);
+    mouthInterval = setInterval(() => {
+      mouthOpen = !mouthOpen;
+      avMouth.setAttribute('d', mouthOpen
+        ? 'M78 124 Q100 145 122 124 Q100 132 78 124'
+        : 'M82 130 Q100 130 118 130');
+    }, 110);
+    fallbackCaptionInterval = setInterval(() => {
+      if(boundaryFired){ clearInterval(fallbackCaptionInterval); return; }
+      if(wordIndex < words.length){ wordIndex++; renderCaption(wordIndex); }
+      else clearInterval(fallbackCaptionInterval);
+    }, wordDelayMs);
+  };
+  utter.onboundary = (event) => {
+    if(event.name && event.name !== 'word') return;
+    boundaryFired = true;
+    clearInterval(fallbackCaptionInterval);
+    const idx = event.charIndex || 0;
+    const said = text.slice(0, idx).trim();
+    wordIndex = said ? said.split(/\s+/).length : 0;
+    renderCaption(wordIndex);
+  };
+  utter.onend = () => {
+    clearInterval(mouthInterval);
+    clearInterval(fallbackCaptionInterval);
+    avMouth.setAttribute('d', 'M82 130 Q100 130 118 130');
+    videoBadge.classList.remove('on');
+    videoCaption.textContent = text;
+    videoPlayBtn.disabled = false;
+    videoPlayBtn.style.display = 'none';
+    videoReplayBtn.style.display = 'inline-flex';
+    videoTranscriptFr.textContent = currentVideoEpisode.fr;
+    videoTranscripts.style.display = 'grid';
+    videoPracticeZone.style.display = 'block';
+    resetVideoRepeat();
+  };
+  utter.onerror = () => {
+    clearInterval(mouthInterval);
+    clearInterval(fallbackCaptionInterval);
+    videoPlayBtn.disabled = false;
+  };
+  window.speechSynthesis.speak(utter);
+}
+videoPlayBtn.addEventListener('click', playEpisode);
+videoReplayBtn.addEventListener('click', playEpisode);
+
+/* ---- Repeat step: word-by-word pronunciation verification (same pattern as elsewhere) ---- */
+let videoExpectedWords = [];
+let videoReadIndex = 0;
+let videoRecognition = null;
+let videoRecognizing = false;
+let videoPaused = false;
+let videoCorrections = 0;
+
+function renderVideoTeleprompter(){
+  const displayWords = currentVideoEpisode[videoLanguage].split(/\s+/);
+  videoTeleprompter.innerHTML = videoExpectedWords.map((w,i) =>
+    `<span class="tp-word ${i < videoReadIndex ? 'read' : (i === videoReadIndex ? 'current' : 'pending')}">${displayWords[i]}</span>`
+  ).join(' ');
+}
+function resetVideoRepeat(){
+  if(videoRecognition && videoRecognizing){ try{ videoRecognition.stop(); }catch(e){} }
+  videoExpectedWords = currentVideoEpisode[videoLanguage].split(/\s+/).map(normalizeWord).filter(Boolean);
+  videoReadIndex = 0;
+  videoPaused = false;
+  videoCorrections = 0;
+  videoRepeatBtn.disabled = false;
+  videoRepeatBtn.textContent = 'Je répète maintenant';
+  videoWordHelp.classList.remove('show');
+  videoCelebrate.classList.remove('show');
+  videoRetryZone.classList.remove('show');
+  renderVideoTeleprompter();
+}
+
+function videoPauseOnWord(){
+  if(videoRecognition){ try{ videoRecognition.stop(); }catch(e){} }
+  videoPaused = true;
+  videoCorrections++;
+  const displayWords = currentVideoEpisode[videoLanguage].split(/\s+/);
+  videoHelpWord.textContent = displayWords[videoReadIndex] || '';
+  videoWordHelp.classList.add('show');
+  videoRepeatBtn.disabled = true;
+}
+document.getElementById('videoHearWordBtn').addEventListener('click', () => {
+  if(!window.speechSynthesis) return;
+  const displayWords = currentVideoEpisode[videoLanguage].split(/\s+/);
+  window.speechSynthesis.cancel();
+  const utter = new SpeechSynthesisUtterance(displayWords[videoReadIndex] || '');
+  utter.lang = getVideoLocale(); utter.rate = 0.65;
+  if(videoVoice) utter.voice = videoVoice;
+  window.speechSynthesis.speak(utter);
+});
+document.getElementById('videoContinueBtn').addEventListener('click', () => {
+  videoWordHelp.classList.remove('show');
+  videoPaused = false;
+  startVideoRecognition();
+});
+
+function videoEpisodeSuccess(){
+  const unlocked = videoProgress[videoLanguage] || 0;
+  if(videoEpisodeIndex >= unlocked && unlocked < VIDEO_EPISODES_TOTAL - 1){
+    videoProgress[videoLanguage] = unlocked + 1;
+    saveVideoProgress(videoProgress);
+  } else if(videoEpisodeIndex >= unlocked){
+    videoProgress[videoLanguage] = VIDEO_EPISODES_TOTAL - 1;
+    saveVideoProgress(videoProgress);
+  }
+  videoCelebrate.classList.add('show');
+  burstCelebration(avatarSvg.parentElement);
+  setTimeout(() => {
+    if(videoEpisodeIndex < VIDEO_EPISODES_TOTAL - 1){
+      videoEpisodeIndex++;
+      renderEpisode();
+    } else {
+      renderEpisodeDots();
+    }
+  }, 1400);
+}
+
+function startVideoRecognition(){
+  if(!SpeechRec){
+    videoHint.textContent = "La reconnaissance vocale n'est pas disponible sur ce navigateur.";
+    return;
+  }
+  const sessionStart = videoReadIndex;
+  videoRepeatBtn.disabled = true;
+  videoRepeatBtn.textContent = 'Écoute en cours…';
+  try{
+    videoRecognition = new SpeechRec();
+    videoRecognition.lang = getVideoLocale();
+    videoRecognition.continuous = true;
+    videoRecognition.interimResults = true;
+    videoRecognition.onresult = (event) => {
+      if(videoPaused) return;
+      let fullText = '';
+      let latestChunk = '';
+      for(let i=0;i<event.results.length;i++){
+        fullText += event.results[i][0].transcript + ' ';
+        if(i === event.results.length-1) latestChunk = event.results[i][0].transcript;
+      }
+      const fillerRe = FILLER_RE_BY_LANG[videoLanguage] || EN_FILLER_RE;
+      if(fillerRe.test(latestChunk)){ videoPauseOnWord(); return; }
+      const recognizedWords = fullText.split(/\s+/).map(normalizeWord).filter(Boolean);
+      let localMatch = 0;
+      while(localMatch < recognizedWords.length && (sessionStart+localMatch) < videoExpectedWords.length && recognizedWords[localMatch] === videoExpectedWords[sessionStart+localMatch]){
+        localMatch++;
+      }
+      const newIdx = sessionStart + localMatch;
+      if(newIdx > videoReadIndex){ videoReadIndex = newIdx; renderVideoTeleprompter(); }
+      if(videoReadIndex >= videoExpectedWords.length){
+        if(videoRecognition){ try{ videoRecognition.stop(); }catch(e){} }
+        videoRepeatBtn.disabled = false;
+        videoRepeatBtn.textContent = 'Répéter à nouveau';
+        videoEpisodeSuccess();
+        return;
+      }
+      if(recognizedWords.length > localMatch + 2){ videoPauseOnWord(); }
+    };
+    videoRecognition.onerror = () => { videoHint.textContent = "Le micro n'a pas pu être utilisé ici."; };
+    videoRecognition.onend = () => { videoRecognizing = false; };
+    videoRecognition.start();
+    videoRecognizing = true;
+  }catch(e){
+    videoHint.textContent = "Le micro n'a pas pu être utilisé ici.";
+    videoRepeatBtn.disabled = false;
+  }
+}
+videoRepeatBtn.addEventListener('click', startVideoRecognition);
+
+document.getElementById('goToVideoLink').addEventListener('click', (ev) => {
+  ev.preventDefault();
+  switchToTab('panel-video');
+});
+
 const PHRASES = [
   { text: "Avoir la langue bien pendue", meaning: "Parler facilement, sans jamais être à court de mots." },
   { text: "Ne pas y aller par quatre chemins", meaning: "Dire les choses directement, sans détour." },
